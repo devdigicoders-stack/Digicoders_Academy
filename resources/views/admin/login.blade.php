@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Login | DigiCoders Academy</title>
+    <meta name="description" content="DigiCoders Academy central admin portal login.">
+
+    <!-- Favicon -->
+    @if(!empty($settings['site_favicon']))
+        <link rel="icon" href="{{ asset($settings['site_favicon']) }}" type="image/png">
+    @endif
+    @if(!empty($settings['site_favicon_ico']))
+        <link rel="shortcut icon" href="{{ asset($settings['site_favicon_ico']) }}" type="image/x-icon">
+    @endif
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+ <!-- Google Maps JS API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEss4wpsQ0o9WPBjDgHsSByUzFuo2oSNE"></script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #E8EFF7;
+            color: #1E293B;
+            font-family: 'Inter', sans-serif;
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+
+            html,
+            body {
+                overflow: hidden;
+            }
+        }
+
+        .login-wrapper {
+            min-height: 100vh;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            z-index: 10;
+            box-sizing: border-box;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 980px;
+            background-color: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        @media (min-width: 768px) {
+            .login-card {
+                flex-direction: row;
+                min-height: 560px;
+            }
+
+            .left-panel {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                background-color: #EBF4FC;
+                padding: 40px;
+                position: relative;
+            }
+
+            .right-panel {
+                width: 50%;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .left-panel {
+                display: none;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 32px 24px;
+            }
+        }
+
+        .diagonal-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 280px;
+            background-image: repeating-linear-gradient(-45deg,
+                    rgba(148, 163, 184, 0.15),
+                    rgba(148, 163, 184, 0.15) 1.5px,
+                    transparent 1.5px,
+                    transparent 10px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease-in-out;
+            color: #1E293B;
+            font-weight: 500;
+        }
+
+        .input-field:focus {
+            border-color: #1877F2;
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.15);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #1877F2;
+            color: #ffffff;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 6px -1px rgba(24, 119, 242, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background-color: #166FE5;
+            box-shadow: 0 10px 15px -3px rgba(24, 119, 242, 0.3);
+        }
+
+        .btn-submit.btn-loading {
+            background: linear-gradient(135deg, #00A651 0%, #008742 100%);
+            box-shadow: 0 6px 16px rgba(0, 166, 81, 0.35);
+        }
+
+        /* Top-Right Premium Toast Container */
+        #loginToastContainer {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 380px;
+            width: calc(100% - 48px);
+            pointer-events: none;
+        }
+
+        .login-toast {
+            background: #ffffff;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            pointer-events: auto;
+            transform: translateX(120%);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-toast.toast-show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .login-toast-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .toast-success .login-toast-icon {
+            background: rgba(0, 166, 81, 0.12);
+            color: #00A651;
+        }
+
+        .toast-error .login-toast-icon {
+            background: rgba(239, 68, 68, 0.12);
+            color: #EF4444;
+        }
+
+        .login-toast-body {
+            flex: 1;
+        }
+
+        .login-toast-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 2px;
+        }
+
+        .login-toast-message {
+            font-size: 12px;
+            color: #64748B;
+            line-height: 1.35;
+        }
+
+        .login-toast-close {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #94A3B8;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .login-toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: #00A651;
+            animation: toastProgress 4s linear forwards;
+        }
+
+        .toast-error .login-toast-progress {
+            background: #EF4444;
+        }
+
+        @keyframes toastProgress {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top-Right Floating Toast Container -->
+    <div id="loginToastContainer"></div>
+
+    <!-- Striped Background and Blobs in main body -->
+    <div class="diagonal-bg"></div>
+    <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#C2DCFA]/50 blur-3xl pointer-events-none z-0">
+    </div>
+
+    <div class="login-wrapper">
+
+        <!-- Card Container -->
+        <div class="login-card">
+
+            <!-- LEFT PANEL: 3D Illustration & Feature Highlights -->
+            <div class="left-panel">
+                <!-- Header Title -->
+                <div style="z-index: 10;">
+                    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 166, 81, 0.12); color: #008742; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 14px;">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Secure Admin Management</span>
+                    </div>
+                    <h2 style="font-size: 22px; font-weight: 800; color: #1E293B; line-height: 1.4; margin: 0 0 8px 0;">
+                        Simplify interaction between <span style="color: #00A651; font-weight: 800;">Trainers</span> & <span style="color: #F58220; font-weight: 800;">Students</span> online!
+                    </h2>
+                    <p style="font-size: 13px; color: #64748B; margin: 0; line-height: 1.5;">
+                        Empowering educational excellence with real-time admissions, course tracking, and secure access.
+                    </p>
+                </div>
+
+                <!-- 3D Graphic Illustration -->
+                <div style="width: 100%; max-width: 380px; margin: 20px auto; display: flex; justify-content: center; z-index: 10; position: relative;">
+                    <img src="{{ asset('images/login-illustration.jpg') }}" alt="DigiCoders Academy Login Graphic"
+                        style="width: 100%; max-height: 270px; object-fit: contain; border-radius: 16px; filter: drop-shadow(0 12px 24px rgba(0, 166, 81, 0.15));"
+                        onerror="this.src='{{ asset('images/loginillustraction.jpg') }}'">
+                </div>
+
+                <!-- Bottom Feature Chips -->
+                <div style="z-index: 10; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="background: #ffffff; border: 1px solid #E2E8F0; padding: 8px 14px; border-radius: 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+                        <i class="fa-solid fa-location-crosshairs" style="color: #00A651; font-size: 13px;"></i>
+                        <span style="font-size: 12px; font-weight: 600; color: #334155;">Geolocation Protection</span>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid #E2E8F0; padding: 8px 14px; border-radius: 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+                        <i class="fa-solid fa-bolt" style="color: #F58220; font-size: 13px;"></i>
+                        <span style="font-size: 12px; font-weight: 600; color: #334155;">Real-Time CMS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: Pure White Login Form -->
+            <div class="right-panel">
+
+                @if(!empty($settings['site_logo']))
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <a href="{{ route('home') }}" style="display: inline-block;">
+                            <img src="{{ asset($settings['site_logo']) }}" alt="DigiCoders Academy Logo"
+                                style="height: 40px; width: auto; max-width: 100%; display: block; margin: 0 auto;">
+                        </a>
+                    </div>
+                @endif
+
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <h3 style="font-size: 22px; font-weight: 700; color: #1E293B; margin: 0; line-height: 1.2;">
+                        Hi, welcome back!
+                    </h3>
+                </div>
+
+                @if (session('success'))
+                    <div style="padding: 12px 16px; background: rgba(0, 166, 81, 0.12); border: 1px solid #00A651; border-radius: 10px; color: #008742; font-weight: 600; font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="check-circle" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+                        <span>{{ session('success') }}</span>
+                    </div>
+                @endif
+
+                <!-- FORM -->
+                <form id="adminLoginForm" action="{{ route('admin.login.submit') }}" method="POST"
+                    style="display: flex; flex-direction: column; gap: 14px;">
+                    @csrf
+                    <input type="hidden" name="latitude" id="loginLatitude" value="">
+                    <input type="hidden" name="longitude" id="loginLongitude" value="">
+                    <input type="hidden" name="location_address" id="loginLocationAddress" value="">
+
+                    <!-- Email input -->
+                    <div>
+                        <input type="email" name="email" required value="admin@digicoders.in"
+                            placeholder="e.g. email@example.com" class="input-field">
+                    </div>
+
+                    <!-- Password input with eye toggle -->
+                    <div style="position: relative;">
+                        <input type="password" id="adminPassword" name="password" required value="password"
+                            placeholder="Enter your password" class="input-field" style="padding-right: 44px;">
+                        <button type="button" onclick="togglePasswordVisibility()"
+                            style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94A3B8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                            <i class="fa-solid fa-eye-slash" id="adminToggleIcon" style="font-size: 16px;"></i>
+                        </button>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div style="margin-top: 4px;">
+                        <button type="submit" id="loginSubmitBtn" class="btn-submit">
+                            <span>Login</span>
+                            <i class="fa-solid fa-arrow-right" style="font-size: 12px;"></i>
+                        </button>
+                    </div>
+
+                    <!-- Footer Privacy/Terms -->
+                    <div style="border-top: 1px solid #F1F5F9; margin-top: 18px; padding-top: 14px;">
+                        <p style="font-size: 11px; color: #94A3B8; line-height: 1.5; margin: 0; text-align: left;">
+                            By continuing, you accept our <a href="{{ route('terms') }}"
+                                style="color: #1877F2; font-weight: 600; text-decoration: none;">Terms of Use</a> and <a
+                                href="{{ route('privacy-policy') }}"
+                                style="color: #1877F2; font-weight: 600; text-decoration: none;">Privacy Policy</a>.
+                        </p>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Script for Top-Right Toast Notifications & Mandatory Geolocation Login -->
+    <script>
+        let locationPermissionGranted = false;
+
+        // Global Login Toast Helper
+        function showLoginToast(type, title, message) {
+            const container = document.getElementById("loginToastContainer");
+            if (!container) return;
+
+            const toast = document.createElement("div");
+            toast.className = `login-toast toast-${type}`;
+
+            let iconClass = "fa-circle-check";
+            if (type === "error") iconClass = "fa-triangle-exclamation";
+
+            toast.innerHTML = `
+                <div class="login-toast-icon">
+                    <i class="fa-solid ${iconClass}"></i>
+                </div>
+                <div class="login-toast-body">
+                    <div class="login-toast-title">${title}</div>
+                    <div class="login-toast-message">${message}</div>
+                </div>
+                <button class="login-toast-close" onclick="this.parentElement.remove()">&times;</button>
+                <div class="login-toast-progress"></div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => toast.classList.add("toast-show"), 50);
+
+            setTimeout(() => {
+                toast.classList.remove("toast-show");
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // 1. Show Specific Top-Right Toast Errors for Email / Password
+            @if ($errors->any())
+                @if ($errors->has('email'))
+                    showLoginToast('error', '{{ session("error_title", "Invalid Email Address 📧") }}', '{{ $errors->first("email") }}');
+                @elseif ($errors->has('password'))
+                    showLoginToast('error', '{{ session("error_title", "Incorrect Password 🔑") }}', '{{ $errors->first("password") }}');
+                @else
+                    showLoginToast('error', 'Authentication Failed', '{{ $errors->first() }}');
+                @endif
+            @endif
+
+            @if (session('success'))
+                showLoginToast('success', 'Success', '{{ session('success') }}');
+            @endif
+
+            // Silent Pre-Capture Geolocation & Google Reverse Geocoding on Page Load
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    const latInput = document.getElementById('loginLatitude');
+                    const lngInput = document.getElementById('loginLongitude');
+                    const addrInput = document.getElementById('loginLocationAddress');
+
+                    if (latInput) latInput.value = lat;
+                    if (lngInput) lngInput.value = lng;
+
+                    if (window.google && window.google.maps && window.google.maps.Geocoder) {
+                        const geocoder = new google.maps.Geocoder();
+                        geocoder.geocode({ 'location': { lat: parseFloat(lat), lng: parseFloat(lng) } }, function (results, status) {
+                            if (status === 'OK' && results && results[0] && results[0].formatted_address) {
+                                if (addrInput) addrInput.value = results[0].formatted_address;
+                            }
+                        });
+                    }
+                }, function (err) {}, { timeout: 10000, enableHighAccuracy: true });
+            }
+
+            const loginForm = document.getElementById('adminLoginForm');
+            const submitBtn = document.getElementById('loginSubmitBtn');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', async function (e) {
+                    if (locationPermissionGranted) {
+                        return true;
+                    }
+
+                    e.preventDefault();
+
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.className = "btn-submit btn-loading";
+                        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking location access...';
+                    }
+
+                    // 1. Check Geolocation Permission FIRST
+                    if (!navigator.geolocation) {
+                        showLoginToast('error', 'Location Access Required 📍', 'Location access is strictly required to proceed with login.');
+                        resetSubmitBtn();
+                        return;
+                    }
+
+                    navigator.geolocation.getCurrentPosition(
+                        async function (position) {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+
+                            document.getElementById('loginLatitude').value = lat;
+                            document.getElementById('loginLongitude').value = lng;
+
+                            // Fetch Exact Street-Level Reverse Geocoded Address using Google Maps Geocoder
+                            let exactAddress = '';
+                            if (window.google && window.google.maps && window.google.maps.Geocoder) {
+                                try {
+                                    const geocoder = new google.maps.Geocoder();
+                                    const latlng = { lat: parseFloat(lat), lng: parseFloat(lng) };
+                                    const gRes = await new Promise((resolve) => {
+                                        geocoder.geocode({ 'location': latlng }, function (results, status) {
+                                            if (status === 'OK' && results && results[0] && results[0].formatted_address) {
+                                                resolve(results[0].formatted_address);
+                                            } else {
+                                                resolve(null);
+                                            }
+                                        });
+                                    });
+                                    if (gRes) exactAddress = gRes;
+                                } catch (gErr) {
+                                    console.warn('Google Maps Geocoder error:', gErr);
+                                }
+                            }
+
+                            if (!exactAddress) {
+                                try {
+                                    const nomRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
+                                        headers: { 'Accept-Language': 'en-US,en' }
+                                    });
+                                    if (nomRes.ok) {
+                                        const nomData = await nomRes.json();
+                                        if (nomData && nomData.display_name) {
+                                            exactAddress = nomData.display_name;
+                                        }
+                                    }
+                                } catch (err) {
+                                    console.warn('Nominatim geocode failed:', err);
+                                }
+                            }
+
+                            if (!exactAddress) {
+                                try {
+                                    const bdcRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
+                                    if (bdcRes.ok) {
+                                        const bdcData = await bdcRes.json();
+                                        const parts = [];
+                                        if (bdcData.locality) parts.push(bdcData.locality);
+                                        if (bdcData.city && bdcData.city !== bdcData.locality) parts.push(bdcData.city);
+                                        if (bdcData.principalSubdivision) parts.push(bdcData.principalSubdivision);
+                                        if (bdcData.countryName) parts.push(bdcData.countryName);
+                                        exactAddress = parts.join(', ') + ` (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+                                    }
+                                } catch (e) {
+                                    exactAddress = `GPS Coordinates (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+                                }
+                            }
+
+                            document.getElementById('loginLocationAddress').value = exactAddress || `GPS Coordinates (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+
+                            // 2. NOW Check Credentials (Email & Password) AFTER Location is Granted
+                            if (submitBtn) {
+                                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking credentials...';
+                            }
+
+                            const verifyData = new FormData(loginForm);
+                            verifyData.append('verify_only', '1');
+
+                            try {
+                                const verifyRes = await fetch("{{ route('admin.login.submit') }}", {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'Accept': 'application/json'
+                                    },
+                                    body: verifyData
+                                });
+
+                                const verifyResult = await verifyRes.json();
+
+                                if (!verifyRes.ok || verifyResult.status === 'error') {
+                                    showLoginToast('error', verifyResult.title || 'Invalid Credentials ❌', verifyResult.message || 'Authentication failed.');
+                                    resetSubmitBtn();
+                                    return;
+                                }
+
+                                // Credentials verified! Show Welcome Toast
+                                showLoginToast('success', verifyResult.title || 'Login Successful! 🎉', verifyResult.message || 'Welcome back! Redirecting to CMS Dashboard...');
+
+                                locationPermissionGranted = true;
+                                sessionStorage.setItem('tab_session_active', 'true');
+
+                                if (submitBtn) {
+                                    submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Redirecting...';
+                                }
+
+                                setTimeout(function () {
+                                    loginForm.submit();
+                                }, 600);
+
+                            } catch (verifyErr) {
+                                console.warn('Credential verification error:', verifyErr);
+                                resetSubmitBtn();
+                            }
+                        },
+                        function (error) {
+                            // Location Denied / Failed -> Immediately show location required message
+                            showLoginToast('error', 'Location Access Required 📍', 'Location access is strictly required to proceed with login. Please allow browser location access.');
+                            resetSubmitBtn();
+                        },
+                        { timeout: 12000, enableHighAccuracy: true, maximumAge: 0 }
+                    );
+                });
+            }
+
+            function resetSubmitBtn() {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.className = "btn-submit";
+                    submitBtn.innerHTML = '<span>Login</span> <i class="fa-solid fa-arrow-right" style="font-size: 12px;"></i>';
+                }
+            }
+        });
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('adminPassword');
+            const icon = document.getElementById('adminToggleIcon');
+            if (input && icon) {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'fa-solid fa-eye';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'fa-solid fa-eye-slash';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;0,900;1,800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --color-dc-orange: #F58220;
+    --color-dc-orange-hover: #E07316;
+    --color-dc-green: #00A651;
+    --color-dc-green-hover: #008D44;
+    --color-dc-bg: #F4F7FB;
+    --color-dc-surface: #FFFFFF;
+    --color-dc-dark: #1E293B;
+    --color-dc-muted: #64748B;
+}
+
+/* Custom Base Styles */
+html {
+    scroll-behavior: smooth;
+    background-color: #F4F7FB;
+    color: #18181B;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: #F4F7FB;
+    color: #18181B;
+    overflow-x: hidden;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* Reference Exact Cards & Components (Standardized 6px Border Radius across project) */
+.ref-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+.ref-card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ref-card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+    border-color: rgba(245, 130, 32, 0.3);
+}
+
+.ref-nav {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+}
+
+.ref-pill {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+}
+
+/* Luxury Glass Card Spec (6px Radius & White Border) */
+.glass-hero-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 6px;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-hero-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 25px 60px -10px rgba(0, 166, 81, 0.15);
+}
+
+/* Premium Buttons (Standardized 6px Border Radius) */
+.btn-orange {
+    background-color: #F58220;
+    color: #FFFFFF;
+    font-weight: 700;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-orange:hover {
+    background-color: #E07316;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(245, 130, 32, 0.35);
+}
+
+.btn-green {
+    background-color: #00A651;
+    color: #FFFFFF;
+    font-weight: 700;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-green:hover {
+    background-color: #008D44;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 166, 81, 0.35);
+}
+
+.btn-glass-primary {
+    background: rgba(0, 166, 81, 0.95);
+    color: #FFFFFF;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(0, 166, 81, 0.3);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-glass-primary:hover {
+    background: rgba(0, 141, 68, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(0, 166, 81, 0.45);
+}
+
+.btn-glass-secondary {
+    background: rgba(255, 255, 255, 0.85);
+    color: #18181B;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-glass-secondary:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #F58220;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px -5px rgba(245, 130, 32, 0.2);
+}
+
+/* Nav Item Hover Orange Line Indicator */
+.nav-link {
+    position: relative;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 2.5px;
+    background-color: #F58220;
+    border-radius: 9999px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* Glass Mega Menu (6px Radius) */
+.glass-mega-menu {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+}
+
+/* Keyframes */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes float-reverse {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dropdown-slide {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-float {
+    animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+    animation: float-reverse 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+    animation: spin-slow 25s linear infinite;
+}
+
+.animate-dropdown {
+    animation: dropdown-slide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F4F7FB;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #F58220;
+}
+
+/* Swiper Continuous Linear Smooth Scroll Marquee */
+.batchSwiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
