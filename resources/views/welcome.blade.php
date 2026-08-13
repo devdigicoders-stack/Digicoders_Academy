@@ -21,16 +21,21 @@
     <meta name="revisit-after" content="7 days">
     <meta name="rating" content="General">
 
-    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn Link Sharing Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="DigiCoders Academy | Best Computer & IT Software Training Institute in Lucknow">
     <meta property="og:description"
-        content="Master Web Development, Full Stack, Python, Java, DCA, ADCA & Digital Marketing with live projects and 100% placement assistance at DigiCoders Academy Lucknow.">
-    <meta property="og:image" content="{{ asset('images/hero-bg.png') }}">
-    <meta property="og:image:alt" content="DigiCoders Academy Lucknow - Job Oriented Tech Education">
+        content="DigiCoders Academy is Lucknow's premier IT & Software Training Institute. Learn Web Development, Python, Full Stack MERN, Java, DCA, ADCA, Digital Marketing & Data Science with 100% placement support.">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="DigiCoders Academy Lucknow - A Unit of DigiCoders Technologies">
     <meta property="og:site_name" content="DigiCoders Academy">
     <meta property="og:locale" content="en_US">
+    <link rel="image_src" href="{{ asset('images/logo.png') }}">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +43,7 @@
     <meta name="twitter:title" content="DigiCoders Academy | Best IT & Computer Training Institute Lucknow">
     <meta name="twitter:description"
         content="Join DigiCoders Academy Lucknow for top job-oriented tech courses: Web Development, Python, MERN Stack, ADCA, DCA & Digital Marketing with 100% Placement.">
-    <meta name="twitter:image" content="{{ asset('images/hero-bg.png') }}">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
 
     <!-- Local & Geo SEO Tags (Lucknow, UP, India) -->
     <meta name="geo.region" content="IN-UP">

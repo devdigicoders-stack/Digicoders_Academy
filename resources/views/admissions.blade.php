@@ -7,6 +7,29 @@
     <title>Admissions 2026 | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Apply for 6-Month & 1-Year Diploma courses at DigiCoders Academy Lucknow. Check admission procedure, eligibility, fee structure, batch timings & scholarships.">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / WhatsApp / Facebook Link Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Admissions 2026 | DigiCoders Academy Lucknow">
+    <meta property="og:description"
+        content="Apply for 6-Month & 1-Year Diploma courses at DigiCoders Academy Lucknow. Check admission procedure, eligibility, fee structure, batch timings & scholarships.">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="DigiCoders Academy">
+    <link rel="image_src" href="{{ asset('images/logo.png') }}">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="Admissions 2026 | DigiCoders Academy Lucknow">
+    <meta name="twitter:description"
+        content="Apply for 6-Month & 1-Year Diploma courses at DigiCoders Academy Lucknow. Check admission procedure, eligibility, fee structure & scholarships.">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
 
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

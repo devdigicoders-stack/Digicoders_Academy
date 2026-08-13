@@ -7,6 +7,29 @@
     <title>Contact Us & Campus Location | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Contact DigiCoders Academy Lucknow. Phone: +91 9140967607, Email: info@digicodersacademy.com. Visit our campus near Polytechnic Chauraha, Indiranagar, Lucknow.">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / WhatsApp / Facebook Link Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Contact Us & Campus Location | DigiCoders Academy Lucknow">
+    <meta property="og:description"
+        content="Get in touch with DigiCoders Academy Lucknow. Call +91 9140967607 or visit our campus for course counseling & admissions.">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="DigiCoders Academy">
+    <link rel="image_src" href="{{ asset('images/logo.png') }}">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="Contact Us | DigiCoders Academy Lucknow">
+    <meta name="twitter:description"
+        content="Contact DigiCoders Academy Lucknow. Call +91 9140967607 or visit our campus for course counseling.">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
 
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

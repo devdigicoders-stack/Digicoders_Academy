@@ -12,6 +12,29 @@
         content="Master Advanced Excel & MIS Reporting at DigiCoders Academy. Learn VLOOKUP, XLOOKUP, Pivot Tables, Dashboards, Power Query, Macros & Data Analytics.">
     <meta name="keywords"
         content="Advanced Excel course Lucknow, MIS Reporting training, Excel Dashboard course, Data Analyst Excel">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / WhatsApp / Facebook Link Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Advanced Excel & MIS Reporting Course | DigiCoders Academy">
+    <meta property="og:description"
+        content="Master Advanced Excel & MIS Reporting at DigiCoders Academy Lucknow. Learn Pivot Tables, Dashboards, Power Query, Macros & Data Analytics with 100% placement support.">
+    <meta property="og:image" content="{{ asset('images/courses/advanceexel.jpg') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/courses/advanceexel.jpg') }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="DigiCoders Academy">
+    <link rel="image_src" href="{{ asset('images/courses/advanceexel.jpg') }}">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="Advanced Excel & MIS Reporting Course | DigiCoders Academy">
+    <meta name="twitter:description"
+        content="Master Advanced Excel & MIS Reporting at DigiCoders Academy Lucknow. Learn Pivot Tables, Dashboards, Power Query, Macros & Data Analytics.">
+    <meta name="twitter:image" content="{{ asset('images/courses/advanceexel.jpg') }}">
 
     <!-- Google Fonts & Lucide Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
