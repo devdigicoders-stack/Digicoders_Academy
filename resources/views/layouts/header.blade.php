@@ -232,26 +232,20 @@
             <!-- Admissions -->
             <a href="{{ route('admissions') }}" class="nav-link {{ request()->routeIs('admissions') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Admissions</a>
 
+            <!-- Placements (Temporarily Commented) -->
+            {{-- <a href="{{ route('placements') }}" class="nav-link {{ request()->routeIs('placements') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Placements</a> --}}
 
-            <!-- Placements -->
-            <a href="{{ route('placements') }}" class="nav-link {{ request()->routeIs('placements') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Placements</a>
+            <!-- Student Life (Temporarily Commented) -->
+            {{-- <a href="{{ route('student-life') }}" class="nav-link {{ request()->routeIs('student-life') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Student Life</a> --}}
 
-
-            <!-- Student Life -->
-            <a href="{{ route('student-life') }}" class="nav-link {{ request()->routeIs('student-life') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Student Life</a>
-
-
-            <!-- Gallery -->
-            <a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Gallery</a>
-
+            <!-- Gallery (Temporarily Commented) -->
+            {{-- <a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Gallery</a> --}}
 
             <!-- Blog -->
             <a href="{{ route('blog.index') }}" class="nav-link {{ request()->routeIs('blog.*') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Blog</a>
 
-
             <!-- Contact -->
             <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Contact</a>
-
 
         </div>
 
@@ -296,57 +290,57 @@
                 </button>
             </div>
 
-            <div class="space-y-3 pt-4 text-sm font-semibold text-[#18181B]">
+            <div class="space-y-1.5 pt-4 text-sm font-semibold text-[#18181B]">
                 <a href="{{ route('home') }}" onclick="toggleMobileMenu()"
-                    class="block py-2 border-b border-slate-100 {{ request()->routeIs('home') ? 'text-[#F58220]' : '' }}">Home</a>
-                <a href="{{ route('about') }}" onclick="toggleMobileMenu()" class="block py-2 border-b border-slate-100 {{ request()->routeIs('about') ? 'text-[#F58220]' : '' }}">About
-                    Academy</a>
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('home') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Home</a>
+                
+                <a href="{{ route('about') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('about') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">About Academy</a>
 
                 <!-- Mobile Courses Accordion -->
-                <div class="border-b border-slate-100 py-2">
+                <div class="border-b border-slate-100 py-1">
                     <button onclick="toggleMobileSubmenu('mobileCourses')"
-                        class="w-full flex items-center justify-between">
-                        <span>Courses</span>
-                        <i data-lucide="plus" class="w-4 h-4 text-[#F58220]"></i>
+                        class="w-full flex items-center justify-between py-2 px-3 rounded-xl hover:bg-slate-50 transition-colors">
+                        <span class="{{ request()->routeIs('courses.*') ? 'text-[#F58220] font-bold' : '' }}">Courses</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-[#F58220]"></i>
                     </button>
-                    <div id="mobileCourses" class="hidden pt-2 pl-3 space-y-2 text-xs font-normal text-[#64748B]">
-                        <a href="#courses" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B]">DCA
-                            (6 Months)</a>
-                        <a href="#courses" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B]">ADCA
-                            (1 Year)</a>
-                        <a href="#courses" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B]">Web
-                            Development (ADWD)</a>
-                        <a href="#courses" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B]">Web
-                            Designing</a>
-                        <a href="#courses" onclick="toggleMobileMenu()"
-                            class="block font-semibold text-[#18181B]">Advanced Excel & MIS</a>
-                        <a href="#courses" onclick="toggleMobileMenu()"
-                            class="block font-semibold text-[#18181B]">Digital Marketing (ADDM)</a>
+                    <div id="mobileCourses" class="hidden pt-2 pl-3 space-y-2.5 text-xs font-normal text-[#64748B]">
+                        <a href="{{ route('courses.index') }}" onclick="toggleMobileMenu()"
+                            class="block font-bold text-[#F58220] p-1.5 rounded-lg bg-orange-50/50">All Courses Catalog →</a>
+
+                        <div class="pt-1">
+                            <p class="text-[10px] font-black uppercase text-[#F58220] tracking-wider mb-1">6-Month Diplomas</p>
+                            <a href="{{ route('courses.dca') }}" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B] py-1 hover:text-[#F58220]">DCA (Diploma in Computer Applications)</a>
+                            <a href="{{ route('courses.excel-mis') }}" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B] py-1 hover:text-[#F58220]">Advanced Excel & MIS</a>
+                            <a href="{{ route('courses.web-designing') }}" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B] py-1 hover:text-[#F58220]">Web Designing</a>
+                        </div>
+
+                        <div class="pt-1">
+                            <p class="text-[10px] font-black uppercase text-[#00A651] tracking-wider mb-1">1-Year Diplomas</p>
+                            <a href="{{ route('courses.adca') }}" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B] py-1 hover:text-[#00A651]">ADCA (Advanced Computer Diploma)</a>
+                            <a href="{{ route('courses.adwd') }}" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B] py-1 hover:text-[#00A651]">ADWD (Web Development Full Stack)</a>
+                            <a href="{{ route('courses.addm') }}" onclick="toggleMobileMenu()" class="block font-semibold text-[#18181B] py-1 hover:text-[#00A651]">ADDM (Digital Marketing)</a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Mobile Admissions Accordion -->
-                <div class="border-b border-slate-100 py-2">
-                    <button onclick="toggleMobileSubmenu('mobileAdmissions')"
-                        class="w-full flex items-center justify-between">
-                        <span>Admissions</span>
-                        <i data-lucide="plus" class="w-4 h-4 text-[#00A651]"></i>
-                    </button>
-                    <div id="mobileAdmissions" class="hidden pt-2 pl-3 space-y-2 text-xs font-normal text-[#64748B]">
-                        <a href="#journey" onclick="toggleMobileMenu()" class="block">Admission Process</a>
-                        <a href="#courses" onclick="toggleMobileMenu()" class="block">Eligibility Criteria</a>
-                        <a href="#faq" onclick="toggleMobileMenu()" class="block">Fee Structure & Documents</a>
-                        <a href="#contact" onclick="toggleMobileMenu()" class="block">Batch Schedule</a>
-                    </div>
-                </div>
+                <a href="{{ route('admissions') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('admissions') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Admissions</a>
 
-                <a href="#placements" onclick="toggleMobileMenu()"
-                    class="block py-2 border-b border-slate-100">Placements</a>
-                <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 border-b border-slate-100">Student
-                    Life & Gallery</a>
-                <a href="#testimonials" onclick="toggleMobileMenu()"
-                    class="block py-2 border-b border-slate-100">Blog</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="block py-2">Contact Us</a>
+                {{-- <a href="{{ route('placements') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('placements') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Placements</a> --}}
+
+                {{-- <a href="{{ route('student-life') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('student-life') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Student Life</a> --}}
+
+                {{-- <a href="{{ route('gallery') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('gallery') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Gallery</a> --}}
+
+                <a href="{{ route('blog.index') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('blog.*') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Blog</a>
+
+                <a href="{{ route('contact') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('contact') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Contact</a>
             </div>
         </div>
 

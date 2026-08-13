@@ -1,31 +1,43 @@
 <!-- INTERACTIVE MODALS -->
 
 <!-- Search Modal (Spotlight Command K) -->
-<div id="searchModal" class="fixed inset-0 z-50 hidden flex items-start justify-center pt-24 p-4 bg-black/60 backdrop-blur-md transition-all">
-    <div class="glass-card-solid w-full max-w-xl p-6 rounded-[6px] bg-white shadow-2xl relative animate-dropdown border border-black/10">
-        <button onclick="closeModal('searchModal')" class="absolute top-5 right-5 p-1 rounded-full hover:bg-slate-100 cursor-pointer">
-            <i data-lucide="x" class="w-5 h-5 text-[#18181B]"></i>
-        </button>
-
-        <div class="flex items-center gap-3 border-b border-black/10 pb-4">
-            <i data-lucide="search" class="w-5 h-5 text-[#F58220]"></i>
-            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search courses, admissions, fees, syllabus..." class="w-full bg-transparent text-sm font-semibold text-[#18181B] focus:outline-none">
+<div id="searchModal" class="fixed inset-0 z-50 hidden flex items-start justify-center pt-16 sm:pt-24 p-4 bg-slate-950/70 backdrop-blur-xl transition-all">
+    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl relative animate-dropdown border border-slate-200/90 overflow-hidden flex flex-col max-h-[85vh]">
+        
+        <!-- Search Input Bar with Command K Shortcut Badge -->
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-100 bg-slate-50/50">
+            <i data-lucide="search" class="w-5 h-5 text-[#F58220] shrink-0"></i>
+            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search courses, diploma, admissions, fees, syllabus..." class="w-full bg-transparent text-sm sm:text-base font-bold text-[#18181B] focus:outline-none placeholder:text-slate-400 placeholder:font-medium">
+            <div class="flex items-center gap-2 shrink-0">
+                <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-slate-200/70 text-slate-600 border border-slate-300/60">ESC</span>
+                <button onclick="closeModal('searchModal')" class="p-1.5 rounded-full hover:bg-slate-200/60 cursor-pointer text-slate-500 hover:text-slate-800 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
 
-        <div id="searchResults" class="mt-4 max-h-72 overflow-y-auto space-y-2 text-xs">
-            <p class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">Popular Searches</p>
-            <a href="#courses" onclick="closeModal('searchModal'); openCourseModal('DCA', '6 Months', '10th Pass', 'Computer basics, MS Office', 'Computer Operator')" class="p-3 rounded-[6px] hover:bg-slate-100 flex items-center justify-between font-semibold text-[#18181B]">
-                <span>DCA (Diploma in Computer Applications)</span>
-                <span class="text-[#F58220]">6 Months</span>
-            </a>
-            <a href="#courses" onclick="closeModal('searchModal'); openCourseModal('ADCA', '1 Year', '12th Pass', 'Advanced Computer, Tally, Web', 'Full Diploma')" class="p-3 rounded-[6px] hover:bg-slate-100 flex items-center justify-between font-semibold text-[#18181B]">
-                <span>ADCA (Advanced Computer Diploma)</span>
-                <span class="text-[#00A651]">1 Year</span>
-            </a>
-            <a href="#courses" onclick="closeModal('searchModal'); openCourseModal('ADWD', '1 Year', '12th Pass', 'Full Stack Development', 'Software Developer')" class="p-3 rounded-[6px] hover:bg-slate-100 flex items-center justify-between font-semibold text-[#18181B]">
-                <span>ADWD (Full Stack Web Development)</span>
-                <span class="text-[#00A651]">1 Year</span>
-            </a>
+        <!-- Quick Tag Filter Pills -->
+        <div class="flex items-center gap-1.5 px-5 py-2.5 bg-slate-100/60 border-b border-slate-200/60 overflow-x-auto text-[11px] font-bold text-slate-600 shrink-0">
+            <span class="text-[10px] font-black uppercase text-slate-400 mr-1 shrink-0">Quick Filter:</span>
+            <button onclick="filterSearchTag('')" class="px-2.5 py-1 rounded-full bg-white shadow-2xs border border-slate-200 hover:text-[#F58220] transition-colors cursor-pointer shrink-0">All</button>
+            <button onclick="filterSearchTag('diploma')" class="px-2.5 py-1 rounded-full bg-white shadow-2xs border border-slate-200 hover:text-[#F58220] transition-colors cursor-pointer shrink-0">Diploma Courses</button>
+            <button onclick="filterSearchTag('6 months')" class="px-2.5 py-1 rounded-full bg-white shadow-2xs border border-slate-200 hover:text-[#F58220] transition-colors cursor-pointer shrink-0">6 Months</button>
+            <button onclick="filterSearchTag('1 year')" class="px-2.5 py-1 rounded-full bg-white shadow-2xs border border-slate-200 hover:text-[#00A651] transition-colors cursor-pointer shrink-0">1 Year</button>
+            <button onclick="filterSearchTag('admission')" class="px-2.5 py-1 rounded-full bg-white shadow-2xs border border-slate-200 hover:text-[#F58220] transition-colors cursor-pointer shrink-0">Admissions</button>
+            <button onclick="filterSearchTag('contact')" class="px-2.5 py-1 rounded-full bg-white shadow-2xs border border-slate-200 hover:text-[#00A651] transition-colors cursor-pointer shrink-0">Contact & Map</button>
+        </div>
+
+        <!-- Results List Body -->
+        <div id="searchResults" class="p-4 overflow-y-auto space-y-2 text-xs">
+            <!-- Dynamic JavaScript content renders here -->
+        </div>
+
+        <!-- Spotlight Keyboard Footer -->
+        <div class="px-5 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium shrink-0">
+            <span class="flex items-center gap-1.5">
+                <span class="font-bold text-slate-600">Tip:</span> Type <code class="px-1.5 py-0.5 rounded bg-slate-200/70 text-slate-700 font-mono text-[10px]">diploma</code>, <code class="px-1.5 py-0.5 rounded bg-slate-200/70 text-slate-700 font-mono text-[10px]">excel</code>, or <code class="px-1.5 py-0.5 rounded bg-slate-200/70 text-slate-700 font-mono text-[10px]">web</code>
+            </span>
+            <span class="hidden sm:inline-block">Press <kbd class="px-1 py-0.5 rounded bg-slate-200/70 font-mono text-[10px] text-slate-700 font-bold">CTRL + K</kbd> anytime</span>
         </div>
     </div>
 </div>
@@ -171,6 +183,238 @@
 </div>
 
 <script>
+    const searchData = [
+        {
+            title: "DCA (Diploma in Computer Applications)",
+            category: "6-Month Diploma",
+            desc: "MS Office, Windows 11, Data Entry, Computer Fundamentals, Internet & Emailing",
+            url: "{{ route('courses.dca') }}",
+            badge: "6 MONTHS",
+            icon: "monitor",
+            badgeBg: "bg-orange-100 text-[#F58220]",
+            keywords: ["dca", "diploma", "computer", "office", "ms office", "typing", "data entry", "basic computer", "6 months"]
+        },
+        {
+            title: "Advanced Excel & MIS Reporting",
+            category: "6-Month Diploma",
+            desc: "Nested VLOOKUP, XLOOKUP, Pivot Tables, Power Query, Executive MIS Reporting & Dashboards",
+            url: "{{ route('courses.excel-mis') }}",
+            badge: "6 MONTHS",
+            icon: "file-spreadsheet",
+            badgeBg: "bg-orange-100 text-[#F58220]",
+            keywords: ["excel", "mis", "advanced excel", "vlookup", "pivot", "reporting", "dashboard", "diploma", "6 months"]
+        },
+        {
+            title: "Web Designing (UI/UX & Frontend)",
+            category: "6-Month Diploma",
+            desc: "HTML5, CSS3, Tailwind CSS, JavaScript ES6, Responsive Design, Figma UI/UX Basics",
+            url: "{{ route('courses.web-designing') }}",
+            badge: "6 MONTHS",
+            icon: "code",
+            badgeBg: "bg-orange-100 text-[#F58220]",
+            keywords: ["web", "designing", "html", "css", "tailwind", "javascript", "ui", "ux", "frontend", "diploma", "6 months"]
+        },
+        {
+            title: "ADCA (Advanced Diploma in Computer Applications)",
+            category: "1-Year Diploma",
+            desc: "DCA + Tally Prime with GST, Photoshop Graphics, Web Basics, Hardware & Networking",
+            url: "{{ route('courses.adca') }}",
+            badge: "1 YEAR",
+            icon: "laptop-2",
+            badgeBg: "bg-emerald-100 text-[#00A651]",
+            keywords: ["adca", "diploma", "advanced computer", "tally", "gst", "photoshop", "accounting", "1 year"]
+        },
+        {
+            title: "ADWD (Full Stack Web Development Diploma)",
+            category: "1-Year Diploma",
+            desc: "Full Stack Web App Development, PHP Laravel Framework, MySQL Database, APIs & Live Projects",
+            url: "{{ route('courses.adwd') }}",
+            badge: "1 YEAR",
+            icon: "globe",
+            badgeBg: "bg-emerald-100 text-[#00A651]",
+            keywords: ["adwd", "web development", "full stack", "laravel", "php", "mysql", "software", "coder", "diploma", "1 year"]
+        },
+        {
+            title: "ADDM (Advanced Digital Marketing Diploma)",
+            category: "1-Year Diploma",
+            desc: "SEO, Google Ads, Meta Ads (Facebook/Insta), Social Media Marketing, Content Strategy & Analytics",
+            url: "{{ route('courses.addm') }}",
+            badge: "1 YEAR",
+            icon: "bar-chart",
+            badgeBg: "bg-emerald-100 text-[#00A651]",
+            keywords: ["addm", "digital marketing", "seo", "google ads", "meta ads", "social media", "marketing", "diploma", "1 year"]
+        },
+        {
+            title: "Admissions 2026 & Enrollment",
+            category: "Admission",
+            desc: "Apply online for new diploma batches, check fee structure, eligibility criteria & scholarships",
+            url: "{{ route('admissions') }}",
+            badge: "APPLY NOW",
+            icon: "graduation-cap",
+            badgeBg: "bg-orange-100 text-[#F58220]",
+            keywords: ["admission", "apply", "enroll", "fees", "eligibility", "batch", "scholarship", "join"]
+        },
+        {
+            title: "About DigiCoders Academy",
+            category: "About Institute",
+            desc: "Lucknow top-rated IT training academy, experienced mentors, practical lab facilities & vision",
+            url: "{{ route('about') }}",
+            badge: "ABOUT US",
+            icon: "building-2",
+            badgeBg: "bg-slate-100 text-slate-700",
+            keywords: ["about", "digicoders", "lucknow", "institute", "directors", "mentors", "academy"]
+        },
+        {
+            title: "FAQ & Help Center",
+            category: "Support",
+            desc: "Common questions about diploma duration, ISO certificates, batch timings & job assistance",
+            url: "{{ route('faq') }}",
+            badge: "HELP",
+            icon: "help-circle",
+            badgeBg: "bg-slate-100 text-slate-700",
+            keywords: ["faq", "help", "questions", "certificate", "timing", "placement", "job"]
+        },
+        {
+            title: "Contact & Campus Location",
+            category: "Contact Us",
+            desc: "Lucknow Campus address, helpline number +91-9140967607, Google Maps location & contact form",
+            url: "{{ route('contact') }}",
+            badge: "LOCATION",
+            icon: "phone-call",
+            badgeBg: "bg-emerald-100 text-[#00A651]",
+            keywords: ["contact", "phone", "number", "location", "address", "lucknow", "map", "call", "whatsapp"]
+        },
+        {
+            title: "Latest Articles & Tech Blog",
+            category: "Blog & News",
+            desc: "Read technology news, career guides, computer learning tips and academy updates",
+            url: "{{ route('blog.index') }}",
+            badge: "BLOG",
+            icon: "newspaper",
+            badgeBg: "bg-slate-100 text-slate-700",
+            keywords: ["blog", "article", "news", "guides", "tips", "updates"]
+        }
+    ];
+
+    function filterSearchTag(tag) {
+        const input = document.getElementById('searchInput');
+        if (input) {
+            input.value = tag;
+            handleSearch(tag);
+            input.focus();
+        }
+    }
+
+    function handleSearch(query) {
+        const resultsContainer = document.getElementById('searchResults');
+        if (!resultsContainer) return;
+
+        const trimmed = query.trim().toLowerCase();
+
+        if (trimmed === '') {
+            let defaultHtml = `
+                <div class="px-2 pt-1 pb-2">
+                    <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider mb-2">Recommended Courses & Quick Access</p>
+                    <div class="grid grid-cols-1 gap-2">
+            `;
+            searchData.slice(0, 5).forEach(item => {
+                defaultHtml += `
+                    <a href="${item.url}" onclick="closeModal('searchModal')" class="p-3 rounded-xl hover:bg-slate-50 border border-slate-100 hover:border-orange-200 transition-all flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-orange-50 text-[#F58220] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <i data-lucide="${item.icon}" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-extrabold text-[#18181B] group-hover:text-[#F58220] transition-colors">${item.title}</h4>
+                                <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">${item.desc}</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-black px-2 py-0.5 rounded-full shrink-0 ml-2 ${item.badgeBg}">${item.badge}</span>
+                    </a>
+                `;
+            });
+            defaultHtml += `</div></div>`;
+            resultsContainer.innerHTML = defaultHtml;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            return;
+        }
+
+        const filtered = searchData.filter(item =>
+            item.title.toLowerCase().includes(trimmed) ||
+            item.desc.toLowerCase().includes(trimmed) ||
+            item.category.toLowerCase().includes(trimmed) ||
+            item.keywords.some(k => k.toLowerCase().includes(trimmed))
+        );
+
+        if (filtered.length === 0) {
+            resultsContainer.innerHTML = `
+                <div class="py-10 text-center text-slate-500">
+                    <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="search-x" class="w-6 h-6"></i>
+                    </div>
+                    <p class="text-xs font-bold text-[#18181B]">No matching results for "${query}"</p>
+                    <p class="text-[11px] text-slate-400 mt-1 max-w-xs mx-auto">Try searching for "dca", "diploma", "excel", "web", "admissions" or "contact".</p>
+                    <button onclick="filterSearchTag('diploma')" class="mt-4 px-4 py-1.5 rounded-full bg-orange-50 text-[#F58220] text-xs font-bold hover:bg-orange-100 transition-colors">
+                        Browse All Diplomas →
+                    </button>
+                </div>
+            `;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            return;
+        }
+
+        let html = `
+            <div class="px-2 pt-1 pb-2">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Search Results (${filtered.length})</p>
+                    <span class="text-[10px] font-medium text-slate-400">Matching "${query}"</span>
+                </div>
+                <div class="space-y-2">
+        `;
+
+        filtered.forEach(item => {
+            html += `
+                <a href="${item.url}" onclick="closeModal('searchModal')" class="p-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-[#F58220]/40 shadow-2xs hover:shadow-md transition-all flex items-center justify-between group">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 text-[#18181B] group-hover:bg-orange-50 group-hover:text-[#F58220] flex items-center justify-center shrink-0 transition-colors">
+                            <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-xs font-extrabold text-[#18181B] group-hover:text-[#F58220] transition-colors">${item.title}</h4>
+                            </div>
+                            <p class="text-[11px] text-slate-500 line-clamp-1 mt-0.5">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0 ml-3">
+                        <span class="text-[10px] font-black px-2.5 py-1 rounded-full ${item.badgeBg}">${item.badge}</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-slate-300 group-hover:text-[#F58220] group-hover:translate-x-1 transition-all"></i>
+                    </div>
+                </a>
+            `;
+        });
+
+        html += `</div></div>`;
+        resultsContainer.innerHTML = html;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // Global Keyboard Shortcut Listener (CTRL + K / CMD + K)
+    document.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            openModal('searchModal');
+            const input = document.getElementById('searchInput');
+            if (input) {
+                input.focus();
+                handleSearch(input.value);
+            }
+        }
+        if (e.key === 'Escape') {
+            closeModal('searchModal');
+        }
+    });
+
     async function handleBrochureDownload(e) {
         e.preventDefault();
         const form = e.target;

@@ -45,8 +45,8 @@
             
             <!-- Background Image with Soft White Gradient Mask -->
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80"
-                    alt="DigiCoders ADDM Lab" class="w-full h-full object-cover object-right opacity-90">
+                <img src="{{ asset('images/course-students-banner.jpg') }}"
+                    alt="DigiCoders ADDM Digital Marketing Lab" class="w-full h-full object-cover object-right opacity-90">
                 <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/90 to-white/20 lg:to-transparent"></div>
             </div>
 
@@ -627,7 +627,9 @@
 
                 </div>
             </div>
-        <!-- 8️⃣ FREQUENTLY ASKED QUESTIONS -->
+        </section>
+
+        <!-- 9️⃣ FREQUENTLY ASKED QUESTIONS -->
         @if(isset($faqs) && $faqs->count() > 0)
         <section id="course-faqs" class="py-14 sm:py-20 bg-white border-t border-slate-200/60">
             <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">

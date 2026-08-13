@@ -7,13 +7,97 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Primary Meta Tags -->
-    <title>DigiCoders Academy | Premium Job-Oriented Tech Education & IT Training</title>
-    <meta name="title" content="DigiCoders Academy | Build Skills That Build Careers">
+    <title>DigiCoders Academy | Best Computer & IT Software Training Institute in Lucknow | 100% Placement</title>
+    <meta name="title" content="DigiCoders Academy | Best Computer & IT Software Training Institute in Lucknow">
     <meta name="description"
-        content="DigiCoders Academy, a unit of DigiCoders Technologies Pvt. Ltd. Master Web Development, Software Engineering, DCA, ADCA, Python, and Digital Marketing with 100% Placement Assistance.">
+        content="DigiCoders Academy is the top computer institute & software training center in Lucknow. Learn Web Development, Python, Full Stack MERN, Java, DCA, ADCA, Digital Marketing & Data Science with live project training and 100% placement support.">
     <meta name="keywords"
-        content="DigiCoders Academy, DCA, ADCA, ADWD, ADDM, Web Designing, Advanced Excel, Computer Institute Lucknow Gorakhpur">
-    <meta name="robots" content="index, follow">
+        content="DigiCoders Academy, Best Computer Institute in Lucknow, Software Training Institute in Lucknow, IT Training Institute Lucknow, Web Development Course in Lucknow, Python Training in Lucknow, Full Stack Developer Course Lucknow, DCA Course Lucknow, ADCA Course Lucknow, ADWD Course, ADDM Course, Digital Marketing Institute in Lucknow, Summer Training Lucknow, Industrial Training Lucknow, 6 Months Internship Lucknow, Advanced Excel Course Lucknow, MERN Stack Course Lucknow, Java Training Lucknow, Computer Coaching near me, Best IT Coaching Lucknow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="author" content="DigiCoders Technologies Pvt. Ltd.">
+    <meta name="publisher" content="DigiCoders Academy">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="General">
+
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="DigiCoders Academy | Best Computer & IT Software Training Institute in Lucknow">
+    <meta property="og:description"
+        content="Master Web Development, Full Stack, Python, Java, DCA, ADCA & Digital Marketing with live projects and 100% placement assistance at DigiCoders Academy Lucknow.">
+    <meta property="og:image" content="{{ asset('images/hero-bg.png') }}">
+    <meta property="og:image:alt" content="DigiCoders Academy Lucknow - Job Oriented Tech Education">
+    <meta property="og:site_name" content="DigiCoders Academy">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="DigiCoders Academy | Best IT & Computer Training Institute Lucknow">
+    <meta name="twitter:description"
+        content="Join DigiCoders Academy Lucknow for top job-oriented tech courses: Web Development, Python, MERN Stack, ADCA, DCA & Digital Marketing with 100% Placement.">
+    <meta name="twitter:image" content="{{ asset('images/hero-bg.png') }}">
+
+    <!-- Local & Geo SEO Tags (Lucknow, UP, India) -->
+    <meta name="geo.region" content="IN-UP">
+    <meta name="geo.placename" content="Lucknow">
+    <meta name="geo.position" content="26.8467;80.9462">
+    <meta name="ICBM" content="26.8467, 80.9462">
+
+    <!-- Schema.org JSON-LD Structured Data for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@graph": [
+        {
+          "@@type": "EducationalOrganization",
+          "@@id": "https://digicodersacademy.com#organization",
+          "name": "DigiCoders Academy",
+          "legalName": "DigiCoders Technologies Pvt. Ltd.",
+          "url": "https://digicodersacademy.com",
+          "logo": "{{ asset('images/logo.png') }}",
+          "image": "{{ asset('images/hero-bg.png') }}",
+          "description": "DigiCoders Academy is Lucknow's leading IT & Software Training Institute offering job-oriented training in Web Development, Full Stack Development, Python, DCA, ADCA, and Digital Marketing with 100% placement assistance.",
+          "address": {
+            "@@type": "PostalAddress",
+            "addressLocality": "Lucknow",
+            "addressRegion": "Uttar Pradesh",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@@type": "GeoCoordinates",
+            "latitude": "26.8467",
+            "longitude": "80.9462"
+          },
+          "telephone": "+91-9140967607",
+          "priceRange": "₹₹",
+          "sameAs": [
+            "https://digiacademy.in",
+            "https://www.facebook.com/digicodersacademy",
+            "https://www.instagram.com/digicodersacademy",
+            "https://www.linkedin.com/company/digicoders"
+          ]
+        },
+        {
+          "@@type": "WebSite",
+          "@@id": "https://digicodersacademy.com#website",
+          "url": "https://digicodersacademy.com",
+          "name": "DigiCoders Academy",
+          "alternateName": "DigiAcademy",
+          "publisher": {
+            "@@id": "https://digicodersacademy.com#organization"
+          },
+          "potentialAction": {
+            "@@type": "SearchAction",
+            "target": "https://digicodersacademy.com/courses?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
 
     <!-- Favicon -->
     @if(!empty($settings['site_favicon']))
@@ -396,7 +480,7 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80"
+                            <img src="{{ asset('images/courses/dca.jpg') }}"
                                 alt="DCA" class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">6
@@ -419,12 +503,11 @@
                         </div>
                     </div>
                     <div class="px-4 pb-4 pt-2">
-                        <button
-                            onclick="openCourseModal('DCA', '6 Months', '10th Pass', 'Computer fundamentals, MS Office, Windows, Data Entry.', 'Computer Operator & Admin Jobs')"
+                        <a href="{{ route('courses.dca') }}"
                             class="text-xs font-bold text-[#18181B] hover:text-[#00A651] flex items-center gap-1 cursor-pointer">
                             <span>Know More</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -432,7 +515,7 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80"
+                            <img src="{{ asset('images/courses/advanceexel.jpg') }}"
                                 alt="Advanced Excel" class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">6
@@ -456,12 +539,11 @@
                         </div>
                     </div>
                     <div class="px-4 pb-4 pt-2">
-                        <button
-                            onclick="openCourseModal('Advanced Excel & MIS', '6 Months', '10th Pass', 'Nested VLOOKUP, Pivot Tables, Power Query, MIS Dashboard reporting.', 'Data Analytics & MIS Executive')"
+                        <a href="{{ route('courses.excel-mis') }}"
                             class="text-xs font-bold text-[#18181B] hover:text-[#00A651] flex items-center gap-1 cursor-pointer">
                             <span>Know More</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -469,7 +551,7 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80"
+                            <img src="{{ asset('images/courses/webdesign.jpg') }}"
                                 alt="Web Designing" class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">6
@@ -492,12 +574,11 @@
                         </div>
                     </div>
                     <div class="px-4 pb-4 pt-2">
-                        <button
-                            onclick="openCourseModal('Web Designing', '6 Months', '10th Pass', 'HTML5, CSS3, JavaScript, Tailwind, Figma UI/UX.', 'Frontend Web Developer')"
+                        <a href="{{ route('courses.web-designing') }}"
                             class="text-xs font-bold text-[#18181B] hover:text-[#00A651] flex items-center gap-1 cursor-pointer">
                             <span>Know More</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -505,7 +586,7 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+                            <img src="{{ asset('images/courses/adca.jpg') }}"
                                 alt="ADCA" class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#00A651] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">1
@@ -529,12 +610,11 @@
                         </div>
                     </div>
                     <div class="px-4 pb-4 pt-2">
-                        <button
-                            onclick="openCourseModal('ADCA', '1 Year', '12th Pass', 'DCA + Tally Prime, Photoshop, HTML, Hardware & Networking.', 'Full 1-Year Diploma Certification')"
+                        <a href="{{ route('courses.adca') }}"
                             class="text-xs font-bold text-[#18181B] hover:text-[#00A651] flex items-center gap-1 cursor-pointer">
                             <span>Know More</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -542,7 +622,7 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
+                            <img src="{{ asset('images/courses/adwd.jpg') }}"
                                 alt="ADWD" class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#00A651] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">1
@@ -565,12 +645,11 @@
                         </div>
                     </div>
                     <div class="px-4 pb-4 pt-2">
-                        <button
-                            onclick="openCourseModal('ADWD', '1 Year', '12th Pass', 'Full Stack Frontend + PHP Laravel Backend + Live Client Projects.', 'Career Ready Web Engineer')"
+                        <a href="{{ route('courses.adwd') }}"
                             class="text-xs font-bold text-[#18181B] hover:text-[#00A651] flex items-center gap-1 cursor-pointer">
                             <span>Know More</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -578,7 +657,7 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+                            <img src="{{ asset('images/courses/addm.jpg') }}"
                                 alt="ADDM" class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#00A651] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">1
@@ -602,12 +681,11 @@
                         </div>
                     </div>
                     <div class="px-4 pb-4 pt-2">
-                        <button
-                            onclick="openCourseModal('ADDM', '1 Year', '12th Pass', 'SEO, Google Ads, Meta Ads, Social Media Marketing, Analytics.', 'Certified Digital Marketer')"
+                        <a href="{{ route('courses.addm') }}"
                             class="text-xs font-bold text-[#18181B] hover:text-[#00A651] flex items-center gap-1 cursor-pointer">
                             <span>Know More</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -1027,7 +1105,7 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+                                    <img src="{{ asset('images/courses/adca.jpg') }}"
                                         alt="ADCA Batch" class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#F58220] text-white shadow-md">
@@ -1078,7 +1156,7 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80"
+                                    <img src="{{ asset('images/courses/dca.jpg') }}"
                                         alt="DCA Batch" class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#00A651] text-white shadow-md">
@@ -1129,7 +1207,7 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
+                                    <img src="{{ asset('images/courses/adwd.jpg') }}"
                                         alt="ADWD Batch" class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#F58220] text-white shadow-md">
@@ -1181,7 +1259,7 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+                                    <img src="{{ asset('images/courses/addm.jpg') }}"
                                         alt="ADDM Batch" class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#00A651] text-white shadow-md">
@@ -1233,7 +1311,7 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80"
+                                    <img src="{{ asset('images/courses/advanceexel.jpg') }}"
                                         alt="Advanced Excel Batch" class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#F58220] text-white shadow-md">
@@ -1285,7 +1363,7 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80"
+                                    <img src="{{ asset('images/courses/webdesign.jpg') }}"
                                         alt="Web Design Batch" class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#00A651] text-white shadow-md">
@@ -1681,34 +1759,7 @@
             lucide.createIcons();
         }
 
-        function handleSearch(query) {
-            const results = document.getElementById('searchResults');
-            if (!query.trim()) {
-                results.innerHTML = `
-                    <p class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">Popular Searches</p>
-                    <a href="#courses" onclick="closeModal('searchModal'); openCourseModal('DCA', '6 Months', '10th Pass', 'Computer basics, MS Office', 'Computer Operator')" class="p-3 rounded-xl hover:bg-slate-100 flex items-center justify-between font-semibold text-[#18181B]">
-                        <span>DCA (Diploma in Computer Applications)</span>
-                        <span class="text-[#F58220]">6 Months</span>
-                    </a>
-                    <a href="#courses" onclick="closeModal('searchModal'); openCourseModal('ADCA', '1 Year', '12th Pass', 'Advanced Computer, Tally, Web', 'Full Diploma')" class="p-3 rounded-xl hover:bg-slate-100 flex items-center justify-between font-semibold text-[#18181B]">
-                        <span>ADCA (Advanced Computer Diploma)</span>
-                        <span class="text-[#00A651]">1 Year</span>
-                    </a>
-                    <a href="#courses" onclick="closeModal('searchModal'); openCourseModal('ADWD', '1 Year', '12th Pass', 'Full Stack Development', 'Software Developer')" class="p-3 rounded-xl hover:bg-slate-100 flex items-center justify-between font-semibold text-[#18181B]">
-                        <span>ADWD (Full Stack Web Development)</span>
-                        <span class="text-[#00A651]">1 Year</span>
-                    </a>
-                `;
-                return;
-            }
-            results.innerHTML = `
-                <p class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">Search Results for "${query}"</p>
-                <div class="p-3 rounded-xl bg-orange-50 text-xs text-[#18181B]">
-                    Found <strong>Course & Admission Info</strong> matching "${query}".
-                    <button onclick="closeModal('searchModal'); openModal('applyModal')" class="mt-2 text-xs font-bold text-[#F58220] underline block">Apply for ${query} →</button>
-                </div>
-            `;
-        }
+
 
         function handleFormSubmit(e, name) {
             e.preventDefault();

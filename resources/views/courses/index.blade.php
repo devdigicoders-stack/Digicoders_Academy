@@ -40,20 +40,62 @@
 
     <main class="w-full overflow-hidden">
 
-        <!-- 1️⃣ HERO BANNER -->
-        <section id="courses-catalog-hero" class="py-12 sm:py-16 bg-white relative border-b border-slate-200/60 overflow-hidden">
-            <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
-                
-                <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#F58220]">OUR DIPLOMA PROGRAMS</span>
-                
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-[#111111] tracking-tight leading-tight mt-2">
-                    Job-Ready Computer & <span class="text-[#00A651]">IT Diploma Courses</span>
-                </h1>
+        <!-- 1️⃣ HERO BANNER WITH STUDENTS IMAGE -->
+        <section id="courses-catalog-hero" class="py-10 sm:py-14 lg:py-16 bg-white relative border-b border-slate-200/60 overflow-hidden">
+            <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <!-- Left Content -->
+                    <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+                        <span class="inline-block px-3 py-1 rounded-full bg-orange-50 text-[#F58220] text-xs font-extrabold uppercase tracking-wider border border-orange-200/60">
+                            OUR DIPLOMA PROGRAMS 2026
+                        </span>
+                        
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-[#111111] tracking-tight leading-[1.15]">
+                            Job-Ready Computer & <br class="hidden sm:inline">
+                            <span class="text-[#00A651]">IT Diploma Courses</span>
+                        </h1>
 
-                <p class="text-sm sm:text-base text-[#555555] leading-relaxed mt-4">
-                    Choose from our government-recognized 6-Month and 1-Year practical diploma programs designed for immediate career growth and job placement.
-                </p>
+                        <p class="text-sm sm:text-base text-[#555555] leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+                            Choose from our government-recognized 6-Month and 1-Year practical diploma programs designed for immediate career growth, practical lab learning, and 100% job placement support.
+                        </p>
 
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#6-month-diplomas"
+                                class="bg-[#F58220] hover:bg-[#e07316] text-white px-6 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-2">
+                                <span>6-Month Diplomas</span>
+                                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                            </a>
+
+                            <a href="#1-year-diplomas"
+                                class="bg-[#00A651] hover:bg-[#008d44] text-white px-6 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-2">
+                                <span>1-Year Diplomas</span>
+                                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Image Container -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 group">
+                            <img src="{{ asset('images/students-group.jpg') }}"
+                                alt="DigiCoders Academy Students Learning"
+                                class="w-full h-auto max-h-[380px] object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-200/80 shadow-lg flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-[#EAF7EE] text-[#00A651] flex items-center justify-center shrink-0">
+                                    <i data-lucide="users" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-extrabold text-[#111111]">Interactive Classroom Labs</p>
+                                    <p class="text-[11px] text-[#666666]">100% Practical Training on Live Projects</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 

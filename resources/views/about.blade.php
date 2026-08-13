@@ -123,12 +123,11 @@
                 </svg>
             </div>
 
-            <!-- RIGHT SIDE EDGE-TO-EDGE WHITE CAMPUS BUILDING IMAGE WITH NATIVE CSS GRADIENT FADE -->
+            <!-- RIGHT SIDE EDGE-TO-EDGE CAMPUS IMAGE WITH NATIVE CSS GRADIENT FADE -->
             <div class="absolute top-0 right-0 bottom-0 h-full z-0 overflow-hidden pointer-events-none"
                 style="width: 70%; right: 0;">
-                <!-- Modern White Corporate Campus Building Photo -->
-                <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=1800&q=80"
-                    alt="DigiCoders Academy Building" class="w-full h-full object-cover object-center">
+                <img src="{{ asset('images/about-hero-students.jpg') }}"
+                    alt="DigiCoders Academy Students" class="w-full h-full object-cover object-center">
 
                 <!-- Native CSS Multi-Stage White Gradient Mask -->
                 <div class="absolute inset-0 pointer-events-none"
@@ -173,14 +172,14 @@
             <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
-                    <!-- Left: Large Building Image + Floating Badge -->
+                    <!-- Left: Large Student Image + Floating Badge -->
                     <div class="lg:col-span-6 relative w-full">
                         <!-- Main Building Image Container -->
                         <div
-                            class="rounded-[6px] overflow-hidden shadow-lg border border-slate-100 bg-slate-50 relative">
-                            <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=900&q=80"
-                                alt="DigiCoders Building Campus"
-                                class="w-full h-[340px] sm:h-[420px] lg:h-[450px] object-cover rounded-[6px] transform hover:scale-105 transition-transform duration-700">
+                            class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 relative group">
+                            <img src="{{ asset('images/who-we-are-campus.png') }}"
+                                alt="DigiCoders Academy Practical Training Lab"
+                                class="w-full h-[340px] sm:h-[420px] lg:h-[450px] object-cover rounded-xl transform group-hover:scale-105 transition-transform duration-700">
 
                             <!-- Floating Badge at bottom left INSIDE image -->
                             <div

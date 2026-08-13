@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Setting;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -95,7 +96,7 @@ class GalleryController extends Controller
             'status' => $request->has('status') ? $request->boolean('status') : true,
         ]);
 
-        \App\Services\NotificationService::notifyGallery($gallery->title);
+        NotificationService::notifyGallery($gallery->title);
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery photo uploaded successfully.');
     }
@@ -138,7 +139,7 @@ class GalleryController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image file from public/uploads/gallery
-            if ($gallery->image_path && file_exists(public_path($gallery->image_path)) && is_file(public_path($gallery->image_path))) {
+            if ($gallery->image_path && Str::startsWith($gallery->image_path, 'uploads/') && file_exists(public_path($gallery->image_path)) && is_file(public_path($gallery->image_path))) {
                 @unlink(public_path($gallery->image_path));
             }
 
@@ -171,7 +172,7 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-        if ($gallery->image_path && file_exists(public_path($gallery->image_path)) && is_file(public_path($gallery->image_path))) {
+        if ($gallery->image_path && Str::startsWith($gallery->image_path, 'uploads/') && file_exists(public_path($gallery->image_path)) && is_file(public_path($gallery->image_path))) {
             @unlink(public_path($gallery->image_path));
         }
 

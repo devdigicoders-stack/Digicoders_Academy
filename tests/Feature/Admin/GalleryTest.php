@@ -83,7 +83,7 @@ test('admin can delete gallery item', function () {
     $gallery = Gallery::create([
         'title' => 'Photo To Delete',
         'album' => 'Campus',
-        'image_path' => 'images/students.png',
+        'image_path' => 'uploads/gallery/fake_test_delete_photo.jpg',
     ]);
 
     $response = $this->actingAs($admin)->delete(route('admin.gallery.destroy', $gallery->id));

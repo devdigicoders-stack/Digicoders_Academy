@@ -184,7 +184,7 @@
         </div>
 
         <!-- Additional Charts Row: Admissions Bar & Brochure Area Chart -->
-        <div class="dc-analytics-grid" style="grid-template-columns: 6fr 6fr;">
+        <div class="dc-analytics-grid dc-grid-2">
             <!-- Monthly Admissions Bar Chart -->
             <div class="dc-card">
                 <div class="dc-card-title-wrap">
@@ -211,7 +211,7 @@
                 <span style="font-size: 12px; color: var(--dc-light-gray);">Fast one-click content creation &
                     management</span>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+            <div class="dc-quick-actions-grid">
                 <a href="{{ route('admin.courses.create') }}" class="dc-card"
                     style="padding: 16px; display: flex; align-items: center; gap: 14px; text-decoration: none;">
                     <div class="dc-stat-icon green"><i class="fa-solid fa-book-open"></i></div>
@@ -296,10 +296,10 @@
         </div>
 
         <!-- 5. RECENT ADMISSIONS & BROCHURE REQUESTS TABLES (100% DYNAMIC FROM DATABASE) -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
+        <!-- <div class="dc-tables-grid"> -->
 
             <!-- Recent Admissions Applications -->
-            <div class="dc-card">
+            <!-- <div class="dc-card">
                 <div class="dc-card-title-wrap">
                     <h2 class="dc-card-title">Recent Admissions Applications</h2>
                     <a href="{{ route('admin.admissions.index') }}" class="dc-btn dc-btn-outline"
@@ -358,10 +358,10 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Recent Brochure Download Requests -->
-            <div class="dc-card">
+            <!-- <div class="dc-card">
                 <div class="dc-card-title-wrap">
                     <h2 class="dc-card-title">Recent Prospectus Downloads</h2>
                     <a href="{{ route('admin.brochure-requests.index') }}" class="dc-btn dc-btn-outline"
@@ -422,9 +422,9 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
 
-        </div>
+        <!-- </div> -->
     </div>
 @endsection
 
@@ -462,6 +462,9 @@
                     chart: {
                         type: 'line',
                         height: 320,
+                        width: '100%',
+                        redrawOnParentResize: true,
+                        redrawOnWindowResize: true,
                         toolbar: { show: false },
                         fontFamily: 'Poppins, sans-serif',
                         foreColor: foreColor
@@ -471,15 +474,32 @@
                     markers: { size: 4, hover: { size: 6 } },
                     xaxis: {
                         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        labels: { style: { colors: foreColor } }
+                        labels: {
+                            style: { colors: foreColor },
+                            hideOverlappingLabels: true
+                        }
                     },
                     yaxis: {
                         labels: { style: { colors: foreColor } }
                     },
                     legend: {
+                        position: 'bottom',
                         labels: { colors: foreColor }
                     },
-                    grid: { borderColor: gridColor }
+                    grid: { borderColor: gridColor },
+                    responsive: [{
+                        breakpoint: 640,
+                        options: {
+                            chart: { height: 260 },
+                            xaxis: {
+                                labels: {
+                                    rotate: -45,
+                                    rotateAlways: false,
+                                    style: { fontSize: '10px' }
+                                }
+                            }
+                        }
+                    }]
                 };
                 var chart1 = new ApexCharts(document.querySelector("#admissionsChart"), admissionsOptions);
                 chart1.render();
@@ -492,6 +512,9 @@
                     chart: {
                         type: 'donut',
                         height: 280,
+                        width: '100%',
+                        redrawOnParentResize: true,
+                        redrawOnWindowResize: true,
                         fontFamily: 'Poppins, sans-serif',
                         foreColor: foreColor
                     },
@@ -500,7 +523,13 @@
                         position: 'bottom',
                         labels: { colors: foreColor }
                     },
-                    dataLabels: { enabled: false }
+                    dataLabels: { enabled: false },
+                    responsive: [{
+                        breakpoint: 640,
+                        options: {
+                            chart: { height: 240 }
+                        }
+                    }]
                 };
                 var chart2 = new ApexCharts(document.querySelector("#enquirySourcesChart"), enquirySourcesOptions);
                 chart2.render();
@@ -515,6 +544,9 @@
                     chart: {
                         type: 'bar',
                         height: 240,
+                        width: '100%',
+                        redrawOnParentResize: true,
+                        redrawOnWindowResize: true,
                         toolbar: { show: false },
                         fontFamily: 'Poppins, sans-serif',
                         foreColor: foreColor
@@ -543,6 +575,9 @@
                     chart: {
                         type: 'area',
                         height: 240,
+                        width: '100%',
+                        redrawOnParentResize: true,
+                        redrawOnWindowResize: true,
                         toolbar: { show: false },
                         fontFamily: 'Poppins, sans-serif',
                         foreColor: foreColor
@@ -573,6 +608,13 @@
                     setTimeout(renderDashboardCharts, 50);
                 });
             }
+
+            // Handle window resize event to force ApexCharts re-render for crisp layout
+            let resizeTimer;
+            window.addEventListener("resize", function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(renderDashboardCharts, 150);
+            });
         });
     </script>
 @endpush

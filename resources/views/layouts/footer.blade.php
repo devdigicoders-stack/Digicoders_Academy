@@ -133,7 +133,7 @@
                             class="hover:text-[#F58220] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
                                 data-lucide="chevron-right" class="w-3 h-3 text-[#F58220]"></i><span>Admissions
                                 2026</span></a></li>
-                    <li><a href="{{ route('placements') }}"
+                    <!-- <li><a href="{{ route('placements') }}"
                             class="hover:text-[#F58220] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
                                 data-lucide="chevron-right"
                                 class="w-3 h-3 text-[#F58220]"></i><span>Placements</span></a></li>
@@ -144,7 +144,7 @@
                     <li><a href="{{ route('gallery') }}"
                             class="hover:text-[#F58220] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
                                 data-lucide="chevron-right" class="w-3 h-3 text-[#F58220]"></i><span>Campus
-                                Gallery</span></a></li>
+                                Gallery</span></a></li> -->
                     <li><a href="{{ route('blog.index') }}"
                             class="hover:text-[#F58220] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
                                 data-lucide="chevron-right" class="w-3 h-3 text-[#F58220]"></i><span>Blog &
@@ -156,33 +156,34 @@
                 </ul>
             </div>
 
-            <!-- Col 3: Student & Partners (lg:col-span-3) -->
+            <!-- Col 3: Popular Programs & Help (lg:col-span-3) -->
             <div class="lg:col-span-3 space-y-4">
                 <h4
                     class="text-xs font-black uppercase tracking-wider text-white font-heading relative inline-block pb-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-8 after:h-0.5 after:bg-[#00A651] after:rounded-full">
-                    Student & Partners
+                    Popular Programs & Help
                 </h4>
                 <ul class="space-y-2 text-xs text-slate-400 font-medium">
-                    <li><a href="{{ route('verify-certificate') }}"
+                    <li><a href="{{ route('courses.dca') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Verify
-                                Certificate</span></a></li>
-                    <li><a href="{{ route('franchise') }}"
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>DCA Course (6 Months)</span></a></li>
+                    <li><a href="{{ route('courses.adca') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Franchise
-                                Partner</span></a></li>
-                    <li><a href="{{ route('careers') }}"
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADCA Course (1 Year)</span></a></li>
+                    <li><a href="{{ route('courses.web-designing') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Careers @
-                                DigiCoders</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Web Designing</span></a></li>
+                    <li><a href="{{ route('courses.excel-mis') }}"
+                            class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Advanced Excel & MIS</span></a></li>
+                    <li><a href="{{ route('courses.adwd') }}"
+                            class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADWD Full Stack</span></a></li>
+                    <li><a href="{{ route('courses.addm') }}"
+                            class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADDM Digital Marketing</span></a></li>
                     <li><a href="{{ route('faq') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>FAQ
-                                Center</span></a></li>
-                    <li><a href="{{ route('sitemap') }}"
-                            class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>XML
-                                Sitemap</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>FAQ Center</span></a></li>
                 </ul>
             </div>
 

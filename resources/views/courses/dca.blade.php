@@ -45,7 +45,7 @@
             
             <!-- Background Image with Soft White Gradient Mask -->
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80"
+                <img src="{{ asset('images/course-students-banner.jpg') }}"
                     alt="DigiCoders Lab Classroom" class="w-full h-full object-cover object-right opacity-90">
                 <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/90 to-white/20 lg:to-transparent"></div>
             </div>
@@ -657,7 +657,11 @@
                             alt="DigiCoders Academy Student" class="w-full h-auto object-contain drop-shadow-xl relative z-10">
                     </div>
 
-        <!-- 8️⃣ FREQUENTLY ASKED QUESTIONS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 9️⃣ FREQUENTLY ASKED QUESTIONS -->
         @if(isset($faqs) && $faqs->count() > 0)
         <section id="course-faqs" class="py-14 sm:py-20 bg-white border-t border-slate-200/60">
             <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">

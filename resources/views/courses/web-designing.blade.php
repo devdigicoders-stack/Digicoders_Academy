@@ -45,8 +45,8 @@
             
             <!-- Background Image with Soft White Gradient Mask -->
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1600&q=80"
-                    alt="DigiCoders Web Lab" class="w-full h-full object-cover object-right opacity-90">
+                <img src="{{ asset('images/course-students-banner.jpg') }}"
+                    alt="DigiCoders Web Designing Lab" class="w-full h-full object-cover object-right opacity-90">
                 <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/90 to-white/20 lg:to-transparent"></div>
             </div>
 
@@ -644,7 +644,9 @@
 
                 </div>
             </div>
-        <!-- 8️⃣ FREQUENTLY ASKED QUESTIONS -->
+        </section>
+
+        <!-- 9️⃣ FREQUENTLY ASKED QUESTIONS -->
         @if(isset($faqs) && $faqs->count() > 0)
         <section id="course-faqs" class="py-14 sm:py-20 bg-white border-t border-slate-200/60">
             <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">

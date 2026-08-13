@@ -53,107 +53,47 @@
             </div>
 
             <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+                <div class="max-w-3xl mx-auto text-center space-y-5">
 
-                    <!-- Left Column: Breadcrumb, Badge, Heading, Desc, Action Buttons -->
-                    <div class="lg:col-span-7 space-y-5 text-left">
+                    <!-- Breadcrumb -->
+                    <nav class="flex items-center justify-center gap-2 text-xs font-semibold text-[#555555]">
+                        <a href="{{ route('home') }}" class="hover:text-[#F58220] transition-colors">Home</a>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                        <span class="text-[#00A651] font-bold">Admissions 2026</span>
+                    </nav>
 
-                        <!-- Breadcrumb -->
-                        <nav class="flex items-center gap-2 text-xs font-semibold text-[#555555]">
-                            <a href="{{ route('home') }}" class="hover:text-[#F58220] transition-colors">Home</a>
-                            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                            <span class="text-[#00A651] font-bold">Admissions 2026</span>
-                        </nav>
-
-                        <!-- Admissions Open Badge -->
-                        <div
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00A651]/10 border border-[#00A651]/20 text-[#00A651] text-xs font-extrabold">
-                            <span class="w-2 h-2 rounded-full bg-[#00A651] animate-pulse"></span>
-                            <span>Admissions Open 2026</span>
-                        </div>
-
-                        <!-- Main Heading -->
-                        <h1
-                            class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold font-heading text-[#111111] leading-[1.18] tracking-tight">
-                            Start Your Learning Journey With <br class="hidden sm:inline">
-                            <span class="text-[#00A651]">DigiCoders Academy</span>
-                        </h1>
-
-                        <!-- Description -->
-                        <p class="text-sm sm:text-base text-[#555555] font-medium leading-relaxed max-w-xl">
-                            Take the first step towards a successful career with practical diploma programmes, expert
-                            trainers and 100% placement support.
-                        </p>
-
-                        <!-- Action Buttons -->
-                        <div class="flex flex-wrap items-center gap-4 pt-2">
-                            <a href="#admission-form"
-                                class="bg-[#00A651] hover:bg-[#008d44] text-white px-7 py-3.5 rounded-[6px] text-xs sm:text-sm font-extrabold transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer">
-                                <span>Apply Now</span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
-
-                            <button onclick="openModal('brochureModal')"
-                                class="bg-white hover:bg-slate-50 text-[#111111] border border-slate-300 px-6 py-3.5 rounded-[6px] text-xs sm:text-sm font-extrabold transition-all shadow-2xs flex items-center gap-2 cursor-pointer">
-                                <i data-lucide="download" class="w-4 h-4 text-[#F58220]"></i>
-                                <span>Download Prospectus</span>
-                            </button>
-                        </div>
-
+                    <!-- Admissions Open Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00A651]/10 border border-[#00A651]/20 text-[#00A651] text-xs font-extrabold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-[#00A651] animate-pulse"></span>
+                        <span>Admissions Open For 2026-2027 Batches</span>
                     </div>
 
-                    <!-- Right Column: Reception Graphic Image + Floating Statistics Cards -->
-                    <div class="lg:col-span-5 relative">
-                        <div class="relative w-full max-w-[460px] mx-auto">
+                    <!-- Main Heading -->
+                    <h1
+                        class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-[#111111] leading-[1.15] tracking-tight">
+                        Start Your Learning Journey With <br class="hidden sm:inline">
+                        <span class="text-[#00A651]">DigiCoders Academy</span>
+                    </h1>
 
-                            <!-- Main Reception Image with 6px Border Radius -->
-                            <div
-                                class="relative rounded-[6px] bg-white p-2 border border-slate-200/90 shadow-xl overflow-hidden">
-                                <img src="{{ asset('images/cta-student.png') }}"
-                                    alt="DigiCoders Academy Admissions Reception"
-                                    class="w-full h-[280px] sm:h-[320px] object-cover rounded-[6px]">
-                            </div>
+                    <!-- Description -->
+                    <p class="text-sm sm:text-base text-[#555555] font-medium leading-relaxed max-w-2xl mx-auto">
+                        Take the first step towards a successful software career with practical 6-Month and 1-Year IT diploma programmes, expert trainers, and 100% placement support.
+                    </p>
 
-                            <!-- Floating Stat Card 1: 5000+ Students -->
-                            <div
-                                class="absolute -top-4 -left-4 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-[6px] p-3 shadow-lg flex items-center gap-3 z-20">
-                                <div
-                                    class="w-9 h-9 rounded-[6px] bg-orange-50 text-[#F58220] flex items-center justify-center shrink-0">
-                                    <i data-lucide="users" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-extrabold text-[#111111] font-heading">5000+</p>
-                                    <p class="text-[10px] font-bold text-[#555555]">Trained Students</p>
-                                </div>
-                            </div>
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                        <a href="#admission-form"
+                            class="bg-[#00A651] hover:bg-[#008d44] text-white px-7 py-3.5 rounded-[6px] text-xs sm:text-sm font-extrabold transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer">
+                            <span>Apply For Admission</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
 
-                            <!-- Floating Stat Card 2: 95% Placement -->
-                            <div
-                                class="absolute -bottom-4 -right-4 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-[6px] p-3 shadow-lg flex items-center gap-3 z-20">
-                                <div
-                                    class="w-9 h-9 rounded-[6px] bg-emerald-50 text-[#00A651] flex items-center justify-center shrink-0">
-                                    <i data-lucide="award" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-extrabold text-[#111111] font-heading">95%</p>
-                                    <p class="text-[10px] font-bold text-[#555555]">Placement Record</p>
-                                </div>
-                            </div>
-
-                            <!-- Floating Stat Card 3: 10+ Years -->
-                            <div
-                                class="absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-[6px] p-2.5 shadow-md flex items-center gap-2.5 z-20 hidden sm:flex">
-                                <div
-                                    class="w-8 h-8 rounded-[6px] bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                    <i data-lucide="clock" class="w-4 h-4"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs font-extrabold text-[#111111] font-heading">10+ Years</p>
-                                    <p class="text-[9px] font-bold text-[#555555]">Excellence</p>
-                                </div>
-                            </div>
-
-                        </div>
+                        <button onclick="openModal('brochureModal')"
+                            class="bg-white hover:bg-slate-50 text-[#111111] border border-slate-300 px-6 py-3.5 rounded-[6px] text-xs sm:text-sm font-extrabold transition-all shadow-2xs flex items-center gap-2 cursor-pointer">
+                            <i data-lucide="download" class="w-4 h-4 text-[#F58220]"></i>
+                            <span>Download Prospectus</span>
+                        </button>
                     </div>
 
                 </div>

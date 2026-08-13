@@ -49,10 +49,10 @@
             <div class="absolute top-1/2 right-0 w-[450px] h-[450px] bg-orange-50/80 rounded-full blur-3xl opacity-70 pointer-events-none z-0"></div>
 
             <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     
                     <!-- Left Column: Breadcrumb, Badge, Heading, Desc -->
-                    <div class="lg:col-span-7 space-y-5 text-left">
+                    <div class="lg:col-span-6 space-y-5 text-left">
                         
                         <!-- Breadcrumb -->
                         <nav class="flex items-center gap-2 text-xs font-semibold text-[#555555]">
@@ -68,7 +68,7 @@
                         </div>
 
                         <!-- Main Heading -->
-                        <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold font-heading text-[#111111] leading-[1.18] tracking-tight">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-[#111111] leading-[1.18] tracking-tight">
                             Let's Build <br class="hidden sm:inline">
                             <span class="text-[#00A651]">Your Future Together.</span>
                         </h1>
@@ -95,26 +95,12 @@
 
                     </div>
 
-                    <!-- Right Column: Reception Image + Floating Badge -->
-                    <div class="lg:col-span-5 relative">
-                        <div class="relative w-full max-w-[460px] mx-auto">
-                            
-                            <div class="relative rounded-[6px] bg-white p-2 border border-slate-200/90 shadow-xl overflow-hidden">
-                                <img src="{{ asset('images/cta-student.png') }}"
-                                    alt="DigiCoders Academy Reception Desk"
-                                    class="w-full h-[260px] sm:h-[300px] object-cover rounded-[6px]">
-                            </div>
-
-                            <div class="absolute -bottom-4 -left-4 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-[6px] p-3 shadow-lg flex items-center gap-3 z-20">
-                                <div class="w-9 h-9 rounded-full bg-emerald-50 text-[#00A651] flex items-center justify-center shrink-0">
-                                    <i data-lucide="headset" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-extrabold text-[#111111] font-heading">Helpdesk Active</p>
-                                    <p class="text-[10px] font-bold text-[#555555]">Mon - Sat: 8 AM - 7 PM</p>
-                                </div>
-                            </div>
-
+                    <!-- Right Column: Larger Responsive Image (Badge Removed) -->
+                    <div class="lg:col-span-6 relative w-full">
+                        <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 group">
+                            <img src="{{ asset('images/contact-support.jpg') }}"
+                                alt="DigiCoders Academy Support Executive"
+                                class="w-full h-auto max-h-[460px] sm:max-h-[500px] object-cover rounded-[6px] group-hover:scale-105 transition-transform duration-500">
                         </div>
                     </div>
 

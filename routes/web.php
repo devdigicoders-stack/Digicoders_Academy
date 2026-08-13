@@ -110,6 +110,62 @@ Route::get('/sitemap', function () {
     return view('sitemap');
 })->name('sitemap');
 
+Route::get('/sitemap.xml', function () {
+    $baseUrl = config('app.url', 'https://digicodersacademy.com');
+    $routes = [
+        '/',
+        '/about',
+        '/courses',
+        '/admissions',
+        '/placements',
+        '/student-life',
+        '/gallery',
+        '/blog',
+        '/contact',
+        '/faq',
+        '/careers',
+        '/verify-certificate',
+        '/franchise',
+        '/privacy-policy',
+        '/terms',
+        '/refund-policy',
+        '/courses/dca',
+        '/courses/adca',
+        '/courses/web-designing',
+        '/courses/advanced-excel-mis',
+        '/courses/adwd',
+        '/courses/addm',
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    foreach ($routes as $route) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . rtrim($baseUrl, '/') . $route . '</loc>';
+        $xml .= '<changefreq>weekly</changefreq>';
+        $xml .= '<priority>' . ($route === '/' ? '1.0' : '0.8') . '</priority>';
+        $xml .= '</url>';
+    }
+
+    try {
+        $blogs = \App\Models\Blog::where('status', 'published')->get();
+        foreach ($blogs as $blog) {
+            $xml .= '<url>';
+            $xml .= '<loc>' . rtrim($baseUrl, '/') . '/blog/' . $blog->slug . '</loc>';
+            $xml .= '<changefreq>monthly</changefreq>';
+            $xml .= '<priority>0.6</priority>';
+            $xml .= '</url>';
+        }
+    } catch (\Throwable $e) {
+        // Silently skip blogs if table is not migrated yet
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200, ['Content-Type' => 'application/xml']);
+});
+
 // 1.5 Admin Panel Routes
 
 
