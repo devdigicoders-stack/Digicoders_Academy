@@ -82,7 +82,8 @@
                                     value="{{ $settings['site_name'] ?? 'DigiCoders Academy' }}" required>
                             </div>
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Working Days / Hours</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Working Days /
+                                    Hours</label>
                                 <input type="text" name="site_working_hours" class="dc-search-input" style="width: 100%;"
                                     value="{{ $settings['site_working_hours'] ?? 'Mon - Sat (9:30 AM - 6:30 PM)' }}">
                             </div>
@@ -97,25 +98,30 @@
                             <div>
                                 <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Support Email 2</label>
                                 <input type="email" name="site_email_2" class="dc-search-input" style="width: 100%;"
-                                    value="{{ $settings['site_email_2'] ?? 'support@digicoders.in' }}" placeholder="support@digicoders.in">
+                                    value="{{ $settings['site_email_2'] ?? 'support@digicoders.in' }}"
+                                    placeholder="support@digicoders.in">
                             </div>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline Phone 1</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline Phone
+                                    1</label>
                                 <input type="text" name="site_phone" class="dc-search-input" style="width: 100%;"
                                     value="{{ $settings['site_phone'] ?? '+91 91409 67607' }}">
                             </div>
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline Phone 2</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline Phone
+                                    2</label>
                                 <input type="text" name="site_phone_2" class="dc-search-input" style="width: 100%;"
                                     value="{{ $settings['site_phone_2'] ?? '+91 63942 96293' }}">
                             </div>
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline Phone 3</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline Phone
+                                    3</label>
                                 <input type="text" name="site_phone_3" class="dc-search-input" style="width: 100%;"
-                                    value="{{ $settings['site_phone_3'] ?? '+91 91984 83820' }}" placeholder="+91 XXXXXXXXXX">
+                                    value="{{ $settings['site_phone_3'] ?? '+91 91984 83820' }}"
+                                    placeholder="+91 XXXXXXXXXX">
                             </div>
                         </div>
 
@@ -126,7 +132,8 @@
                                     value="{{ $settings['site_landline'] ?? '0522-3580555' }}" placeholder="0522-XXXXXXX">
                             </div>
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">WhatsApp Support Number</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">WhatsApp Support
+                                    Number</label>
                                 <input type="text" name="site_whatsapp" class="dc-search-input" style="width: 100%;"
                                     value="{{ $settings['site_whatsapp'] ?? '+91 63942 96191' }}">
                             </div>
@@ -202,7 +209,8 @@
                             <!-- Favicon PNG Upload -->
                             <div
                                 style="background: var(--dc-bg); border: 1px solid var(--dc-border); border-radius: 12px; padding: 16px;">
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 10px;">Favicon Icon (PNG)</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 10px;">Favicon Icon
+                                    (PNG)</label>
                                 <div
                                     style="margin-bottom: 12px; height: 60px; display: flex; align-items: center; justify-content: center; background: var(--dc-bg); border-radius: 8px; border: 1px dashed var(--dc-border); padding: 8px;">
                                     <img id="faviconPreview"
@@ -223,7 +231,8 @@
                             <!-- Favicon ICO Upload -->
                             <div
                                 style="background: var(--dc-bg); border: 1px solid var(--dc-border); border-radius: 12px; padding: 16px;">
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 10px;">Favicon Icon (.ICO)</label>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 10px;">Favicon Icon
+                                    (.ICO)</label>
                                 <div
                                     style="margin-bottom: 12px; height: 60px; display: flex; align-items: center; justify-content: center; background: var(--dc-bg); border-radius: 8px; border: 1px dashed var(--dc-border); padding: 8px;">
                                     <img id="faviconIcoPreview"
@@ -237,7 +246,8 @@
                                 <label
                                     style="display: block; font-weight: 600; font-size: 13px; margin-bottom: 6px;">Browser
                                     Favicon (.ICO)</label>
-                                <input type="file" name="site_favicon_ico" accept=".ico,image/x-icon,image/vnd.microsoft.icon" class="dc-search-input"
+                                <input type="file" name="site_favicon_ico"
+                                    accept=".ico,image/x-icon,image/vnd.microsoft.icon" class="dc-search-input"
                                     onchange="previewImage(this, 'faviconIcoPreview', 'faviconIcoPreviewPlaceholder')">
                             </div>
                         </div>
@@ -266,43 +276,53 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div>
                                 <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">
-                                    <i class="fa-brands fa-facebook" style="color: #1877F2; margin-right: 6px;"></i> Facebook Page URL
+                                    <i class="fa-brands fa-facebook" style="color: #1877F2; margin-right: 6px;"></i>
+                                    Facebook Page URL
                                 </label>
                                 <input type="url" name="social_facebook" class="dc-search-input" style="width: 100%;"
-                                    value="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}" placeholder="https://facebook.com/your-page">
+                                    value="{{ $settings['social_facebook'] ?? 'https://facebook.com' }}"
+                                    placeholder="https://facebook.com/your-page">
                             </div>
                             <div>
                                 <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">
-                                    <i class="fa-brands fa-instagram" style="color: #E4405F; margin-right: 6px;"></i> Instagram Profile URL
+                                    <i class="fa-brands fa-instagram" style="color: #E4405F; margin-right: 6px;"></i>
+                                    Instagram Profile URL
                                 </label>
                                 <input type="url" name="social_instagram" class="dc-search-input" style="width: 100%;"
-                                    value="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}" placeholder="https://instagram.com/your-profile">
+                                    value="{{ $settings['social_instagram'] ?? 'https://instagram.com' }}"
+                                    placeholder="https://instagram.com/your-profile">
                             </div>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div>
                                 <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">
-                                    <i class="fa-brands fa-youtube" style="color: #FF0000; margin-right: 6px;"></i> YouTube Channel URL
+                                    <i class="fa-brands fa-youtube" style="color: #FF0000; margin-right: 6px;"></i> YouTube
+                                    Channel URL
                                 </label>
                                 <input type="url" name="social_youtube" class="dc-search-input" style="width: 100%;"
-                                    value="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}" placeholder="https://youtube.com/@your-channel">
+                                    value="{{ $settings['social_youtube'] ?? 'https://youtube.com' }}"
+                                    placeholder="https://youtube.com/@your-channel">
                             </div>
                             <div>
                                 <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">
-                                    <i class="fa-brands fa-linkedin" style="color: #0A66C2; margin-right: 6px;"></i> LinkedIn Page URL
+                                    <i class="fa-brands fa-linkedin" style="color: #0A66C2; margin-right: 6px;"></i>
+                                    LinkedIn Page URL
                                 </label>
                                 <input type="url" name="social_linkedin" class="dc-search-input" style="width: 100%;"
-                                    value="{{ $settings['social_linkedin'] ?? 'https://linkedin.com' }}" placeholder="https://linkedin.com/company/your-company">
+                                    value="{{ $settings['social_linkedin'] ?? 'https://linkedin.com' }}"
+                                    placeholder="https://linkedin.com/company/your-company">
                             </div>
                         </div>
 
                         <div style="margin-bottom: 20px;">
                             <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">
-                                <i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 6px;"></i> WhatsApp Channel URL
+                                <i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 6px;"></i> WhatsApp
+                                Channel URL
                             </label>
                             <input type="url" name="social_whatsapp_channel" class="dc-search-input" style="width: 100%;"
-                                value="{{ $settings['social_whatsapp_channel'] ?? 'https://whatsapp.com' }}" placeholder="https://whatsapp.com/channel/your-channel">
+                                value="{{ $settings['social_whatsapp_channel'] ?? 'https://whatsapp.com' }}"
+                                placeholder="https://whatsapp.com/channel/your-channel">
                         </div>
                     </div>
 
@@ -313,119 +333,158 @@
                             Head Office & Branch Locations</h2>
 
                         <!-- Lucknow Head Office -->
-                        <div style="background: rgba(0, 166, 81, 0.04); border: 1px solid var(--dc-green-border); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                            <h3 style="font-size: 15px; font-weight: 700; color: var(--dc-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="background: rgba(0, 166, 81, 0.04); border: 1px solid var(--dc-green-border); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                            <h3
+                                style="font-size: 15px; font-weight: 700; color: var(--dc-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
                                 <i class="fa-solid fa-building" style="color: var(--dc-green);"></i>
                                 Lucknow Head Office
                             </h3>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Office Title</label>
-                                    <input type="text" name="office_lucknow_title" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Office
+                                        Title</label>
+                                    <input type="text" name="office_lucknow_title" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_lucknow_title'] ?? 'Lucknow Head Office' }}">
                                 </div>
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline / Phone Numbers</label>
-                                    <input type="text" name="office_lucknow_phone" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline / Phone
+                                        Numbers</label>
+                                    <input type="text" name="office_lucknow_phone" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_lucknow_phone'] ?? '+91 91409 67607, +91 63942 96191' }}">
                                 </div>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Email Address</label>
-                                    <input type="email" name="office_lucknow_email" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Email
+                                        Address</label>
+                                    <input type="email" name="office_lucknow_email" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_lucknow_email'] ?? 'info@digicoders.in' }}">
                                 </div>
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Google Maps Link (URL)</label>
-                                    <input type="url" name="office_lucknow_map_link" class="dc-search-input" style="width: 100%;"
-                                        value="{{ $settings['office_lucknow_map_link'] ?? 'https://maps.google.com/?q=DigiCoders+Technologies+Lucknow' }}" placeholder="https://maps.google.com/...">
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Google Maps Link
+                                        (URL)</label>
+                                    <input type="url" name="office_lucknow_map_link" class="dc-search-input"
+                                        style="width: 100%;"
+                                        value="{{ $settings['office_lucknow_map_link'] ?? 'https://maps.google.com/?q=DigiCoders+Technologies+Lucknow' }}"
+                                        placeholder="https://maps.google.com/...">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Full Office Address</label>
-                                <textarea name="office_lucknow_address" style="width: 100%; height: 60px; padding: 10px; border: 1px solid var(--dc-border); border-radius: var(--radius-std); font-family: var(--font-body); outline: none;">{{ $settings['office_lucknow_address'] ?? '2nd Floor, DigiCoders Building, Near Polytechnic Crossing, Indiranagar, Lucknow, UP 226016' }}</textarea>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Full Office
+                                    Address</label>
+                                <textarea name="office_lucknow_address"
+                                    style="width: 100%; height: 60px; padding: 10px; border: 1px solid var(--dc-border); border-radius: var(--radius-std); font-family: var(--font-body); outline: none;">{{ $settings['office_lucknow_address'] ?? '2nd Floor, DigiCoders Building, Near Polytechnic Crossing, Indiranagar, Lucknow, UP 226016' }}</textarea>
                             </div>
                         </div>
 
                         <!-- Gorakhpur Branch Office -->
-                        <div style="background: rgba(245, 130, 32, 0.04); border: 1px solid rgba(245, 130, 32, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                            <h3 style="font-size: 15px; font-weight: 700; color: var(--dc-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="background: rgba(245, 130, 32, 0.04); border: 1px solid rgba(245, 130, 32, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                            <h3
+                                style="font-size: 15px; font-weight: 700; color: var(--dc-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
                                 <i class="fa-solid fa-location-dot" style="color: #F58220;"></i>
                                 Gorakhpur Branch Office
                             </h3>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Office Title</label>
-                                    <input type="text" name="office_gorakhpur_title" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Office
+                                        Title</label>
+                                    <input type="text" name="office_gorakhpur_title" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_gorakhpur_title'] ?? 'Gorakhpur Branch Office' }}">
                                 </div>
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline / Phone Numbers</label>
-                                    <input type="text" name="office_gorakhpur_phone" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline / Phone
+                                        Numbers</label>
+                                    <input type="text" name="office_gorakhpur_phone" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_gorakhpur_phone'] ?? '+91 91409 67607' }}">
                                 </div>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Email Address</label>
-                                    <input type="email" name="office_gorakhpur_email" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Email
+                                        Address</label>
+                                    <input type="email" name="office_gorakhpur_email" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_gorakhpur_email'] ?? 'gorakhpur@digicoders.in' }}">
                                 </div>
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Google Maps Link (URL)</label>
-                                    <input type="url" name="office_gorakhpur_map_link" class="dc-search-input" style="width: 100%;"
-                                        value="{{ $settings['office_gorakhpur_map_link'] ?? 'https://maps.google.com/?q=DigiCoders+Technologies+Gorakhpur' }}" placeholder="https://maps.google.com/...">
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Google Maps Link
+                                        (URL)</label>
+                                    <input type="url" name="office_gorakhpur_map_link" class="dc-search-input"
+                                        style="width: 100%;"
+                                        value="{{ $settings['office_gorakhpur_map_link'] ?? 'https://maps.google.com/?q=DigiCoders+Technologies+Gorakhpur' }}"
+                                        placeholder="https://maps.google.com/...">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Full Office Address</label>
-                                <textarea name="office_gorakhpur_address" style="width: 100%; height: 60px; padding: 10px; border: 1px solid var(--dc-border); border-radius: var(--radius-std); font-family: var(--font-body); outline: none;">{{ $settings['office_gorakhpur_address'] ?? 'DigiCoders Technologies, Near University Chauraha, Civil Lines, Gorakhpur, UP 273001' }}</textarea>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Full Office
+                                    Address</label>
+                                <textarea name="office_gorakhpur_address"
+                                    style="width: 100%; height: 60px; padding: 10px; border: 1px solid var(--dc-border); border-radius: var(--radius-std); font-family: var(--font-body); outline: none;">{{ $settings['office_gorakhpur_address'] ?? 'DigiCoders Technologies, Near University Chauraha, Civil Lines, Gorakhpur, UP 273001' }}</textarea>
                             </div>
                         </div>
 
                         <!-- Kanpur Branch Office -->
-                        <div style="background: rgba(14, 165, 233, 0.04); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                            <h3 style="font-size: 15px; font-weight: 700; color: var(--dc-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="background: rgba(14, 165, 233, 0.04); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                            <h3
+                                style="font-size: 15px; font-weight: 700; color: var(--dc-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
                                 <i class="fa-solid fa-location-dot" style="color: #0ea5e9;"></i>
                                 Kanpur Branch Office
                             </h3>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Office Title</label>
-                                    <input type="text" name="office_kanpur_title" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Office
+                                        Title</label>
+                                    <input type="text" name="office_kanpur_title" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_kanpur_title'] ?? 'Kanpur Branch Office' }}">
                                 </div>
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline / Phone Numbers</label>
-                                    <input type="text" name="office_kanpur_phone" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Helpline / Phone
+                                        Numbers</label>
+                                    <input type="text" name="office_kanpur_phone" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_kanpur_phone'] ?? '+91 91409 67607' }}">
                                 </div>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Email Address</label>
-                                    <input type="email" name="office_kanpur_email" class="dc-search-input" style="width: 100%;"
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Email
+                                        Address</label>
+                                    <input type="email" name="office_kanpur_email" class="dc-search-input"
+                                        style="width: 100%;"
                                         value="{{ $settings['office_kanpur_email'] ?? 'kanpur@digicoders.in' }}">
                                 </div>
                                 <div>
-                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Google Maps Link (URL)</label>
-                                    <input type="url" name="office_kanpur_map_link" class="dc-search-input" style="width: 100%;"
-                                        value="{{ $settings['office_kanpur_map_link'] ?? 'https://maps.google.com/?q=DigiCoders+Technologies+Kanpur' }}" placeholder="https://maps.google.com/...">
+                                    <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Google Maps Link
+                                        (URL)</label>
+                                    <input type="url" name="office_kanpur_map_link" class="dc-search-input"
+                                        style="width: 100%;"
+                                        value="{{ $settings['office_kanpur_map_link'] ?? 'https://maps.google.com/?q=DigiCoders+Technologies+Kanpur' }}"
+                                        placeholder="https://maps.google.com/...">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Full Office Address</label>
-                                <textarea name="office_kanpur_address" style="width: 100%; height: 60px; padding: 10px; border: 1px solid var(--dc-border); border-radius: var(--radius-std); font-family: var(--font-body); outline: none;">{{ $settings['office_kanpur_address'] ?? 'DigiCoders Technologies, Kakadeo, Kanpur, UP 208025' }}</textarea>
+                                <label class="dc-menu-label" style="padding: 0; margin-bottom: 6px;">Full Office
+                                    Address</label>
+                                <textarea name="office_kanpur_address"
+                                    style="width: 100%; height: 60px; padding: 10px; border: 1px solid var(--dc-border); border-radius: var(--radius-std); font-family: var(--font-body); outline: none;">{{ $settings['office_kanpur_address'] ?? 'DigiCoders Technologies, Kakadeo, Kanpur, UP 208025' }}</textarea>
                             </div>
                         </div>
                     </div>

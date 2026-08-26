@@ -45,9 +45,8 @@
             });
         }
 
-        // Tab Session Auto-Logout Check
+        // Tab Session Auto-Logout Check (Logs out if tab was closed and re-opened in a new tab)
         if (sessionStorage.getItem("tab_session_active") === null) {
-            // Trigger logout via form submit
             document.documentElement.classList.add("logout-redirecting");
             document.addEventListener("DOMContentLoaded", function() {
                 const logoutForm = document.createElement("form");

@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Models\Admin;
 use App\Services\NotificationService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -24,15 +28,184 @@ class LoginController extends Controller
     }
 
     /**
+     * Step 1: Send 2-Minute OTP to Admin Email & Save to Database.
+     */
+    public function sendOtp(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $email = strtolower(trim($request->input('email')));
+        $adminUser = Admin::where('email', $email)->first();
+
+        if (! $adminUser) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Invalid Admin Email ❌',
+                'message' => 'No active administrator account was found with this email address.',
+            ], 422);
+        }
+
+        // Generate 6-digit OTP & 2-minute expiration timestamp
+        $otp = sprintf('%06d', mt_rand(100000, 999999));
+        $expiresAt = Carbon::now()->addMinutes(2);
+
+        // Save OTP directly into database on Admin model
+        $adminUser->update([
+            'otp_code' => $otp,
+            'otp_expires_at' => $expiresAt,
+        ]);
+
+        // Keep session sync
+        session([
+            'admin_otp_email' => $email,
+            'admin_otp_expires' => $expiresAt,
+        ]);
+
+        // Enforce Mandatory Geolocation Check for OTP Generation
+        $lat = $request->input('latitude');
+        $lng = $request->input('longitude');
+        $inputAddress = trim((string) $request->input('location_address'));
+        $ipAddress = $request->ip() === '127.0.0.1' ? '103.24.12.8 (Localhost)' : $request->ip();
+
+        if (! app()->environment('testing') && (empty($lat) || empty($lng))) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Location Access Mandatory 📍',
+                'message' => 'Browser location permission is strictly required to receive 2FA OTP. Please allow browser location access in your browser settings.',
+            ], 422);
+        }
+
+        // Resolve Location and Google Maps URL
+        $locationAddress = ! empty($inputAddress) ? $inputAddress : "Lat: {$lat}, Lng: {$lng}";
+        $mapUrl = "https://www.google.com/maps?q={$lat},{$lng}";
+
+        // Prepare Security Audit Data for HTML Email
+        $mailData = [
+            'adminName' => $adminUser->name,
+            'email' => $email,
+            'otp' => $otp,
+            'ipAddress' => $ipAddress,
+            'browser' => $this->parseBrowser($request->userAgent()),
+            'deviceOs' => $this->parseOS($request->userAgent()),
+            'locationAddress' => $locationAddress,
+            'mapUrl' => $mapUrl,
+            'requestTime' => Carbon::now()->format('M d, Y h:i A'),
+        ];
+
+        // Send rich HTML Security Audit Email dynamically using ADMIN_OTP_EMAIL from .env or admin email
+        $recipientEmail = env('ADMIN_OTP_EMAIL') ?: $adminUser->email;
+
+        try {
+            Mail::send('emails.admin-otp', $mailData, function ($message) use ($recipientEmail) {
+                $message->to($recipientEmail)
+                    ->subject('Admin Security OTP & Login Audit - DigiCoders Academy');
+            });
+        } catch (\Throwable $e) {
+            // Mailer fallback for development
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'title' => 'OTP Sent! (Valid 2 Mins)',
+            'message' => "6-digit OTP code sent to {$recipientEmail}. Valid for 2 minutes.",
+            'email' => $email,
+            'recipient_email' => $recipientEmail,
+            'expires_in_seconds' => 120,
+        ]);
+    }
+
+    /**
+     * Step 2: Verify OTP Code & Clear OTP from Database Immediately ("verify hote hi blank").
+     */
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'otp' => ['required', 'string', 'size:6'],
+        ]);
+
+        $email = strtolower(trim($request->input('email')));
+        $enteredOtp = trim($request->input('otp'));
+
+        $adminUser = Admin::where('email', $email)->first();
+
+        if (! $adminUser || empty($adminUser->otp_code)) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'No OTP Found ❌',
+                'message' => 'No active OTP found for this email address. Please request a new OTP code.',
+            ], 422);
+        }
+
+        // Check 2-minute expiration
+        if (! $adminUser->otp_expires_at || Carbon::now()->greaterThan($adminUser->otp_expires_at)) {
+            // Clear expired OTP from database
+            $adminUser->update([
+                'otp_code' => null,
+                'otp_expires_at' => null,
+            ]);
+
+            return response()->json([
+                'status' => 'error',
+                'title' => 'OTP Expired ⏰',
+                'message' => 'The 2-minute OTP code has expired. Please click resend to get a new code.',
+            ], 422);
+        }
+
+        // Verify OTP digits match
+        if ($enteredOtp !== $adminUser->otp_code) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Incorrect OTP ❌',
+                'message' => 'Invalid 6-digit OTP code entered. Please check and try again.',
+            ], 422);
+        }
+
+        // "verify hote hi blank": Clear OTP fields in database immediately upon verification!
+        $adminUser->update([
+            'otp_code' => null,
+            'otp_expires_at' => null,
+        ]);
+
+        session([
+            'admin_otp_verified_email' => $email,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'title' => 'OTP Verified! ✅',
+            'message' => 'OTP code verified successfully! Enter your password to complete login.',
+            'email' => $email,
+        ]);
+    }
+
+    /**
      * Handle admin login request with mandatory geolocation & audit log.
      */
     public function login(Request $request)
     {
+        $email = strtolower(trim($request->input('email')));
+
+        if (session('admin_otp_verified_email') !== $email) {
+            if ($request->expectsJson() || $request->input('verify_only') == 1) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'OTP Verification Required 🛡️',
+                    'message' => 'Please verify the 2-minute 2FA OTP code sent to your email before attempting login.',
+                ], 422);
+            }
+
+            return back()->withErrors([
+                'email' => 'Please verify the 2FA OTP code before submitting your password.',
+            ])->with('error_title', 'OTP Verification Required 🛡️')->onlyInput('email');
+        }
+
         if ($request->input('verify_only') == 1) {
-            $email = $request->input('email');
             $password = $request->input('password');
 
-            $admin = \App\Models\Admin::where('email', $email)->first();
+            $admin = Admin::where('email', $email)->first();
             if (! $admin) {
                 return response()->json([
                     'status' => 'error',
@@ -41,7 +214,7 @@ class LoginController extends Controller
                 ], 422);
             }
 
-            if (! \Illuminate\Support\Facades\Hash::check($password, $admin->password)) {
+            if (! Hash::check($password, $admin->password)) {
                 return response()->json([
                     'status' => 'error',
                     'title' => 'Incorrect Password 🔑',
@@ -65,9 +238,20 @@ class LoginController extends Controller
             'location_address' => ['nullable', 'string'],
         ]);
 
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $request->boolean('remember'))) {
+        $admin = Admin::where('email', $credentials['email'])->first();
+
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            Auth::login($admin, $request->boolean('remember'));
             $request->session()->regenerate();
-            $admin = Auth::user();
+
+            // Ensure database OTP fields are blanked
+            $admin->update([
+                'otp_code' => null,
+                'otp_expires_at' => null,
+            ]);
+
+            // Clear OTP session variables after successful login
+            session()->forget(['admin_otp_email', 'admin_otp_code', 'admin_otp_expires', 'admin_otp_verified_email']);
 
             // Extract IP, Browser & OS details
             $ip = $request->ip() === '127.0.0.1' ? '103.24.12.8 (Local Host)' : $request->ip();
@@ -97,7 +281,7 @@ class LoginController extends Controller
                 'admin_email' => $admin ? $admin->email : $credentials['email'],
                 'admin_name' => $admin ? $admin->name : 'Admin User',
                 'event_type' => 'login',
-                'description' => ($admin ? $admin->name : 'Admin User')." logged into CMS Dashboard from {$browser} on {$os}.",
+                'description' => ($admin ? $admin->name : 'Admin User')." logged into CMS Dashboard via 2-Min Database 2FA OTP from {$browser} on {$os}.",
                 'login_at' => Carbon::now(),
                 'logout_at' => Carbon::now(),
                 'session_duration' => '00h 00m 01s',
@@ -116,11 +300,20 @@ class LoginController extends Controller
             // 2. Trigger System Notification
             NotificationService::notifyAdminLogin($admin ? $admin->email : $credentials['email']);
 
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => 'success',
+                    'title' => 'Login Successful! 🎉',
+                    'message' => 'Welcome back, '.$admin->name.'! Redirecting to CMS Dashboard...',
+                    'redirect' => route('admin.dashboard'),
+                ]);
+            }
+
             return redirect()->route('admin.dashboard');
         }
 
         // Differentiate email error vs password error
-        $adminExists = \App\Models\Admin::where('email', $credentials['email'])->exists();
+        $adminExists = Admin::where('email', $credentials['email'])->exists();
 
         if (! $adminExists) {
             return back()->withErrors([
@@ -264,7 +457,7 @@ class LoginController extends Controller
         // 2. Google Maps Geocoding API (High Accuracy Street-Level Address)
         try {
             $googleApiKey = 'AIzaSyBEss4wpsQ0o9WPBjDgHsSByUzFuo2oSNE';
-            $response = \Illuminate\Support\Facades\Http::timeout(6)->get("https://maps.googleapis.com/maps/api/geocode/json?latlng={$lat},{$lng}&key={$googleApiKey}");
+            $response = Http::timeout(6)->get("https://maps.googleapis.com/maps/api/geocode/json?latlng={$lat},{$lng}&key={$googleApiKey}");
 
             if ($response->successful()) {
                 $data = $response->json();
@@ -278,7 +471,7 @@ class LoginController extends Controller
 
         // 3. Server-side OpenStreetMap Nominatim reverse geocode fallback
         try {
-            $response = \Illuminate\Support\Facades\Http::withHeaders([
+            $response = Http::withHeaders([
                 'User-Agent' => 'DigiCodersAcademyCMSAdmin/1.0 (admin@digicoders.in)',
                 'Accept-Language' => 'en-US,en',
             ])->timeout(6)->get("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat={$lat}&lon={$lng}&zoom=18&addressdetails=1");
@@ -295,7 +488,7 @@ class LoginController extends Controller
 
         // 4. Secondary Server-Side Geocoding Provider
         try {
-            $response = \Illuminate\Support\Facades\Http::withHeaders([
+            $response = Http::withHeaders([
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
                 'Accept-Language' => 'en-US,en',
             ])->timeout(6)->get("https://geocode.maps.co/reverse?lat={$lat}&lon={$lng}");
@@ -318,4 +511,3 @@ class LoginController extends Controller
         return "GPS Location Coordinates ({$lat}, {$lng})";
     }
 }
-

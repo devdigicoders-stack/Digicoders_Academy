@@ -22,6 +22,8 @@ class Admin extends Authenticatable
         'email',
         'image',
         'password',
+        'otp_code',
+        'otp_expires_at',
     ];
 
     /**
@@ -32,6 +34,7 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'otp_code',
     ];
 
     /**
@@ -44,6 +47,7 @@ class Admin extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'otp_expires_at' => 'datetime',
         ];
     }
 
@@ -111,4 +115,3 @@ class Admin extends Authenticatable
         return "https://ui-avatars.com/api/?name={$name}&background=00A651&color=ffffff&bold=true";
     }
 }
-

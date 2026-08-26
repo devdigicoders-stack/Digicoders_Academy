@@ -128,6 +128,28 @@
                     </div>
                 </div>
 
+                <!-- Article Frequently Asked Questions (FAQs) Card -->
+                <div class="dc-card" style="padding: 24px; border-left: 4px solid var(--dc-primary); margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--dc-border);">
+                        <div>
+                            <h3 style="font-size: 16px; font-weight: 700; color: var(--dc-[#111111]); margin: 0; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="help-circle" style="width: 18px; height: 18px; color: var(--dc-primary);"></i>
+                                <span>Article FAQs (Frequently Asked Questions)</span>
+                            </h3>
+                            <p style="font-size: 12px; color: var(--dc-light-gray); margin-top: 4px; margin-bottom: 0;">
+                                Add Q&A items to be displayed as an interactive accordion on the blog detail page.
+                            </p>
+                        </div>
+                        <button type="button" id="btnAddFaq" class="dc-btn dc-[#00A651] dc-btn-outline" style="padding: 6px 14px; font-size: 12px; border-color: var(--dc-primary); color: var(--dc-primary);">
+                            <i data-lucide="plus" style="width: 14px; height: 14px;"></i> Add FAQ Row
+                        </button>
+                    </div>
+
+                    <div id="faqContainer" style="display: flex; flex-direction: column; gap: 16px;">
+                        <!-- FAQ repeater items injected here -->
+                    </div>
+                </div>
+
                 <!-- Strong SEO Metadata Card -->
                 <div class="dc-card" style="padding: 28px; border-left: 4px solid var(--dc-green);">
                     <h3 class="dc-card-title" style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -351,6 +373,52 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        // FAQ Repeater Logic
+        let faqCounter = 0;
+
+        function addFaqRow(q = '', a = '') {
+            faqCounter++;
+            let rowId = 'faq-row-' + faqCounter;
+            let html = `
+                <div id="${rowId}" style="background: #FAFAFA; border: 1px solid var(--dc-border); border-radius: 8px; padding: 16px; position: relative;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="font-size: 12px; font-weight: 700; color: var(--dc-primary);">FAQ #${faqCounter}</span>
+                        <button type="button" onclick="removeFaqRow('${rowId}')" class="dc-btn" style="background: #Fee2e2; color: #dc2626; border: none; padding: 4px 10px; font-size: 11px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                            <i data-lucide="trash-2" style="width: 12px; height: 12px;"></i> Remove
+                        </button>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label style="display: block; font-weight: 600; font-size: 12px; margin-bottom: 4px;">Question</label>
+                        <input type="text" name="faqs[${faqCounter}][question]" value="${q.replace(/"/g, '&quot;')}" class="dc-search-input" style="width: 100%; font-size: 13px;" placeholder="e.g. Is this course beginner friendly?">
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; font-size: 12px; margin-bottom: 4px;">Answer</label>
+                        <textarea name="faqs[${faqCounter}][answer]" class="dc-search-input" style="width: 100%; height: 60px; padding: 8px; font-size: 13px;" placeholder="e.g. Yes, no prior programming experience is required...">${a}</textarea>
+                    </div>
+                </div>
+            `;
+            $('#faqContainer').append(html);
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function removeFaqRow(rowId) {
+            $('#' + rowId).slideUp(150, function() { $(this).remove(); });
+        }
+
+        $('#btnAddFaq').on('click', function() {
+            addFaqRow();
+        });
+
+        // Pre-populate existing FAQs
+        const existingFaqs = @json(old('faqs', $blog->faqs ?? []));
+        if (Array.isArray(existingFaqs) && existingFaqs.length > 0) {
+            existingFaqs.forEach(item => {
+                if (item && (item.question || item.answer)) {
+                    addFaqRow(item.question || '', item.answer || '');
+                }
+            });
         }
     </script>
 @endsection

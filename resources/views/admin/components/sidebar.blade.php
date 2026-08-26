@@ -219,7 +219,7 @@
                 </div>
             </a>
 
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+            <a href="#" onclick="event.preventDefault(); sessionStorage.removeItem('tab_session_active'); document.getElementById('logout-form').submit();"
                 class="dc-nav-item" style="color: #d9534f;" title="Logout">
                 <div class="nav-link-content">
                     <span class="icon-box" style="background: rgba(217, 83, 79, 0.1);"><i

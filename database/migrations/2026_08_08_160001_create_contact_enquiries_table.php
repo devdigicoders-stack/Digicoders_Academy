@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('phone', 15);
             $table->string('email')->nullable();
             $table->string('course')->nullable();
-            $table->string('city')->nullable();
             $table->text('message');
             $table->string('status', 30)->default('new'); // new, contacted, resolved
             $table->boolean('is_read')->default(false);

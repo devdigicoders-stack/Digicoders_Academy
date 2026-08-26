@@ -52,18 +52,22 @@
         <h3 class="text-xl font-bold font-heading text-[#18181B]">Apply For Admission 2026</h3>
         <p class="text-xs text-[#64748B] mb-4">Start your career journey with DigiCoders Academy.</p>
 
-        <form onsubmit="handleFormSubmit(event, 'Apply Form')" class="space-y-3">
+        <form onsubmit="handleModalSubmit(event, 'applyModal', '{{ route('contact.submit') }}', 'Apply Request')" class="space-y-3">
+            @csrf
+            <input type="hidden" name="subject" value="Admission Apply Modal Request">
             <div>
                 <label class="block text-xs font-bold text-[#18181B] mb-1">Your Name *</label>
-                <input type="text" required placeholder="Enter full name" class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
+                <input type="text" name="name" required placeholder="Enter full name" class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
             </div>
             <div>
                 <label class="block text-xs font-bold text-[#18181B] mb-1">Mobile Number *</label>
-                <input type="tel" required placeholder="10 digit phone number" class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
+                <input type="tel" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" minlength="10" placeholder="10 digit phone number"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+                    class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
             </div>
             <div>
                 <label class="block text-xs font-bold text-[#18181B] mb-1">Select Course *</label>
-                <select required class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs text-[#18181B]">
+                <select name="course" required class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs text-[#18181B]">
                     <option value="DCA">DCA (6 Months)</option>
                     <option value="ADCA">ADCA (1 Year)</option>
                     <option value="Web Designing">Web Designing (6 Months)</option>
@@ -131,14 +135,18 @@
         <h3 class="text-xl font-bold font-heading text-[#18181B]">Book Free Career Counselling</h3>
         <p class="text-xs text-[#64748B] mb-4">Speak with a senior IT mentor to choose the right career path.</p>
 
-        <form onsubmit="handleFormSubmit(event, 'Counselling Request')" class="space-y-3">
+        <form onsubmit="handleModalSubmit(event, 'counsellingModal', '{{ route('contact.submit') }}', 'Counselling Request')" class="space-y-3">
+            @csrf
+            <input type="hidden" name="subject" value="Book Free Counselling Request">
             <div>
                 <label class="block text-xs font-bold text-[#18181B] mb-1">Your Name *</label>
-                <input type="text" required placeholder="Enter full name" class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
+                <input type="text" name="name" required placeholder="Enter full name" class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
             </div>
             <div>
                 <label class="block text-xs font-bold text-[#18181B] mb-1">Mobile Number *</label>
-                <input type="tel" required placeholder="10 digit mobile number" class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
+                <input type="tel" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" minlength="10" placeholder="10 digit mobile number"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+                    class="w-full px-3.5 py-2.5 rounded-[6px] border border-slate-200 text-xs">
             </div>
             <button type="submit" class="w-full btn-orange py-3 rounded-[6px] text-xs font-bold shadow-md cursor-pointer mt-2">
                 Confirm Free Counselling
@@ -288,7 +296,7 @@
             title: "Latest Articles & Tech Blog",
             category: "Blog & News",
             desc: "Read technology news, career guides, computer learning tips and academy updates",
-            url: "{{ route('blog.index') }}",
+            url: "{{ route('blogs.index') }}",
             badge: "BLOG",
             icon: "newspaper",
             badgeBg: "bg-slate-100 text-slate-700",
@@ -478,6 +486,56 @@
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnHtml;
                 if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+        }
+    }
+
+    async function handleModalSubmit(e, modalId, routeUrl, titleName) {
+        e.preventDefault();
+        const form = e.target;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.innerText : 'Submit';
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Saving...';
+        }
+
+        const formData = new FormData(form);
+
+        try {
+            const res = await fetch(routeUrl, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                closeModal(modalId);
+                const toast = document.getElementById('toastNotification');
+                if (toast) {
+                    const toastTitle = document.getElementById('toastTitle');
+                    const toastDesc = document.getElementById('toastDesc');
+                    if (toastTitle) toastTitle.innerText = titleName + ' Saved!';
+                    if (toastDesc) toastDesc.innerText = 'Our team will contact you shortly.';
+                    toast.classList.remove('hidden');
+                    setTimeout(() => { toast.classList.add('hidden'); }, 3500);
+                }
+                form.reset();
+            } else {
+                alert(data.message || 'Please enter a valid 10-digit mobile number.');
+            }
+        } catch (err) {
+            console.error('Modal submit error:', err);
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalText;
             }
         }
     }

@@ -7,35 +7,9 @@
 
     <div class="px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto relative z-10">
 
-        <!-- Top Highlight Banner inside Footer -->
-        <div
-            class="mb-14 p-6 sm:p-8 rounded-[6px] bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-            <div class="flex items-center gap-4 text-center sm:text-left">
-                <div
-                    class="w-12 h-12 rounded-[6px] bg-[#F58220]/15 text-[#F58220] flex items-center justify-center shrink-0">
-                    <i data-lucide="sparkles" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h3 class="text-base sm:text-lg font-black font-heading text-white">Admissions Open 2026 - Limited
-                        Seats!</h3>
-                    <p class="text-xs text-slate-400 mt-0.5">Build a successful career in Web Development, Software
-                        Engineering & Digital Marketing.</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3 shrink-0">
-                <a href="{{ route('admissions') }}"
-                    class="btn-orange px-6 py-2.5 rounded-[6px] text-xs font-bold shadow-md cursor-pointer whitespace-nowrap inline-block">
-                    Apply Online
-                </a>
-                <a href="{{ route('contact') }}"
-                    class="btn-green px-6 py-2.5 rounded-[6px] text-xs font-bold shadow-md cursor-pointer whitespace-nowrap inline-block">
-                    Talk to Expert
-                </a>
-            </div>
-        </div>
 
         <!-- Main Footer Grid (12-Column Layout) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-slate-800/80">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-4">
 
             <!-- Col 1: Brand & Academy Info (lg:col-span-4) -->
             <div class="lg:col-span-4 space-y-4">
@@ -145,7 +119,7 @@
                             class="hover:text-[#F58220] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
                                 data-lucide="chevron-right" class="w-3 h-3 text-[#F58220]"></i><span>Campus
                                 Gallery</span></a></li> -->
-                    <li><a href="{{ route('blog.index') }}"
+                    <li><a href="{{ route('blogs.index') }}"
                             class="hover:text-[#F58220] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
                                 data-lucide="chevron-right" class="w-3 h-3 text-[#F58220]"></i><span>Blog &
                                 News</span></a></li>
@@ -165,25 +139,32 @@
                 <ul class="space-y-2 text-xs text-slate-400 font-medium">
                     <li><a href="{{ route('courses.dca') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>DCA Course (6 Months)</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>DCA Course (6
+                                Months)</span></a></li>
                     <li><a href="{{ route('courses.adca') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADCA Course (1 Year)</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADCA Course (1
+                                Year)</span></a></li>
                     <li><a href="{{ route('courses.web-designing') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Web Designing</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Web
+                                Designing</span></a></li>
                     <li><a href="{{ route('courses.excel-mis') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Advanced Excel & MIS</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>Advanced Excel &
+                                MIS</span></a></li>
                     <li><a href="{{ route('courses.adwd') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADWD Full Stack</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADWD Full
+                                Stack</span></a></li>
                     <li><a href="{{ route('courses.addm') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADDM Digital Marketing</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>ADDM Digital
+                                Marketing</span></a></li>
                     <li><a href="{{ route('faq') }}"
                             class="hover:text-[#00A651] flex items-center gap-1.5 transition-all hover:translate-x-1.5"><i
-                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>FAQ Center</span></a></li>
+                                data-lucide="chevron-right" class="w-3 h-3 text-[#00A651]"></i><span>FAQ
+                                Center</span></a></li>
                 </ul>
             </div>
 
@@ -244,10 +225,10 @@
                             @endif
                             @if(!empty($settings['office_gorakhpur_map_link']))
                                 <a href="{{ $settings['office_gorakhpur_map_link'] }}" target="_blank"
-                                    class="px-2.5 py-1 rounded bg-white/10 hover:bg-[#F58220] text-slate-200 hover:text-white transition-colors flex items-center gap-1 font-semibold">
-                                    <i data-lucide="navigation" class="w-3 h-3 text-[#F58220]"></i>
+                                class="px-2.5 py-1 rounded bg-white/10 hover:bg-[#F58220] text-slate-200 hover:text-white transition-colors flex items-center gap-1 font-semibold">
+                                <i data-lucide="navigation" class="w-3 h-3 text-[#F58220]"></i>
                                     <span>{{ $settings['office_gorakhpur_title'] ?? 'Gorakhpur' }}</span>
-                                </a>
+                            </a>
                             @endif
                             @if(!empty($settings['office_kanpur_map_link']))
                                 <a href="{{ $settings['office_kanpur_map_link'] }}" target="_blank"
@@ -261,6 +242,140 @@
                 @endif
             </div>
 
+        </div>
+
+        <!-- CSS for Exact Trust Badge Container Styling -->
+        <style>
+            .trust-badge-container {
+                background: #ffffff;
+                padding: 8px 16px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 64px;
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .trust-badge-container:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 20px rgba(0, 109, 171, 0.3);
+                border-color: rgba(0, 109, 171, 0.25);
+            }
+
+            .trust-badge {
+                max-height: 100%;
+                max-width: 100%;
+                object-fit: contain;
+            }
+
+            .trust-badge-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+                align-items: center;
+                justify-content: center;
+                max-width: 1350px;
+                margin: 0 auto;
+            }
+
+            @media (min-width: 768px) {
+                .trust-badge-grid {
+                    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+                }
+            }
+        </style>
+
+        <!-- Corporate Certifications & Recognitions Badges Row -->
+        <div class="mt-6 pb-8 border-b text-center" style="border-bottom-color: rgba(255, 255, 255, 0.08) !important;">
+            <div>
+                <span class="text-white/50 font-bold block mb-4"
+                    style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; font-family: 'Montserrat', sans-serif;">Recognized
+                    & Certified By</span>
+                <div class="trust-badge-grid">
+                    <div>
+                        <div class="trust-badge-container w-full">
+                            <img src="{{ asset('images/footer/digitalindia.jpg') }}" alt="Digital India Logo"
+                                class="trust-badge">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="trust-badge-container w-full">
+                            <img src="{{ asset('images/footer/startupindia.jpg') }}" alt="Startup India Recognition"
+                                class="trust-badge">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="trust-badge-container w-full">
+                            <img src="{{ asset('images/footer/gem.jpg') }}" alt="Government e Marketplace GeM"
+                                class="trust-badge">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="trust-badge-container w-full">
+                            <img src="{{ asset('images/footer/iso.jpg') }}" alt="ISO 9001:2015 Certification"
+                                class="trust-badge">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="trust-badge-container w-full">
+                            <img src="{{ asset('images/footer/mca.jpg') }}" alt="Ministry of Corporate Affairs MCA"
+                                class="trust-badge">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="trust-badge-container w-full">
+                            <img src="{{ asset('images/footer/msme.jpg') }}" alt="Ministry of MSME Government of India"
+                                class="trust-badge">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clean Legal Registration Details Text (3 Columns x 2 Items Each) -->
+            <div class="mt-6 text-xs sm:text-sm text-slate-300 text-left max-w-[1350px] mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    
+                    <!-- Column 1 (2 Items) -->
+                    <div class="space-y-3.5 pl-3.5 border-l-2 border-[#F58220]">
+                        <div>
+                            <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#F58220]">Legal Name</p>
+                            <p class="text-xs sm:text-sm font-bold text-white mt-0.5">DigiCoders Technologies Private Limited</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#00A651]">Company Type</p>
+                            <p class="text-xs sm:text-sm font-semibold text-slate-200 mt-0.5">Private Limited</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 (2 Items) -->
+                    <div class="space-y-3.5 pl-3.5 border-l-2 border-[#00A651]">
+                        <div>
+                            <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#F58220]">Date of Incorporation</p>
+                            <p class="text-xs sm:text-sm font-semibold text-slate-200 mt-0.5">14-Feb-2019</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#00A651]">CIN (Corporate ID)</p>
+                            <p class="text-xs sm:text-sm font-mono font-bold text-white mt-0.5 tracking-wider">U72900UP2019PTC113696</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 (2 Items) -->
+                    <div class="space-y-3.5 pl-3.5 border-l-2 border-[#F58220]">
+                        <div>
+                            <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#F58220]">GSTIN (GST Number)</p>
+                            <p class="text-xs sm:text-sm font-mono font-bold text-white mt-0.5 tracking-wider">09AAHCD1032D1Z6</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#00A651]">Registered Office</p>
+                            <p class="text-xs sm:text-sm font-medium text-slate-200 mt-0.5 leading-snug">B-36, Sector-'O', Aliganj, Lucknow, 226024</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
         <!-- Bottom Copyright Bar -->
@@ -278,11 +393,6 @@
                 <a href="{{ route('refund-policy') }}" class="hover:text-[#F58220] transition-colors">Refund Policy</a>
                 <span>•</span>
                 <a href="{{ route('sitemap') }}" class="hover:text-[#F58220] transition-colors">Sitemap</a>
-                <a href="#"
-                    class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#F58220] text-white flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-md ml-2"
-                    title="Back to Top">
-                    <i data-lucide="arrow-up" class="w-4 h-4"></i>
-                </a>
             </div>
         </div>
 
@@ -290,26 +400,33 @@
     </div>
 </footer>
 
+<!-- FIXED ALWAYS VISIBLE BACK TO TOP BUTTON (Bottom Right) -->
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-[#1E293B] hover:bg-[#F58220] text-white border border-white/20 flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 cursor-pointer"
+    title="Back to Top">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+</button>
+
 <!-- GLOBAL DYNAMIC FLOATING RIGHT SIDEBAR STICKY WIDGET (Appears on All Pages) -->
 <div class="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2.5 items-end pr-0">
     <!-- 1. WhatsApp Floating Action -->
     @if(!empty($settings['site_whatsapp']))
         <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_whatsapp']) }}" target="_blank"
-            style="border-radius: 6px 0 0 6px;"
-            title="Chat on WhatsApp"
+            style="border-radius: 6px 0 0 6px;" title="Chat on WhatsApp"
             class="group flex items-center bg-[#00A651] text-white p-3 rounded-tl-[6px] rounded-bl-[6px] shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-[#008f45]">
             <i data-lucide="message-square" class="w-5 h-5 shrink-0"></i>
-            <span class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 pr-1">
+            <span
+                class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 pr-1">
                 WhatsApp
             </span>
         </a>
     @elseif(!empty($settings['site_phone']))
         <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['site_phone']) }}" target="_blank"
-            style="border-radius: 6px 0 0 6px;"
-            title="Chat on WhatsApp"
+            style="border-radius: 6px 0 0 6px;" title="Chat on WhatsApp"
             class="group flex items-center bg-[#00A651] text-white p-3 rounded-tl-[6px] rounded-bl-[6px] shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-[#008f45]">
             <i data-lucide="message-square" class="w-5 h-5 shrink-0"></i>
-            <span class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 pr-1">
+            <span
+                class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 pr-1">
                 WhatsApp
             </span>
         </a>
@@ -317,46 +434,45 @@
 
     <!-- 2. Call Now Floating Action -->
     @if(!empty($settings['site_phone']))
-        <a href="tel:{{ str_replace(' ', '', $settings['site_phone']) }}"
-            style="border-radius: 6px 0 0 6px;"
+        <a href="tel:{{ str_replace(' ', '', $settings['site_phone']) }}" style="border-radius: 6px 0 0 6px;"
             title="Call Helpline"
             class="group flex items-center bg-[#F58220] text-white p-3 rounded-tl-[6px] rounded-bl-[6px] shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-[#e07318]">
             <i data-lucide="phone-call" class="w-5 h-5 shrink-0"></i>
-            <span class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 pr-1">
+            <span
+                class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2 pr-1">
                 Call Now
             </span>
         </a>
     @endif
 
-    <!-- 3. Visit Campus Map Floating Action -->
+    <!-- 3. Visit Office Map Floating Action -->
     @if(!empty($settings['office_lucknow_map_link']))
-        <a href="{{ $settings['office_lucknow_map_link'] }}" target="_blank"
-            style="border-radius: 6px 0 0 6px;"
-            title="Visit Campus"
+        <a href="{{ $settings['office_lucknow_map_link'] }}" target="_blank" style="border-radius: 6px 0 0 6px;"
+            title="Visit Office"
             class="group flex items-center bg-[#00A651] text-white p-3 rounded-tl-[6px] rounded-bl-[6px] shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-[#008f45]">
             <i data-lucide="map-pin" class="w-5 h-5 shrink-0"></i>
-            <span class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2 pr-1">
-                Visit Campus
+            <span
+                class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2 pr-1">
+                Visit Office
             </span>
         </a>
     @elseif(!empty($settings['site_map_iframe']) && str_starts_with($settings['site_map_iframe'], 'http'))
-        <a href="{{ $settings['site_map_iframe'] }}" target="_blank"
-            style="border-radius: 6px 0 0 6px;"
-            title="Visit Campus"
+        <a href="{{ $settings['site_map_iframe'] }}" target="_blank" style="border-radius: 6px 0 0 6px;"
+            title="Visit Office"
             class="group flex items-center bg-[#00A651] text-white p-3 rounded-tl-[6px] rounded-bl-[6px] shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-[#008f45]">
             <i data-lucide="map-pin" class="w-5 h-5 shrink-0"></i>
-            <span class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2 pr-1">
-                Visit Campus
+            <span
+                class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2 pr-1">
+                Visit Office
             </span>
         </a>
     @else
-        <a href="{{ route('contact') }}"
-            style="border-radius: 6px 0 0 6px;"
-            title="Visit Campus"
+        <a href="{{ route('contact') }}" style="border-radius: 6px 0 0 6px;" title="Visit Office"
             class="group flex items-center bg-[#00A651] text-white p-3 rounded-tl-[6px] rounded-bl-[6px] shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-[#008f45]">
             <i data-lucide="map-pin" class="w-5 h-5 shrink-0"></i>
-            <span class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2 pr-1">
-                Visit Campus
+            <span
+                class="max-w-0 opacity-0 overflow-hidden whitespace-nowrap text-xs font-bold transition-all duration-300 ease-in-out group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2 pr-1">
+                Visit Office
             </span>
         </a>
     @endif

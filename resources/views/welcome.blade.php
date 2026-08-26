@@ -152,7 +152,8 @@
                         <div
                             class="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-[6px] bg-white/85 backdrop-blur-md border border-white/90 shadow-xs text-[10px] sm:text-[11px] font-semibold">
                             <span class="w-2 h-2 rounded-full bg-[#00A651] animate-pulse"></span>
-                            <span class="text-[#18181B] font-bold uppercase tracking-wider">{{ $settings['home_hero_badge'] ?? 'Admissions Open 2026' }}</span>
+                            <span
+                                class="text-[#18181B] font-bold uppercase tracking-wider">{{ $settings['home_hero_badge'] ?? 'Admissions Open 2026' }}</span>
                         </div>
 
                         <!-- Huge Heading: Build Skills That Build Careers. -->
@@ -485,8 +486,8 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="{{ asset('images/courses/dca.jpg') }}"
-                                alt="DCA" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/courses/dca.jpg') }}" alt="DCA"
+                                class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">6
                                 MONTHS</span>
@@ -520,8 +521,8 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="{{ asset('images/courses/advanceexel.jpg') }}"
-                                alt="Advanced Excel" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/courses/advanceexel.jpg') }}" alt="Advanced Excel"
+                                class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">6
                                 MONTHS</span>
@@ -556,8 +557,8 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="{{ asset('images/courses/webdesign.jpg') }}"
-                                alt="Web Designing" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/courses/webdesign.jpg') }}" alt="Web Designing"
+                                class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">6
                                 MONTHS</span>
@@ -591,8 +592,8 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="{{ asset('images/courses/adca.jpg') }}"
-                                alt="ADCA" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/courses/adca.jpg') }}" alt="ADCA"
+                                class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#00A651] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">1
                                 YEAR</span>
@@ -627,8 +628,8 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="{{ asset('images/courses/adwd.jpg') }}"
-                                alt="ADWD" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/courses/adwd.jpg') }}" alt="ADWD"
+                                class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#00A651] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">1
                                 YEAR</span>
@@ -662,8 +663,8 @@
                 <div class="ref-card rounded-2xl bg-white overflow-hidden ref-card-hover flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                            <img src="{{ asset('images/courses/addm.jpg') }}"
-                                alt="ADDM" class="w-full h-full object-cover">
+                            <img src="{{ asset('images/courses/addm.jpg') }}" alt="ADDM"
+                                class="w-full h-full object-cover">
                             <span
                                 class="absolute top-2 left-2 bg-[#00A651] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-md">1
                                 YEAR</span>
@@ -872,8 +873,7 @@
 
                     <!-- Right Visual Image (SVG Illustration) -->
                     <div class="lg:col-span-3 flex justify-center lg:justify-end">
-                        <img src="{{ asset('images/Study Abroad.svg') }}"
-                            alt="Placed Student"
+                        <img src="{{ asset('images/Study Abroad.svg') }}" alt="Placed Student"
                             class="w-full max-w-[280px] h-auto object-contain rounded-[6px]">
                     </div>
 
@@ -1007,7 +1007,8 @@
                         CAMPUS <span class="text-[#00A651]">GALLERY</span>
                     </span>
                     <h2 class="text-2xl sm:text-4xl font-extrabold text-[#18181B] font-heading tracking-tight mt-1">
-                        Life at <span class="text-[#F58220]">DigiCoders</span> <span class="text-[#00A651]">Academy</span>
+                        Life at <span class="text-[#F58220]">DigiCoders</span> <span
+                            class="text-[#00A651]">Academy</span>
                     </h2>
                 </div>
 
@@ -1021,38 +1022,38 @@
             <!-- 5 Image Cards Grid (Exact 5 Images Row) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
 
-                <!-- Image 1: Computer Lab -->
+                <!-- Image 1: Interactive Classroom Lecture -->
                 <div class="ref-card rounded-[6px] overflow-hidden aspect-4/3 bg-slate-100 group shadow-md">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
-                        alt="Computer Lab DigiCoders Academy"
+                    <img src="{{ asset('images/gallery/digicoders-academy-coding-classroom-lecture.jpg') }}"
+                        alt="DigiCoders Academy Interactive Coding Classroom Lecture"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
 
-                <!-- Image 2: Certificate Distribution -->
+                <!-- Image 2: Student Certificate Achievement -->
                 <div class="ref-card rounded-[6px] overflow-hidden aspect-4/3 bg-slate-100 group shadow-md">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
-                        alt="Certificate Distribution"
+                    <img src="{{ asset('images/gallery/digicoders-student-course-completion-certificate.jpg') }}"
+                        alt="DigiCoders Academy Student Course Completion Certificate Award"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
 
-                <!-- Image 3: High-Tech Lab -->
+                <!-- Image 3: Group Coding Discussion -->
                 <div class="ref-card rounded-[6px] overflow-hidden aspect-4/3 bg-slate-100 group shadow-md">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80"
-                        alt="High Tech Lab"
+                    <img src="{{ asset('images/gallery/digicoders-students-group-coding-discussion.jpg') }}"
+                        alt="DigiCoders Students Group Project Collaboration & Discussion"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
 
-                <!-- Image 4: Practical Coding Session -->
+                <!-- Image 4: Programming Lab Session -->
                 <div class="ref-card rounded-[6px] overflow-hidden aspect-4/3 bg-slate-100 group shadow-md">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
-                        alt="Practical Coding Session"
+                    <img src="{{ asset('images/gallery/digicoders-academy-programming-lab-session.jpg') }}"
+                        alt="DigiCoders Academy Hands-on Programming Lab Session"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
 
-                <!-- Image 5: Campus Event & Team Celebration -->
+                <!-- Image 5: Computer Lab Practical Learning -->
                 <div class="ref-card rounded-[6px] overflow-hidden aspect-4/3 bg-slate-100 group shadow-md">
-                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80"
-                        alt="Campus Event & Celebration"
+                    <img src="{{ asset('images/gallery/digicoders-computer-lab-practical-learning.jpg') }}"
+                        alt="DigiCoders Computer Lab Practical Software Development Training"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
 
@@ -1110,8 +1111,8 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="{{ asset('images/courses/adca.jpg') }}"
-                                        alt="ADCA Batch" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/courses/adca.jpg') }}" alt="ADCA Batch"
+                                        class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#F58220] text-white shadow-md">
                                         1 Year Diploma
@@ -1161,8 +1162,8 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="{{ asset('images/courses/dca.jpg') }}"
-                                        alt="DCA Batch" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/courses/dca.jpg') }}" alt="DCA Batch"
+                                        class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#00A651] text-white shadow-md">
                                         6 Month Diploma
@@ -1212,8 +1213,8 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="{{ asset('images/courses/adwd.jpg') }}"
-                                        alt="ADWD Batch" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/courses/adwd.jpg') }}" alt="ADWD Batch"
+                                        class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#F58220] text-white shadow-md">
                                         1 Year Diploma
@@ -1264,8 +1265,8 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="{{ asset('images/courses/addm.jpg') }}"
-                                        alt="ADDM Batch" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/courses/addm.jpg') }}" alt="ADDM Batch"
+                                        class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#00A651] text-white shadow-md">
                                         1 Year Diploma
@@ -1316,8 +1317,8 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="{{ asset('images/courses/advanceexel.jpg') }}"
-                                        alt="Advanced Excel Batch" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/courses/advanceexel.jpg') }}" alt="Advanced Excel Batch"
+                                        class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#F58220] text-white shadow-md">
                                         6 Month Diploma
@@ -1368,8 +1369,8 @@
                             class="ref-card rounded-[6px] bg-white/90 backdrop-blur-xl ref-card-hover border border-white/80 shadow-lg flex flex-col justify-between h-full overflow-hidden">
                             <div class="space-y-3">
                                 <div class="relative aspect-16/10 w-full overflow-hidden bg-slate-100">
-                                    <img src="{{ asset('images/courses/webdesign.jpg') }}"
-                                        alt="Web Design Batch" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/courses/webdesign.jpg') }}" alt="Web Design Batch"
+                                        class="w-full h-full object-cover">
                                     <span
                                         class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-[6px] text-[10px] font-bold bg-[#00A651] text-white shadow-md">
                                         6 Month Diploma
@@ -1429,20 +1430,20 @@
 
                     <div class="space-y-3 pt-2">
                         @forelse($faqs ?? [] as $fItem)
-                        @if(!empty($fItem) && (is_object($fItem) || is_array($fItem)))
-                        <div class="ref-card rounded-[6px] bg-white overflow-hidden">
-                            <button onclick="toggleFaq(this)"
-                                class="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-[#18181B] cursor-pointer">
-                                <span>{{ data_get($fItem, 'question') }}</span>
-                                <i data-lucide="plus" class="w-4 h-4 text-[#18181B] shrink-0"></i>
-                            </button>
-                            <div class="faq-content hidden px-4 pb-4 text-xs text-[#64748B] leading-relaxed">
-                                {{ data_get($fItem, 'answer') }}
-                            </div>
-                        </div>
-                        @endif
+                            @if(!empty($fItem) && (is_object($fItem) || is_array($fItem)))
+                                <div class="ref-card rounded-[6px] bg-white overflow-hidden">
+                                    <button onclick="toggleFaq(this)"
+                                        class="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-[#18181B] cursor-pointer">
+                                        <span>{{ data_get($fItem, 'question') }}</span>
+                                        <i data-lucide="plus" class="w-4 h-4 text-[#18181B] shrink-0"></i>
+                                    </button>
+                                    <div class="faq-content hidden px-4 pb-4 text-xs text-[#64748B] leading-relaxed">
+                                        {{ data_get($fItem, 'answer') }}
+                                    </div>
+                                </div>
+                            @endif
                         @empty
-                        <div class="p-4 text-center text-xs text-slate-400">No FAQs available.</div>
+                            <div class="p-4 text-center text-xs text-slate-400">No FAQs available.</div>
                         @endforelse
                     </div>
                 </div>
@@ -1467,24 +1468,27 @@
                             </div>
                         </div>
 
-                        <form onsubmit="handleFormSubmit(event, 'Enquiry Form')" class="space-y-3.5 mt-6">
+                        <form id="homeEnquiryForm" onsubmit="handleHomeEnquirySubmit(event)" class="space-y-3.5 mt-6">
+                            @csrf
+                            <input type="hidden" name="subject" value="Home Page Quick Enquiry">
                             <div>
-                                <label class="block text-[11px] font-bold text-[#18181B] mb-1">Your Name</label>
-                                <input type="text" required placeholder="Enter your name"
+                                <label class="block text-[11px] font-bold text-[#18181B] mb-1">Your Name *</label>
+                                <input type="text" name="name" required placeholder="Enter your name"
                                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#00A651]">
                             </div>
 
                             <div>
-                                <label class="block text-[11px] font-bold text-[#18181B] mb-1">Mobile Number</label>
-                                <input type="tel" required placeholder="Enter your mobile number"
+                                <label class="block text-[11px] font-bold text-[#18181B] mb-1">Mobile Number *</label>
+                                <input type="tel" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" minlength="10" placeholder="10-digit mobile number"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
                                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#00A651]">
                             </div>
 
                             <div>
                                 <label class="block text-[11px] font-bold text-[#18181B] mb-1">Select Course</label>
-                                <select required
+                                <select name="course"
                                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-medium text-[#64748B] focus:outline-none focus:border-[#00A651]">
-                                    <option value="">Choose a course</option>
+                                    <option value="General Enquiry">Choose a course</option>
                                     <option value="DCA">DCA (6 Months)</option>
                                     <option value="Advanced Excel">Advanced Excel & MIS</option>
                                     <option value="Web Designing">Web Designing</option>
@@ -1495,12 +1499,12 @@
                             </div>
 
                             <div>
-                                <label class="block text-[11px] font-bold text-[#18181B] mb-1">Message</label>
-                                <textarea rows="2" placeholder="Write your message"
+                                <label class="block text-[11px] font-bold text-[#18181B] mb-1">Message (Optional)</label>
+                                <textarea name="message" rows="2" placeholder="Write your message"
                                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#00A651]"></textarea>
                             </div>
 
-                            <button type="submit"
+                            <button type="submit" id="btnHomeEnquirySubmit"
                                 class="w-full btn-green py-3 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
                                 <span>Submit Enquiry</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -1516,33 +1520,38 @@
         <!-- 13.5 HOME BLOG SECTION (Swiper Slider + View All Button on Right Header) -->
         <section id="home-blogs" class="px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto py-16 relative">
             <div class="space-y-8">
-                
+
                 <!-- Section Header (Left Titles + Right View All & Navigation Controls) -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div class="space-y-2 text-left">
-                        <span class="px-3 py-1 rounded-[6px] text-[10px] font-extrabold uppercase tracking-wider bg-[#00A651]/10 text-[#00A651] border border-[#00A651]/20 inline-flex items-center gap-1.5">
+                        <span
+                            class="px-3 py-1 rounded-[6px] text-[10px] font-extrabold uppercase tracking-wider bg-[#00A651]/10 text-[#00A651] border border-[#00A651]/20 inline-flex items-center gap-1.5">
                             <i data-lucide="book-open" class="w-3.5 h-3.5 text-[#00A651]"></i>
                             <span>LATEST ARTICLES & GUIDES</span>
                         </span>
-                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-[#18181B] font-heading tracking-tight">
+                        <h2
+                            class="text-2xl sm:text-3xl lg:text-4xl font-black text-[#18181B] font-heading tracking-tight">
                             Explore Technical <span class="text-[#00A651]">Blogs & Articles</span>
                         </h2>
                         <p class="text-xs sm:text-sm text-[#64748B] font-medium max-w-xl">
-                            Stay ahead with latest programming tutorials, career roadmaps, interview preparation tips & technology insights.
+                            Stay ahead with latest programming tutorials, career roadmaps, interview preparation tips &
+                            technology insights.
                         </p>
                     </div>
 
                     <div class="flex items-center gap-3 shrink-0">
                         <!-- Swiper Nav Prev & Next -->
-                        <button class="blog-prev p-2.5 rounded-[6px] bg-white border border-slate-200 text-[#18181B] hover:text-[#00A651] hover:border-[#00A651] transition-all shadow-xs cursor-pointer">
+                        <button
+                            class="blog-prev p-2.5 rounded-[6px] bg-white border border-slate-200 text-[#18181B] hover:text-[#00A651] hover:border-[#00A651] transition-all shadow-xs cursor-pointer">
                             <i data-lucide="chevron-left" class="w-4 h-4"></i>
                         </button>
-                        <button class="blog-next p-2.5 rounded-[6px] bg-white border border-slate-200 text-[#18181B] hover:text-[#00A651] hover:border-[#00A651] transition-all shadow-xs cursor-pointer">
+                        <button
+                            class="blog-next p-2.5 rounded-[6px] bg-white border border-slate-200 text-[#18181B] hover:text-[#00A651] hover:border-[#00A651] transition-all shadow-xs cursor-pointer">
                             <i data-lucide="chevron-right" class="w-4 h-4"></i>
                         </button>
 
                         <!-- View All Button -->
-                        <a href="{{ route('blog.index') }}"
+                        <a href="{{ route('blogs.index') }}"
                             class="bg-[#00A651] hover:bg-[#008d44] text-white px-5 py-2.5 rounded-[6px] text-xs font-extrabold transition-all shadow-md flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
                             <span>View All Blogs</span>
                             <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -1553,18 +1562,23 @@
                 <!-- Swiper Slider Container -->
                 <div class="swiper blogSwiper">
                     <div class="swiper-wrapper py-2">
-                        
+
                         @forelse($latestBlogs as $blog)
                             <div class="swiper-slide">
-                                <div class="p-5 rounded-[6px] bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all space-y-4 flex flex-col justify-between h-full group">
+                                <div
+                                    class="p-5 rounded-[6px] bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all space-y-4 flex flex-col justify-between h-full group">
                                     <div class="space-y-3">
-                                        <div class="w-full h-48 rounded-[6px] bg-slate-100 flex items-center justify-center text-slate-400 overflow-hidden relative">
+                                        <div
+                                            class="w-full aspect-[16/9] rounded-[6px] bg-slate-100 flex items-center justify-center text-slate-400 overflow-hidden relative border border-slate-200/80 shadow-xs">
                                             @if($blog->featured_image)
-                                                <img src="{{ asset($blog->featured_image) }}" alt="{{ $blog->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                                <img src="{{ asset($blog->featured_image) }}" alt="{{ $blog->title }}"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                             @else
-                                                <i data-lucide="newspaper" class="w-12 h-12 text-[#00A651] group-hover:scale-110 transition-transform duration-300"></i>
+                                                <i data-lucide="newspaper"
+                                                    class="w-12 h-12 text-[#00A651] group-hover:scale-110 transition-transform duration-300"></i>
                                             @endif
-                                            <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-[6px] bg-[#00A651] text-white text-[10px] font-extrabold uppercase shadow-sm">
+                                            <span
+                                                class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-[6px] bg-[#00A651] text-white text-[10px] font-extrabold uppercase shadow-sm">
                                                 {{ $blog->category ?: 'Article' }}
                                             </span>
                                         </div>
@@ -1575,16 +1589,19 @@
                                             </span>
                                             <span>{{ $blog->created_at ? $blog->created_at->format('M d, Y') : 'Recent' }}</span>
                                         </div>
-                                        <h3 class="text-base font-extrabold text-[#18181B] font-heading group-hover:text-[#F58220] transition-colors leading-snug line-clamp-2">
-                                            <a href="{{ route('blog.show', $blog->slug) }}">{{ $blog->title }}</a>
+                                        <h3
+                                            class="text-base font-extrabold text-[#18181B] font-heading group-hover:text-[#F58220] transition-colors leading-snug line-clamp-2">
+                                            <a href="{{ route('blogs.show', $blog->slug) }}">{{ $blog->title }}</a>
                                         </h3>
                                         <p class="text-xs text-[#64748B] leading-relaxed line-clamp-2">
                                             {{ $blog->summary ?: Str::limit(strip_tags($blog->content), 110) }}
                                         </p>
                                     </div>
                                     <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                                        <span class="font-bold text-[#18181B] text-[11px]">{{ $blog->author ?: 'DigiCoders Team' }}</span>
-                                        <a href="{{ route('blog.show', $blog->slug) }}" class="font-extrabold text-[#00A651] flex items-center gap-1 hover:underline">
+                                        <span
+                                            class="font-bold text-[#18181B] text-[11px]">{{ $blog->author ?: 'DigiCoders Team' }}</span>
+                                        <a href="{{ route('blogs.show', $blog->slug) }}"
+                                            class="font-extrabold text-[#00A651] flex items-center gap-1 hover:underline">
                                             <span>Read Article</span>
                                             <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                                         </a>
@@ -1603,8 +1620,8 @@
                     </div>
                 </div>
 
-                    </div>
-                </div>
+            </div>
+            </div>
 
             </div>
         </section>
@@ -1677,22 +1694,24 @@
 
                             @if(!empty($settings['site_map_iframe']))
                                 @if(str_contains($settings['site_map_iframe'], '<iframe'))
-                                    <div class="w-full h-full [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:border-0 opacity-90 group-hover:opacity-100 transition-opacity">
+                                    <div
+                                        class="w-full h-full [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:border-0 opacity-90 group-hover:opacity-100 transition-opacity">
                                         {!! $settings['site_map_iframe'] !!}
                                     </div>
                                 @else
-                                    <iframe
-                                        src="{{ $settings['site_map_iframe'] }}"
+                                    <iframe src="{{ $settings['site_map_iframe'] }}"
                                         class="w-full h-full border-0 opacity-90 group-hover:opacity-100 transition-opacity"
-                                        allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                        allowfullscreen="" loading="lazy"
+                                        referrerpolicy="strict-origin-when-cross-origin"></iframe>
                                 @endif
                             @elseif(!empty($settings['office_lucknow_map_link']))
-                                <iframe
-                                    src="{{ $settings['office_lucknow_map_link'] }}"
+                                <iframe src="{{ $settings['office_lucknow_map_link'] }}"
                                     class="w-full h-full border-0 opacity-90 group-hover:opacity-100 transition-opacity"
-                                    allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                    allowfullscreen="" loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
                             @else
-                                <div class="w-full h-full flex items-center justify-center text-slate-400 text-xs font-semibold p-4 text-center">
+                                <div
+                                    class="w-full h-full flex items-center justify-center text-slate-400 text-xs font-semibold p-4 text-center">
                                     <span>Map Location Not Configured</span>
                                 </div>
                             @endif
@@ -1765,6 +1784,56 @@
         }
 
 
+
+        async function handleHomeEnquirySubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = document.getElementById('btnHomeEnquirySubmit');
+            const originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Submit Enquiry';
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>Saving Enquiry...</span>';
+            }
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("{{ route('contact.submit') }}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const toast = document.getElementById('toastNotification');
+                    if (toast) {
+                        const toastTitle = document.getElementById('toastTitle');
+                        const toastDesc = document.getElementById('toastDesc');
+                        if (toastTitle) toastTitle.innerText = 'Enquiry Received!';
+                        if (toastDesc) toastDesc.innerText = 'Our team will contact you shortly.';
+                        toast.classList.remove('hidden');
+                        setTimeout(() => { toast.classList.add('hidden'); }, 3500);
+                    }
+                    form.reset();
+                } else {
+                    alert(data.message || 'Please enter a valid 10-digit mobile number.');
+                }
+            } catch (err) {
+                console.error('Home enquiry error:', err);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHtml;
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }
+            }
+        }
 
         function handleFormSubmit(e, name) {
             e.preventDefault();

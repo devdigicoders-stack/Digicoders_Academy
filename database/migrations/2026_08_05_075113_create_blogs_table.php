@@ -29,6 +29,7 @@ return new class extends Migration
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->string('canonical_url')->nullable();
+            $table->json('faqs')->nullable();
 
             $table->timestamps();
         });

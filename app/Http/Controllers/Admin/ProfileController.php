@@ -8,6 +8,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -49,7 +50,7 @@ class ProfileController extends Controller
             }
 
             $file = $request->file('image');
-            $filename = 'admin_'.time().'_'.\Illuminate\Support\Str::random(6).'.'.$file->getClientOriginalExtension();
+            $filename = 'admin_'.time().'_'.Str::random(6).'.'.$file->getClientOriginalExtension();
 
             // Create target folder if not exists
             if (! file_exists(public_path('uploads/admins'))) {
@@ -92,36 +93,54 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update Admin Password.
+     * Change administrator password.
      */
     public function updatePassword(Request $request)
     {
-        $request->validate([
-            'current_password' => 'required|string',
-            'new_password' => 'required|string|min:6|confirmed',
-        ]);
-
         $admin = Auth::user() ?? Admin::first();
         if (! $admin || ! Hash::check($request->input('current_password'), $admin->password)) {
-            return redirect()->back()->with('error', 'Current password does not match our records!');
+            return redirect()->back()->with('error', 'The provided current password does not match your account password.');
         }
 
+        $validated = $request->validate([
+            'current_password' => ['required', 'string'],
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
+            ],
+        ], [
+            'current_password.required' => 'Please enter your current password.',
+            'new_password.required' => 'Please enter a new password.',
+            'new_password.min' => 'The new password must be at least 8 characters long.',
+            'new_password.confirmed' => 'New password confirmation does not match.',
+        ]);
+
         $admin->update([
-            'password' => Hash::make($request->input('new_password')),
+            'password' => Hash::make($validated['new_password']),
         ]);
 
-        // Record Password Change Activity Log
-        ActivityLog::create([
-            'admin_id' => $admin->id,
-            'admin_email' => $admin->email,
-            'admin_name' => $admin->name,
-            'event_type' => 'password_change',
-            'description' => "{$admin->name} changed security password.",
-            'ip_address' => $request->ip() === '127.0.0.1' ? '103.24.12.8' : $request->ip(),
-            'user_agent' => $request->userAgent(),
-            'location_address' => null,
-        ]);
+        try {
+            ActivityLog::create([
+                'admin_id' => $admin->id,
+                'admin_email' => $admin->email,
+                'admin_name' => $admin->name,
+                'event_type' => 'password_change',
+                'description' => 'Changed account security password successfully',
+                'ip_address' => $request->ip() === '127.0.0.1' ? '103.24.12.8' : $request->ip(),
+                'user_agent' => substr((string) $request->userAgent(), 0, 500),
+                'location_address' => null,
+            ]);
+        } catch (\Throwable $e) {
+            // Log failure should not break password update
+        }
 
-        return redirect()->back()->with('success', 'Admin password changed successfully!');
+        return redirect()->back()->with('success', 'Password changed successfully!');
     }
 }

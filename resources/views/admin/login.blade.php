@@ -25,7 +25,7 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
- <!-- Google Maps JS API -->
+    <!-- Google Maps JS API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEss4wpsQ0o9WPBjDgHsSByUzFuo2oSNE"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -298,12 +298,14 @@
             <div class="left-panel">
                 <!-- Header Title -->
                 <div style="z-index: 10;">
-                    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 166, 81, 0.12); color: #008742; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 14px;">
+                    <div
+                        style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 166, 81, 0.12); color: #008742; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 14px;">
                         <i class="fa-solid fa-shield-halved"></i>
                         <span>Secure Admin Management</span>
                     </div>
                     <h2 style="font-size: 22px; font-weight: 800; color: #1E293B; line-height: 1.4; margin: 0 0 8px 0;">
-                        Simplify interaction between <span style="color: #00A651; font-weight: 800;">Trainers</span> & <span style="color: #F58220; font-weight: 800;">Students</span> online!
+                        Simplify interaction between <span style="color: #00A651; font-weight: 800;">Trainers</span> &
+                        <span style="color: #F58220; font-weight: 800;">Students</span> online!
                     </h2>
                     <p style="font-size: 13px; color: #64748B; margin: 0; line-height: 1.5;">
                         Empowering educational excellence with real-time admissions, course tracking, and secure access.
@@ -311,7 +313,8 @@
                 </div>
 
                 <!-- 3D Graphic Illustration -->
-                <div style="width: 100%; max-width: 380px; margin: 20px auto; display: flex; justify-content: center; z-index: 10; position: relative;">
+                <div
+                    style="width: 100%; max-width: 380px; margin: 20px auto; display: flex; justify-content: center; z-index: 10; position: relative;">
                     <img src="{{ asset('images/login-illustration.jpg') }}" alt="DigiCoders Academy Login Graphic"
                         style="width: 100%; max-height: 270px; object-fit: contain; border-radius: 16px; filter: drop-shadow(0 12px 24px rgba(0, 166, 81, 0.15));"
                         onerror="this.src='{{ asset('images/loginillustraction.jpg') }}'">
@@ -319,37 +322,63 @@
 
                 <!-- Bottom Feature Chips -->
                 <div style="z-index: 10; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div style="background: #ffffff; border: 1px solid #E2E8F0; padding: 8px 14px; border-radius: 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+                    <div
+                        style="background: #ffffff; border: 1px solid #E2E8F0; padding: 8px 14px; border-radius: 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
                         <i class="fa-solid fa-location-crosshairs" style="color: #00A651; font-size: 13px;"></i>
                         <span style="font-size: 12px; font-weight: 600; color: #334155;">Geolocation Protection</span>
                     </div>
-                    <div style="background: #ffffff; border: 1px solid #E2E8F0; padding: 8px 14px; border-radius: 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+                    <div
+                        style="background: #ffffff; border: 1px solid #E2E8F0; padding: 8px 14px; border-radius: 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
                         <i class="fa-solid fa-bolt" style="color: #F58220; font-size: 13px;"></i>
                         <span style="font-size: 12px; font-weight: 600; color: #334155;">Real-Time CMS</span>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT PANEL: Pure White Login Form -->
+            <!-- RIGHT PANEL: Pure White 3-Step 2FA Login Form -->
             <div class="right-panel">
 
                 @if(!empty($settings['site_logo']))
-                    <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
                         <a href="{{ route('home') }}" style="display: inline-block;">
                             <img src="{{ asset($settings['site_logo']) }}" alt="DigiCoders Academy Logo"
-                                style="height: 40px; width: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                style="height: 38px; width: auto; max-width: 100%; display: block; margin: 0 auto;">
                         </a>
                     </div>
                 @endif
 
-                <div style="text-align: center; margin-bottom: 24px;">
-                    <h3 style="font-size: 22px; font-weight: 700; color: #1E293B; margin: 0; line-height: 1.2;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3 id="stepHeaderTitle"
+                        style="font-size: 20px; font-weight: 700; color: #1E293B; margin: 0 0 4px 0; line-height: 1.2;">
                         Hi, welcome back!
                     </h3>
+                    <p id="stepHeaderSubtitle" style="font-size: 12px; color: #64748B; margin: 0;">
+                        Enter your email address
+                    </p>
+                </div>
+
+                <!-- 3-Step Process Indicator Badges -->
+                <div
+                    style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px;">
+                    <div id="stepBadge1"
+                        style="padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; background: rgba(0, 166, 81, 0.12); color: #00A651; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-envelope"></i> <span>1. Email</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #cbd5e1;"></i>
+                    <div id="stepBadge2"
+                        style="padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #94a3b8; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-shield-halved"></i> <span>2. OTP</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #cbd5e1;"></i>
+                    <div id="stepBadge3"
+                        style="padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #94a3b8; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-key"></i> <span>3. Password</span>
+                    </div>
                 </div>
 
                 @if (session('success'))
-                    <div style="padding: 12px 16px; background: rgba(0, 166, 81, 0.12); border: 1px solid #00A651; border-radius: 10px; color: #008742; font-weight: 600; font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    <div
+                        style="padding: 12px 16px; background: rgba(0, 166, 81, 0.12); border: 1px solid #00A651; border-radius: 10px; color: #008742; font-weight: 600; font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
                         <i data-lucide="check-circle" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
                         <span>{{ session('success') }}</span>
                     </div>
@@ -363,32 +392,82 @@
                     <input type="hidden" name="longitude" id="loginLongitude" value="">
                     <input type="hidden" name="location_address" id="loginLocationAddress" value="">
 
-                    <!-- Email input -->
-                    <div>
-                        <input type="email" name="email" required value="admin@digicoders.in"
-                            placeholder="e.g. email@example.com" class="input-field">
-                    </div>
+                    <!-- STEP 1: Email Input Container -->
+                    <div id="authStep1">
+                        <label
+                            style="display: block; font-weight: 600; font-size: 12px; margin-bottom: 6px; color: #334155;">Admin
+                            Email Address <span style="color: red;">*</span></label>
+                        <input type="email" id="adminEmail" name="email" required placeholder="e.g. email@example.com"
+                            class="input-field">
 
-                    <!-- Password input with eye toggle -->
-                    <div style="position: relative;">
-                        <input type="password" id="adminPassword" name="password" required value="password"
-                            placeholder="Enter your password" class="input-field" style="padding-right: 44px;">
-                        <button type="button" onclick="togglePasswordVisibility()"
-                            style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94A3B8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; z-index: 10;">
-                            <i class="fa-solid fa-eye-slash" id="adminToggleIcon" style="font-size: 16px;"></i>
+                        <button type="button" id="btnSendOtp" class="btn-submit" style="margin-top: 14px;">
+                            <i id="btnSendIcon" class="fa-solid fa-paper-plane"></i>
+                            <i id="btnSendSpinner" class="fa-solid fa-spinner fa-spin" style="display: none;"></i>
+                            <span id="btnSendText">Send OTP</span>
                         </button>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div style="margin-top: 4px;">
-                        <button type="submit" id="loginSubmitBtn" class="btn-submit">
-                            <span>Login</span>
-                            <i class="fa-solid fa-arrow-right" style="font-size: 12px;"></i>
+                    <!-- STEP 2: OTP Verification Container -->
+                    <div id="authStep2" style="display: none;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="font-weight: 600; font-size: 12px; color: #334155;">6-Digit Security OTP Code
+                                <span style="color: red;">*</span></label>
+                            <span id="otpTimerBadge"
+                                style="font-size: 11px; font-weight: 700; color: #00A651; background: rgba(0,166,81,0.1); padding: 2px 8px; border-radius: 10px;">
+                                ⏱️ 02:00
+                            </span>
+                        </div>
+                        <input type="text" id="otpInput" maxlength="6" placeholder="• • • • • •" class="input-field"
+                            style="text-align: center; font-size: 22px; font-weight: 800; letter-spacing: 12px; font-family: monospace;">
+
+                        <div id="resendOtpContainer"
+                            style="display: none; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 11px;">
+                            <span style="color: #64748b;">Didn't receive code?</span>
+                            <button type="button" onclick="resendOtpCode()"
+                                style="background: none; border: none; color: #1877F2; font-weight: 700; cursor: pointer; padding: 0;">
+                                Resend OTP Code
+                            </button>
+                        </div>
+
+                        <button type="button" id="btnVerifyOtp" class="btn-submit"
+                            style="margin-top: 14px; background-color: #00A651;">
+                            <i id="btnVerifyIcon" class="fa-solid fa-shield-check"></i>
+                            <i id="btnVerifySpinner" class="fa-solid fa-spinner fa-spin" style="display: none;"></i>
+                            <span id="btnVerifyText">Verify OTP & Proceed</span>
                         </button>
+
+                        <button type="button" onclick="goToAuthStep(1)"
+                            style="margin-top: 8px; background: none; border: none; color: #64748b; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; text-align: center;">
+                            ← Change Email Address
+                        </button>
+                    </div>
+
+                    <!-- STEP 3: Password Authentication Container -->
+                    <div id="authStep3" style="display: none;">
+                        <label
+                            style="display: block; font-weight: 600; font-size: 12px; margin-bottom: 6px; color: #334155;">Account
+                            Password <span style="color: red;">*</span></label>
+                        <div style="position: relative;">
+                            <input type="password" id="adminPassword" name="password" required 
+                                placeholder="Enter your password" class="input-field" style="padding-right: 44px;">
+                            <button type="button" onclick="togglePasswordVisibility()"
+                                style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94A3B8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                                <i class="fa-solid fa-eye-slash" id="adminToggleIcon" style="font-size: 16px;"></i>
+                            </button>
+                        </div>
+
+                        <div style="margin-top: 14px;">
+                            <button type="submit" id="loginSubmitBtn" class="btn-submit">
+                                <i id="btnSubmitIcon" class="fa-solid fa-right-to-bracket"></i>
+                                <i id="btnSubmitSpinner" class="fa-solid fa-spinner fa-spin" style="display: none;"></i>
+                                <span id="loginSubmitText">Sign In to Admin Panel</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Footer Privacy/Terms -->
-                    <div style="border-top: 1px solid #F1F5F9; margin-top: 18px; padding-top: 14px;">
+                    <div style="border-top: 1px solid #F1F5F9; margin-top: 14px; padding-top: 12px;">
                         <p style="font-size: 11px; color: #94A3B8; line-height: 1.5; margin: 0; text-align: left;">
                             By continuing, you accept our <a href="{{ route('terms') }}"
                                 style="color: #1877F2; font-weight: 600; text-decoration: none;">Terms of Use</a> and <a
@@ -405,9 +484,11 @@
 
     </div>
 
-    <!-- Script for Top-Right Toast Notifications & Mandatory Geolocation Login -->
+    <!-- Script for Top-Right Toast Notifications, 3-Step 2FA OTP & Geolocation Login -->
     <script>
         let locationPermissionGranted = false;
+        let otpCountdownInterval = null;
+        let currentAuthStep = 1;
 
         // Global Login Toast Helper
         function showLoginToast(type, title, message) {
@@ -442,25 +523,151 @@
             }, 4000);
         }
 
+        // Step Navigation Switcher
+        function goToAuthStep(step) {
+            currentAuthStep = step;
+            const step1 = document.getElementById('authStep1');
+            const step2 = document.getElementById('authStep2');
+            const step3 = document.getElementById('authStep3');
+
+            const badge1 = document.getElementById('stepBadge1');
+            const badge2 = document.getElementById('stepBadge2');
+            const badge3 = document.getElementById('stepBadge3');
+
+            const title = document.getElementById('stepHeaderTitle');
+            const subtitle = document.getElementById('stepHeaderSubtitle');
+
+            if (step === 1) {
+                step1.style.display = 'block';
+                step2.style.display = 'none';
+                step3.style.display = 'none';
+
+                badge1.style.background = 'rgba(0, 166, 81, 0.12)';
+                badge1.style.color = '#00A651';
+                badge2.style.background = '#f1f5f9';
+                badge2.style.color = '#94a3b8';
+                badge3.style.background = '#f1f5f9';
+                badge3.style.color = '#94a3b8';
+
+                title.textContent = 'Hi, welcome back!';
+                subtitle.textContent = 'Enter your email address to receive a security OTP.';
+            } else if (step === 2) {
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                step3.style.display = 'none';
+
+                badge1.style.background = '#f1f5f9';
+                badge1.style.color = '#94a3b8';
+                badge2.style.background = 'rgba(0, 166, 81, 0.12)';
+                badge2.style.color = '#00A651';
+                badge3.style.background = '#f1f5f9';
+                badge3.style.color = '#94a3b8';
+
+                title.textContent = 'Enter 6-Digit OTP Code 🛡️';
+                subtitle.textContent = 'Check your email inbox for the security code.';
+
+                startOtpTimer(120);
+                document.getElementById('otpInput').focus();
+            } else if (step === 3) {
+                step1.style.display = 'none';
+                step2.style.display = 'none';
+                step3.style.display = 'block';
+
+                badge1.style.background = '#f1f5f9';
+                badge1.style.color = '#94a3b8';
+                badge2.style.background = '#f1f5f9';
+                badge2.style.color = '#94a3b8';
+                badge3.style.background = 'rgba(0, 166, 81, 0.12)';
+                badge3.style.color = '#00A651';
+
+                title.textContent = 'Enter Password 🔑';
+                subtitle.textContent = 'OTP verified! Enter your admin password to complete sign in.';
+
+                document.getElementById('adminPassword').focus();
+            }
+        }
+
+        function startOtpTimer(seconds) {
+            clearInterval(otpCountdownInterval);
+            let timeLeft = seconds;
+            const badge = document.getElementById('otpTimerBadge');
+            const resendBox = document.getElementById('resendOtpContainer');
+
+            // Hide Resend Button while timer is running
+            if (resendBox) {
+                resendBox.style.display = 'none';
+            }
+
+            function updateTimerDisplay() {
+                const m = Math.floor(timeLeft / 60);
+                const s = timeLeft % 60;
+                const mStr = m < 10 ? '0' + m : m;
+                const sStr = s < 10 ? '0' + s : s;
+                if (badge) {
+                    badge.textContent = `⏱️ ${mStr}:${sStr}`;
+                    if (timeLeft <= 30) {
+                        badge.style.color = '#ef4444';
+                        badge.style.background = 'rgba(239, 68, 68, 0.1)';
+                    } else {
+                        badge.style.color = '#00A651';
+                        badge.style.background = 'rgba(0, 166, 81, 0.1)';
+                    }
+                }
+            }
+
+            updateTimerDisplay();
+            otpCountdownInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    clearInterval(otpCountdownInterval);
+                    if (badge) {
+                        badge.textContent = '⏱️ Expired';
+                        badge.style.color = '#ef4444';
+                    }
+                    // Show Resend Button ONLY when OTP timer has expired
+                    if (resendBox) {
+                        resendBox.style.display = 'flex';
+                    }
+                    showLoginToast('error', 'OTP Expired ⏰', 'The OTP code has expired. Click resend to get a new code.');
+                } else {
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function resendOtpCode() {
+            const resendBox = document.getElementById('resendOtpContainer');
+            if (resendBox) {
+                resendBox.style.display = 'none';
+            }
+            document.getElementById('btnSendOtp').click();
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
 
-            // 1. Show Specific Top-Right Toast Errors for Email / Password
-            @if ($errors->any())
-                @if ($errors->has('email'))
-                    showLoginToast('error', '{{ session("error_title", "Invalid Email Address 📧") }}', '{{ $errors->first("email") }}');
-                @elseif ($errors->has('password'))
-                    showLoginToast('error', '{{ session("error_title", "Incorrect Password 🔑") }}', '{{ $errors->first("password") }}');
-                @else
-                    showLoginToast('error', 'Authentication Failed', '{{ $errors->first() }}');
-                @endif
-            @endif
+            // Bind Enter keypress for Email and OTP inputs to trigger corresponding step action
+            const adminEmailInput = document.getElementById('adminEmail');
+            if (adminEmailInput) {
+                adminEmailInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.getElementById('btnSendOtp').click();
+                    }
+                });
+            }
 
-            @if (session('success'))
-                showLoginToast('success', 'Success', '{{ session('success') }}');
-            @endif
+            const otpInput = document.getElementById('otpInput');
+            if (otpInput) {
+                otpInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.getElementById('btnVerifyOtp').click();
+                    }
+                });
+            }
 
             // Silent Pre-Capture Geolocation & Google Reverse Geocoding on Page Load
             if (navigator.geolocation) {
@@ -482,157 +689,267 @@
                             }
                         });
                     }
-                }, function (err) {}, { timeout: 10000, enableHighAccuracy: true });
+                }, function (err) { }, { timeout: 10000, enableHighAccuracy: true });
             }
 
+            function resetSendBtn() {
+                const btnSendOtp = document.getElementById('btnSendOtp');
+                const btnSendIcon = document.getElementById('btnSendIcon');
+                const btnSendSpinner = document.getElementById('btnSendSpinner');
+                const btnSendText = document.getElementById('btnSendText');
+
+                if (btnSendOtp) btnSendOtp.disabled = false;
+                if (btnSendIcon) btnSendIcon.style.display = 'inline-block';
+                if (btnSendSpinner) btnSendSpinner.style.display = 'none';
+                if (btnSendText) btnSendText.textContent = 'Send OTP';
+            }
+
+            // Step 1: Send OTP Button Event Listener
+            const btnSendOtp = document.getElementById('btnSendOtp');
+            btnSendOtp.addEventListener('click', async function () {
+                const emailInput = document.getElementById('adminEmail');
+                const email = emailInput.value.trim();
+
+                if (!email) {
+                    showLoginToast('error', 'Email Required 📧', 'Please enter your admin email address.');
+                    emailInput.focus();
+                    return;
+                }
+
+                const btnSendIcon = document.getElementById('btnSendIcon');
+                const btnSendSpinner = document.getElementById('btnSendSpinner');
+                const btnSendText = document.getElementById('btnSendText');
+
+                btnSendOtp.disabled = true;
+                btnSendIcon.style.display = 'none';
+                btnSendSpinner.style.display = 'inline-block';
+                btnSendText.textContent = 'Sending 2-Min OTP...';
+
+                // Mandatory Geolocation Check for OTP Generation
+                let lat = document.getElementById('loginLatitude').value;
+                let lng = document.getElementById('loginLongitude').value;
+                let address = document.getElementById('loginLocationAddress').value;
+
+                if (!lat || !lng) {
+                    if (!navigator.geolocation) {
+                        showLoginToast('error', 'Location Access Required 📍', 'Browser location permission is strictly required to receive 2FA OTP.');
+                        resetSendBtn();
+                        return;
+                    }
+
+                    try {
+                        const pos = await new Promise((resolve, reject) => {
+                            navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000, enableHighAccuracy: true });
+                        });
+                        lat = pos.coords.latitude;
+                        lng = pos.coords.longitude;
+                        document.getElementById('loginLatitude').value = lat;
+                        document.getElementById('loginLongitude').value = lng;
+                    } catch (geoErr) {
+                        showLoginToast('error', 'Location Access Mandatory 📍', 'Browser location permission is strictly required to receive 2FA OTP. Please allow browser location access in your browser settings.');
+                        resetSendBtn();
+                        return;
+                    }
+                }
+
+                if (!lat || !lng) {
+                    showLoginToast('error', 'Location Access Mandatory 📍', 'Browser location permission is strictly required to receive 2FA OTP. Please allow browser location access in your browser settings.');
+                    resetSendBtn();
+                    return;
+                }
+
+                try {
+                    const res = await fetch("{{ route('admin.sendOtp') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            latitude: lat,
+                            longitude: lng,
+                            location_address: address
+                        })
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok || data.status === 'error') {
+                        showLoginToast('error', data.title || 'OTP Failed', data.message || 'Failed to send OTP code.');
+                        btnSendOtp.disabled = false;
+                        btnSendIcon.style.display = 'inline-block';
+                        btnSendSpinner.style.display = 'none';
+                        btnSendText.textContent = 'Send OTP';
+                        return;
+                    }
+
+                    const recipientDisplay = data.recipient_email || data.email || email;
+                    showLoginToast('success', data.title || 'OTP Sent 📬', data.message || `OTP sent to ${recipientDisplay}! Valid for 2 minutes.`);
+
+                    btnSendOtp.disabled = false;
+                    btnSendIcon.style.display = 'inline-block';
+                    btnSendSpinner.style.display = 'none';
+                    btnSendText.textContent = 'Send OTP';
+
+                    document.getElementById('otpInput').value = '';
+                    goToAuthStep(2);
+
+                } catch (err) {
+                    showLoginToast('error', 'Network Error 🌐', 'Unable to send OTP request. Please check connection.');
+                    btnSendOtp.disabled = false;
+                    btnSendIcon.style.display = 'inline-block';
+                    btnSendSpinner.style.display = 'none';
+                    btnSendText.textContent = 'Send OTP';
+                }
+            });
+
+            // Step 2: Verify OTP Button Event Listener
+            const btnVerifyOtp = document.getElementById('btnVerifyOtp');
+            btnVerifyOtp.addEventListener('click', async function () {
+                const emailInput = document.getElementById('adminEmail');
+                const otpInput = document.getElementById('otpInput');
+                const email = emailInput.value.trim();
+                const otp = otpInput.value.trim();
+
+                if (!otp || otp.length !== 6) {
+                    showLoginToast('error', 'Invalid OTP 🔑', 'Please enter a valid 6-digit OTP code.');
+                    otpInput.focus();
+                    return;
+                }
+
+                const btnVerifyIcon = document.getElementById('btnVerifyIcon');
+                const btnVerifySpinner = document.getElementById('btnVerifySpinner');
+                const btnVerifyText = document.getElementById('btnVerifyText');
+
+                btnVerifyOtp.disabled = true;
+                btnVerifyIcon.style.display = 'none';
+                btnVerifySpinner.style.display = 'inline-block';
+                btnVerifyText.textContent = 'Verifying OTP...';
+
+                try {
+                    const res = await fetch("{{ route('admin.verifyOtp') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ email: email, otp: otp })
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok || data.status === 'error') {
+                        showLoginToast('error', data.title || 'OTP Failed', data.message || 'Invalid OTP code.');
+                        btnVerifyOtp.disabled = false;
+                        btnVerifyIcon.style.display = 'inline-block';
+                        btnVerifySpinner.style.display = 'none';
+                        btnVerifyText.textContent = 'Verify OTP & Proceed';
+                        return;
+                    }
+
+                    showLoginToast('success', data.title || 'OTP Verified ✅', data.message || 'OTP verified! Enter password to complete login.');
+
+                    btnVerifyOtp.disabled = false;
+                    btnVerifyIcon.style.display = 'inline-block';
+                    btnVerifySpinner.style.display = 'none';
+                    btnVerifyText.textContent = 'Verify OTP & Proceed';
+
+                    goToAuthStep(3);
+
+                } catch (err) {
+                    showLoginToast('error', 'Network Error 🌐', 'Unable to verify OTP code.');
+                    btnVerifyOtp.disabled = false;
+                    btnVerifyIcon.style.display = 'inline-block';
+                    btnVerifySpinner.style.display = 'none';
+                    btnVerifyText.textContent = 'Verify OTP & Proceed';
+                }
+            });
+
+            // Step 3: Login Submit Event Listener
             const loginForm = document.getElementById('adminLoginForm');
             const submitBtn = document.getElementById('loginSubmitBtn');
 
             if (loginForm) {
                 loginForm.addEventListener('submit', async function (e) {
-                    if (locationPermissionGranted) {
-                        return true;
-                    }
-
                     e.preventDefault();
 
-                    if (submitBtn) {
-                        submitBtn.disabled = true;
-                        submitBtn.className = "btn-submit btn-loading";
-                        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking location access...';
+                    if (currentAuthStep === 1) {
+                        document.getElementById('btnSendOtp').click();
+                        return;
                     }
-
-                    // 1. Check Geolocation Permission FIRST
-                    if (!navigator.geolocation) {
-                        showLoginToast('error', 'Location Access Required 📍', 'Location access is strictly required to proceed with login.');
-                        resetSubmitBtn();
+                    if (currentAuthStep === 2) {
+                        document.getElementById('btnVerifyOtp').click();
                         return;
                     }
 
-                    navigator.geolocation.getCurrentPosition(
-                        async function (position) {
-                            const lat = position.coords.latitude;
-                            const lng = position.coords.longitude;
+                    if (locationPermissionGranted) {
+                        loginForm.submit();
+                        return true;
+                    }
 
-                            document.getElementById('loginLatitude').value = lat;
-                            document.getElementById('loginLongitude').value = lng;
+                    const btnSubmitIcon = document.getElementById('btnSubmitIcon');
+                    const btnSubmitSpinner = document.getElementById('btnSubmitSpinner');
+                    const loginSubmitText = document.getElementById('loginSubmitText');
 
-                            // Fetch Exact Street-Level Reverse Geocoded Address using Google Maps Geocoder
-                            let exactAddress = '';
-                            if (window.google && window.google.maps && window.google.maps.Geocoder) {
-                                try {
-                                    const geocoder = new google.maps.Geocoder();
-                                    const latlng = { lat: parseFloat(lat), lng: parseFloat(lng) };
-                                    const gRes = await new Promise((resolve) => {
-                                        geocoder.geocode({ 'location': latlng }, function (results, status) {
-                                            if (status === 'OK' && results && results[0] && results[0].formatted_address) {
-                                                resolve(results[0].formatted_address);
-                                            } else {
-                                                resolve(null);
-                                            }
-                                        });
-                                    });
-                                    if (gRes) exactAddress = gRes;
-                                } catch (gErr) {
-                                    console.warn('Google Maps Geocoder error:', gErr);
-                                }
-                            }
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        if (btnSubmitIcon) btnSubmitIcon.style.display = 'none';
+                        if (btnSubmitSpinner) btnSubmitSpinner.style.display = 'inline-block';
+                        if (loginSubmitText) loginSubmitText.textContent = 'Verifying credentials...';
+                    }
 
-                            if (!exactAddress) {
-                                try {
-                                    const nomRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
-                                        headers: { 'Accept-Language': 'en-US,en' }
-                                    });
-                                    if (nomRes.ok) {
-                                        const nomData = await nomRes.json();
-                                        if (nomData && nomData.display_name) {
-                                            exactAddress = nomData.display_name;
-                                        }
-                                    }
-                                } catch (err) {
-                                    console.warn('Nominatim geocode failed:', err);
-                                }
-                            }
+                    const verifyData = new FormData(loginForm);
+                    verifyData.append('verify_only', '1');
 
-                            if (!exactAddress) {
-                                try {
-                                    const bdcRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
-                                    if (bdcRes.ok) {
-                                        const bdcData = await bdcRes.json();
-                                        const parts = [];
-                                        if (bdcData.locality) parts.push(bdcData.locality);
-                                        if (bdcData.city && bdcData.city !== bdcData.locality) parts.push(bdcData.city);
-                                        if (bdcData.principalSubdivision) parts.push(bdcData.principalSubdivision);
-                                        if (bdcData.countryName) parts.push(bdcData.countryName);
-                                        exactAddress = parts.join(', ') + ` (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
-                                    }
-                                } catch (e) {
-                                    exactAddress = `GPS Coordinates (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
-                                }
-                            }
+                    try {
+                        const verifyRes = await fetch("{{ route('admin.login.submit') }}", {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json'
+                            },
+                            body: verifyData
+                        });
 
-                            document.getElementById('loginLocationAddress').value = exactAddress || `GPS Coordinates (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+                        const verifyResult = await verifyRes.json();
 
-                            // 2. NOW Check Credentials (Email & Password) AFTER Location is Granted
-                            if (submitBtn) {
-                                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking credentials...';
-                            }
-
-                            const verifyData = new FormData(loginForm);
-                            verifyData.append('verify_only', '1');
-
-                            try {
-                                const verifyRes = await fetch("{{ route('admin.login.submit') }}", {
-                                    method: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json'
-                                    },
-                                    body: verifyData
-                                });
-
-                                const verifyResult = await verifyRes.json();
-
-                                if (!verifyRes.ok || verifyResult.status === 'error') {
-                                    showLoginToast('error', verifyResult.title || 'Invalid Credentials ❌', verifyResult.message || 'Authentication failed.');
-                                    resetSubmitBtn();
-                                    return;
-                                }
-
-                                // Credentials verified! Show Welcome Toast
-                                showLoginToast('success', verifyResult.title || 'Login Successful! 🎉', verifyResult.message || 'Welcome back! Redirecting to CMS Dashboard...');
-
-                                locationPermissionGranted = true;
-                                sessionStorage.setItem('tab_session_active', 'true');
-
-                                if (submitBtn) {
-                                    submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Redirecting...';
-                                }
-
-                                setTimeout(function () {
-                                    loginForm.submit();
-                                }, 600);
-
-                            } catch (verifyErr) {
-                                console.warn('Credential verification error:', verifyErr);
-                                resetSubmitBtn();
-                            }
-                        },
-                        function (error) {
-                            // Location Denied / Failed -> Immediately show location required message
-                            showLoginToast('error', 'Location Access Required 📍', 'Location access is strictly required to proceed with login. Please allow browser location access.');
+                        if (!verifyRes.ok || verifyResult.status === 'error') {
+                            showLoginToast('error', verifyResult.title || 'Invalid Credentials ❌', verifyResult.message || 'Authentication failed.');
                             resetSubmitBtn();
-                        },
-                        { timeout: 12000, enableHighAccuracy: true, maximumAge: 0 }
-                    );
+                            return;
+                        }
+
+                        showLoginToast('success', verifyResult.title || 'Login Successful! 🎉', verifyResult.message || 'Welcome back! Redirecting to CMS Dashboard...');
+
+                        sessionStorage.setItem("tab_session_active", "true");
+                        locationPermissionGranted = true;
+
+                        if (loginSubmitText) loginSubmitText.textContent = 'Redirecting...';
+
+                        setTimeout(function () {
+                            loginForm.submit();
+                        }, 600);
+
+                    } catch (verifyErr) {
+                        console.warn('Credential verification error:', verifyErr);
+                        resetSubmitBtn();
+                    }
                 });
             }
 
             function resetSubmitBtn() {
                 if (submitBtn) {
                     submitBtn.disabled = false;
-                    submitBtn.className = "btn-submit";
-                    submitBtn.innerHTML = '<span>Login</span> <i class="fa-solid fa-arrow-right" style="font-size: 12px;"></i>';
+                    const btnSubmitIcon = document.getElementById('btnSubmitIcon');
+                    const btnSubmitSpinner = document.getElementById('btnSubmitSpinner');
+                    const loginSubmitText = document.getElementById('loginSubmitText');
+
+                    if (btnSubmitIcon) btnSubmitIcon.style.display = 'inline-block';
+                    if (btnSubmitSpinner) btnSubmitSpinner.style.display = 'none';
+                    if (loginSubmitText) loginSubmitText.textContent = 'Sign In to Admin Panel';
                 }
             }
         });

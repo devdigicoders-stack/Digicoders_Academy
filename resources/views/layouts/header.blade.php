@@ -242,7 +242,7 @@
             {{-- <a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Gallery</a> --}}
 
             <!-- Blog -->
-            <a href="{{ route('blog.index') }}" class="nav-link {{ request()->routeIs('blog.*') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Blog</a>
+            <a href="{{ route('blogs.index') }}" class="nav-link {{ request()->routeIs('blogs.*') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Blog</a>
 
             <!-- Contact -->
             <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active text-[#F58220] font-bold' : 'hover:text-[#F58220]' }}">Contact</a>
@@ -336,8 +336,8 @@
                 {{-- <a href="{{ route('gallery') }}" onclick="toggleMobileMenu()"
                     class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('gallery') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Gallery</a> --}}
 
-                <a href="{{ route('blog.index') }}" onclick="toggleMobileMenu()"
-                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('blog.*') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Blog</a>
+                <a href="{{ route('blogs.index') }}" onclick="toggleMobileMenu()"
+                    class="block py-2.5 px-3 rounded-xl border-b border-slate-100 hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('blogs.*') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Blog</a>
 
                 <a href="{{ route('contact') }}" onclick="toggleMobileMenu()"
                     class="block py-2.5 px-3 rounded-xl hover:bg-orange-50 hover:text-[#F58220] transition-colors {{ request()->routeIs('contact') ? 'bg-orange-50 text-[#F58220] font-bold' : '' }}">Contact</a>

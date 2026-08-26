@@ -121,7 +121,7 @@
                 </div>
                 <div class="dc-dropdown-divider"></div>
                 <div class="dc-dropdown-footer">
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('topbar-logout-form').submit();" class="dc-dropdown-item danger">
+                    <a href="#" onclick="event.preventDefault(); sessionStorage.removeItem('tab_session_active'); document.getElementById('topbar-logout-form').submit();" class="dc-dropdown-item danger">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Logout</span>
                     </a>

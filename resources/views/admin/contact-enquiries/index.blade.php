@@ -188,12 +188,6 @@
                                     {{ $item->course }}
                                 </span>
                                 @endif
-                                @if($item->city)
-                                <span style="color: var(--dc-dark-muted); display: flex; align-items: center; gap: 5px;">
-                                    <i class="fa-solid fa-location-dot" style="color: #3b82f6; font-size: 11px;"></i>
-                                    {{ $item->city }}
-                                </span>
-                                @endif
                             </div>
 
                             <p style="color: var(--dc-dark-muted); font-size: 13px; margin: 0 0 8px 0; line-height: 1.5; white-space: pre-line;">{{ $item->message }}</p>

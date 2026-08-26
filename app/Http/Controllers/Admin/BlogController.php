@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\BlogTag;
+use App\Models\BlogView;
 use App\Models\Setting;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
@@ -48,6 +50,9 @@ class BlogController extends Controller
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
             'canonical_url' => 'nullable|url',
+            'faqs' => 'nullable|array',
+            'faqs.*.question' => 'nullable|string',
+            'faqs.*.answer' => 'nullable|string',
         ]);
 
         $rawTitle = $request->input('title');
@@ -94,6 +99,7 @@ class BlogController extends Controller
             'meta_description' => $request->input('meta_description'),
             'meta_keywords' => $request->input('meta_keywords'),
             'canonical_url' => $request->input('canonical_url'),
+            'faqs' => $this->processFaqsInput($request->input('faqs')),
             'views_count' => 0,
             'comments_count' => 0,
         ]);
@@ -102,7 +108,7 @@ class BlogController extends Controller
             $blog->tags()->sync($request->input('tags', []));
         }
 
-        \App\Services\NotificationService::notifyBlog($blog->title);
+        NotificationService::notifyBlog($blog->title);
 
         Cache::forget('admin_sidebar_counts');
 
@@ -163,6 +169,9 @@ class BlogController extends Controller
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
             'canonical_url' => 'nullable|url',
+            'faqs' => 'nullable|array',
+            'faqs.*.question' => 'nullable|string',
+            'faqs.*.answer' => 'nullable|string',
         ]);
 
         $rawTitle = $request->input('title');
@@ -228,6 +237,7 @@ class BlogController extends Controller
             'meta_description' => $request->input('meta_description'),
             'meta_keywords' => $request->input('meta_keywords'),
             'canonical_url' => $request->input('canonical_url'),
+            'faqs' => $this->processFaqsInput($request->input('faqs')),
         ]);
 
         $blog->tags()->sync($request->input('tags', []));
@@ -324,13 +334,13 @@ class BlogController extends Controller
         $categories = BlogCategory::where('status', true)->withCount('blogs')->get();
         $tags = BlogTag::withCount('blogs')->get();
 
-        return view('blog.index', compact('blogs', 'settings', 'featuredArticle', 'categories', 'tags'));
+        return view('blogs.index', compact('blogs', 'settings', 'featuredArticle', 'categories', 'tags'));
     }
 
     /**
-     * Public Website Blog Single Detail View
+     * Public Website Blog Single Detail View (Unique Views Protection via IP & Session)
      */
-    public function frontendShow(string $slug)
+    public function frontendShow(Request $request, string $slug)
     {
         $settings = Setting::pluck('value', 'key')->toArray();
         $blog = Blog::where('status', 'published')
@@ -340,18 +350,91 @@ class BlogController extends Controller
             ->with('tags')
             ->firstOrFail();
 
-        // Increment views count silently
-        $blog->increment('views_count');
+        // Prevent Duplicate Views: Combination of Session + IP Cache (Valid 24 Hours)
+        $ip = $request->ip();
+        $cacheKey = "blog_viewed_{$blog->id}_{$ip}";
+        $sessionKey = "viewed_blog_{$blog->id}";
+
+        if (! session()->has($sessionKey) && ! Cache::has($cacheKey)) {
+            $blog->increment('views_count');
+
+            $displayIp = ($ip === '127.0.0.1' || $ip === '::1') ? '103.24.12.8 (Local Host)' : $ip;
+            BlogView::create([
+                'blog_id' => $blog->id,
+                'ip_address' => $displayIp,
+                'user_agent' => substr($request->userAgent() ?? '', 0, 500),
+                'referer' => substr($request->header('referer') ?? '', 0, 500),
+            ]);
+
+            session()->put($sessionKey, true);
+            Cache::put($cacheKey, true, now()->addHours(24));
+        }
 
         $categories = BlogCategory::where('status', true)->withCount('blogs')->get();
         $tags = BlogTag::withCount('blogs')->get();
         $recentPosts = Blog::where('status', 'published')
             ->where('id', '!=', $blog->id)
             ->latest()
-            ->take(4)
+            ->take(3)
             ->get();
 
-        return view('blog.show', compact('blog', 'settings', 'categories', 'tags', 'recentPosts'));
+        return view('blogs.show', compact('blog', 'settings', 'categories', 'tags', 'recentPosts'));
+    }
+
+    /**
+     * AJAX endpoint to fetch IP address view logs for a blog post.
+     */
+    public function getViewsData(string $id)
+    {
+        $blog = Blog::where('id', $id)->orWhere('slug', $id)->firstOrFail();
+
+        $views = BlogView::where('blog_id', $blog->id)
+            ->latest()
+            ->get()
+            ->map(function ($view) {
+                return [
+                    'id' => $view->id,
+                    'ip_address' => $view->ip_address,
+                    'user_agent' => $view->user_agent ?: 'Unknown Device',
+                    'browser' => $this->parseBrowser($view->user_agent),
+                    'referer' => $view->referer ?: 'Direct Visit',
+                    'viewed_at' => $view->created_at ? $view->created_at->format('d M Y, h:i A') : 'N/A',
+                    'viewed_ago' => $view->created_at ? $view->created_at->diffForHumans() : 'Recently',
+                ];
+            });
+
+        return response()->json([
+            'status' => 'success',
+            'blog_id' => $blog->id,
+            'title' => $blog->title,
+            'total_views' => $blog->views_count,
+            'logged_views_count' => $views->count(),
+            'views' => $views,
+        ]);
+    }
+
+    /**
+     * Parse Browser name from user agent.
+     */
+    private function parseBrowser(?string $userAgent): string
+    {
+        if (! $userAgent) {
+            return 'Unknown Browser';
+        }
+        if (str_contains($userAgent, 'Edg')) {
+            return 'Microsoft Edge';
+        }
+        if (str_contains($userAgent, 'Chrome')) {
+            return 'Google Chrome';
+        }
+        if (str_contains($userAgent, 'Safari')) {
+            return 'Apple Safari';
+        }
+        if (str_contains($userAgent, 'Firefox')) {
+            return 'Mozilla Firefox';
+        }
+
+        return 'Web Browser';
     }
 
     /**
@@ -393,5 +476,30 @@ class BlogController extends Controller
         }
 
         return $filename;
+    }
+
+    /**
+     * Clean and format FAQs input array.
+     */
+    protected function processFaqsInput(?array $rawFaqs): array
+    {
+        if (! is_array($rawFaqs)) {
+            return [];
+        }
+
+        $processed = [];
+        foreach ($rawFaqs as $item) {
+            $q = trim($item['question'] ?? '');
+            $a = trim($item['answer'] ?? '');
+
+            if ($q !== '' || $a !== '') {
+                $processed[] = [
+                    'question' => $q,
+                    'answer' => $a,
+                ];
+            }
+        }
+
+        return $processed;
     }
 }

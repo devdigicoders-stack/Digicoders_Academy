@@ -62,7 +62,7 @@
                             <li><a href="{{ route('placements') }}" class="hover:text-[#00A651] font-medium">Placements & Success Stories</a></li>
                             <li><a href="{{ route('student-life') }}" class="hover:text-[#00A651] font-medium">Student Life</a></li>
                             <li><a href="{{ route('gallery') }}" class="hover:text-[#00A651] font-medium">Campus Gallery</a></li>
-                            <li><a href="{{ route('blog.index') }}" class="hover:text-[#00A651] font-medium">Blog Listing</a></li>
+                            <li><a href="{{ route('blogs.index') }}" class="hover:text-[#00A651] font-medium">Blog Listing</a></li>
                             <li><a href="{{ route('contact') }}" class="hover:text-[#00A651] font-medium">Contact Us</a></li>
                         </ul>
                     </div>
@@ -91,9 +91,6 @@
                             <h2 class="text-base font-extrabold font-heading text-[#111111]">Services & Legal</h2>
                         </div>
                         <ul class="space-y-2 text-xs text-[#555555]">
-                            <li><a href="{{ route('verify-certificate') }}" class="hover:text-blue-600 font-medium">Certificate Verification Portal</a></li>
-                            <li><a href="{{ route('franchise') }}" class="hover:text-blue-600 font-medium">Franchise Partnership</a></li>
-                            <li><a href="{{ route('careers') }}" class="hover:text-blue-600 font-medium">Careers @ DigiCoders</a></li>
                             <li><a href="{{ route('faq') }}" class="hover:text-blue-600 font-medium">Frequently Asked Questions</a></li>
                             <li><a href="{{ route('privacy-policy') }}" class="hover:text-blue-600 font-medium">Privacy Policy</a></li>
                             <li><a href="{{ route('terms') }}" class="hover:text-blue-600 font-medium">Terms & Conditions</a></li>

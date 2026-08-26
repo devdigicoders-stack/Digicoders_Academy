@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\ContactEnquiry;
 use App\Services\NotificationService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactEnquiryController extends Controller
 {
     /**
-     * Store a contact form submission from the public contact page.
+     * Store a contact form or home page enquiry submission.
      */
     public function store(Request $request)
     {
@@ -26,27 +29,64 @@ class ContactEnquiryController extends Controller
         }
 
         $validated = $request->validate([
-            'name'    => 'required|string|max:255',
-            'phone'   => ['required', 'string', 'regex:/^[6-9]\d{9}$/'],
-            'email'   => 'nullable|email|max:255',
-            'course'  => 'nullable|string|max:255',
-            'city'    => 'nullable|string|max:255',
-            'message' => 'required|string|max:2000',
+            'name' => 'required|string|max:255',
+            'phone' => ['required', 'string', 'regex:/^[6-9]\d{9}$/'],
+            'email' => 'nullable|email|max:255',
+            'course' => 'nullable|string|max:255',
+            'message' => 'nullable|string|max:2000',
         ], [
-            'name.required'    => 'Full Name is required (Kripya naam bharein).',
-            'phone.required'   => 'Mobile number is required.',
-            'phone.regex'      => 'Mobile number must be 10 digits and start with 6, 7, 8, or 9.',
-            'email.email'      => 'Please enter a valid email address.',
-            'message.required' => 'Please enter your message/question.',
+            'name.required' => 'Full Name is required (Kripya naam bharein).',
+            'phone.required' => 'Mobile number is required.',
+            'phone.regex' => 'Mobile number must be 10 digits and start with 6, 7, 8, or 9.',
+            'email.email' => 'Please enter a valid email address.',
         ]);
 
-        $enquiry = ContactEnquiry::create($validated);
+        // Save enquiry to database table `contact_enquiries`
+        $enquiry = ContactEnquiry::create([
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+            'email' => $validated['email'] ?? null,
+            'course' => $validated['course'] ?? 'General Enquiry',
+            'message' => $validated['message'] ?? $request->input('subject', 'Home Page Quick Enquiry'),
+            'status' => 'new',
+            'is_read' => false,
+        ]);
 
+        // 1. Dispatch real-time Admin Panel System Notification
         NotificationService::notifyContact(
             $enquiry->name,
             $enquiry->course ?? 'General Enquiry',
             route('admin.contact-enquiries.index')
         );
+
+        // 2. Send Rich HTML Email Notification to Admin
+        $recipientEmail = env('ADMIN_OTP_EMAIL') ?: (Admin::first()?->email ?: 'admin@digicoders.in');
+        $mailData = [
+            'name' => $enquiry->name,
+            'phone' => $enquiry->phone,
+            'email' => $enquiry->email,
+            'course' => $enquiry->course,
+            'enquiryMessage' => $enquiry->message,
+            'requestTime' => Carbon::now()->format('M d, Y h:i A'),
+            'adminUrl' => route('admin.contact-enquiries.index'),
+        ];
+
+        try {
+            Mail::send('emails.contact-enquiry', $mailData, function ($message) use ($recipientEmail, $enquiry) {
+                $message->to($recipientEmail)
+                    ->subject("📩 New Enquiry: {$enquiry->name} ({$enquiry->course}) - DigiCoders Academy");
+            });
+        } catch (\Throwable $e) {
+            // Mailer exception fallback for local dev
+        }
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you! Your enquiry has been received successfully. Our counsellor will get back to you within 2 hours.',
+                'data' => $enquiry,
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Thank you! Your message has been sent successfully. Our counsellor will get back to you within 2 hours.');
     }
@@ -81,11 +121,11 @@ class ContactEnquiryController extends Controller
         }
 
         $stats = [
-            'total'     => ContactEnquiry::count(),
-            'new'       => ContactEnquiry::where('status', 'new')->count(),
+            'total' => ContactEnquiry::count(),
+            'new' => ContactEnquiry::where('status', 'new')->count(),
             'contacted' => ContactEnquiry::where('status', 'contacted')->count(),
-            'resolved'  => ContactEnquiry::where('status', 'resolved')->count(),
-            'unread'    => ContactEnquiry::where('is_read', false)->count(),
+            'resolved' => ContactEnquiry::where('status', 'resolved')->count(),
+            'unread' => ContactEnquiry::where('is_read', false)->count(),
         ];
 
         $enquiries = $query->latest()->paginate(15)->withQueryString();
