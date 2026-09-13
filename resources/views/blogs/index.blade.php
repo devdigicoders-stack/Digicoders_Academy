@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Blog & Tech Articles | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Read latest web development tutorials, Excel MIS tips, Digital Marketing strategies, diploma course guides & IT interview preparation from DigiCoders Academy.">
@@ -155,7 +156,7 @@
                             </button>
 
                             @if(request('search') || request('category') || request('tag') || request('sort') === 'popular')
-                                <a href="{{ route('blog.index') }}"
+                                <a href="{{ route('blogs.index') }}"
                                     class="h-11 px-3 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200/80 rounded-[6px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0"
                                     title="Reset all filters">
                                     <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
@@ -175,7 +176,7 @@
                             <span>Popular Tags:</span>
                         </div>
                         @if(request('tag'))
-                            <a href="{{ route('blog.index', request()->except('tag', 'page')) }}"
+                            <a href="{{ route('blogs.index', request()->except('tag', 'page')) }}"
                                 class="px-3 py-1 rounded-[6px] bg-red-50 border border-red-200 text-xs font-semibold text-red-600 hover:bg-red-100 transition-all shrink-0 flex items-center gap-1">
                                 <span>Clear Tag</span>
                                 <i data-lucide="x" class="w-3 h-3"></i>
@@ -185,7 +186,7 @@
                             @php
                                 $isActive = request('tag') == $tag->slug || request('tag') == $tag->name;
                             @endphp
-                            <a href="{{ route('blog.index', array_merge(request()->except('tag', 'page'), $isActive ? [] : ['tag' => $tag->slug])) }}"
+                            <a href="{{ route('blogs.index', array_merge(request()->except('tag', 'page'), $isActive ? [] : ['tag' => $tag->slug])) }}"
                                 class="px-3 py-1 rounded-[6px] border text-xs font-medium transition-all shrink-0 flex items-center gap-1 {{ $isActive ? 'bg-[#00A651] text-white border-[#00A651] shadow-xs' : 'bg-white border-slate-200 text-[#333333] hover:text-[#00A651] hover:border-[#00A651] hover:bg-emerald-50/50' }}">
                                 <span>#{{ $tag->name }}</span>
                                 <span class="text-[10px] {{ $isActive ? 'text-white/80' : 'text-slate-400' }}">({{ $tag->blogs_count }})</span>

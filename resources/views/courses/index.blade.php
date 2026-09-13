@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     
     <!-- SEO Title & Meta -->
     <title>All Computer & IT Diploma Courses in Lucknow - DigiCoders Academy</title>

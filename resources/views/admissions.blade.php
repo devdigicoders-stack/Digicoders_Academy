@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Admissions 2026 | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Apply for 6-Month & 1-Year Diploma courses at DigiCoders Academy Lucknow. Check admission procedure, eligibility, fee structure, batch timings & scholarships.">
@@ -389,10 +390,14 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit"
-                            class="w-full bg-[#00A651] hover:bg-[#008d44] text-white py-4 rounded-[6px] text-sm font-extrabold transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2">
-                            <span>Submit</span>
-                            <i data-lucide="send" class="w-4 h-4"></i>
+                        <button type="submit" id="admissionSubmitBtn"
+                            class="w-full bg-[#00A651] hover:bg-[#008d44] text-white py-4 rounded-[6px] text-sm font-extrabold transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed">
+                            <span id="admissionBtnText">Submit</span>
+                            <i id="admissionBtnIcon" data-lucide="send" class="w-4 h-4"></i>
+                            <svg id="admissionBtnSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
                         </button>
                     </form>
                 </div>
@@ -776,6 +781,24 @@
                         if (whatsappInput) {
                             whatsappInput.value = this.value;
                         }
+                    }
+                });
+            }
+
+            // Handle Submit Button Spin Loading State
+            const admissionForm = document.querySelector('#admission-form form');
+            if (admissionForm) {
+                admissionForm.addEventListener('submit', function () {
+                    const btn = document.getElementById('admissionSubmitBtn');
+                    const btnText = document.getElementById('admissionBtnText');
+                    const btnIcon = document.getElementById('admissionBtnIcon');
+                    const spinner = document.getElementById('admissionBtnSpinner');
+
+                    if (btn && btnText) {
+                        btn.disabled = true;
+                        btnText.innerText = 'Submitting Admission...';
+                        if (btnIcon) btnIcon.classList.add('hidden');
+                        if (spinner) spinner.classList.remove('hidden');
                     }
                 });
             }

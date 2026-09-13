@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Admission;
+use App\Services\NotificationService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdmissionController extends Controller
 {
@@ -80,14 +84,14 @@ class AdmissionController extends Controller
         $validated = $this->validateAdmission($request);
 
         $uploadPath = public_path('uploads/admissions');
-        if (!file_exists($uploadPath)) {
+        if (! file_exists($uploadPath)) {
             mkdir($uploadPath, 0777, true);
         }
 
         if ($request->hasFile('student_photo')) {
-            $photoName = 'photo_' . time() . '_' . uniqid() . '.' . $request->file('student_photo')->getClientOriginalExtension();
+            $photoName = 'photo_'.time().'_'.uniqid().'.'.$request->file('student_photo')->getClientOriginalExtension();
             $request->file('student_photo')->move($uploadPath, $photoName);
-            $validated['student_photo'] = 'uploads/admissions/' . $photoName;
+            $validated['student_photo'] = 'uploads/admissions/'.$photoName;
         }
 
         $validated['source'] = 'Online Admission Form';
@@ -95,7 +99,37 @@ class AdmissionController extends Controller
 
         $admission = Admission::create($validated);
 
-        \App\Services\NotificationService::notifyAdmission($admission->name, $admission->course_name ?? 'Course');
+        NotificationService::notifyAdmission($admission->name, $admission->course_name ?? 'Course');
+
+        // Send Instant Rich HTML Email Notification to Admin
+        $recipientEmail = env('ADMIN_OTP_EMAIL') ?: (Admin::first()?->email ?: 'admin@digicoders.in');
+        $mailData = [
+            'name' => $admission->name,
+            'father_name' => $admission->father_name,
+            'course_name' => $admission->course_name,
+            'mode' => $admission->mode,
+            'phone' => $admission->phone,
+            'whatsapp_number' => $admission->whatsapp_number,
+            'guardian_mobile' => $admission->guardian_mobile,
+            'email' => $admission->email,
+            'dob' => $admission->dob,
+            'gender' => $admission->gender,
+            'qualification' => $admission->qualification,
+            'school_college_name' => $admission->school_college_name,
+            'aadhaar_number' => $admission->aadhaar_number,
+            'address' => $admission->address,
+            'requestTime' => Carbon::now()->format('M d, Y h:i A'),
+            'adminUrl' => route('admin.admissions.index'),
+        ];
+
+        try {
+            Mail::send('emails.admission-enquiry', $mailData, function ($message) use ($recipientEmail, $admission) {
+                $message->to($recipientEmail)
+                    ->subject("🎓 New Admission: {$admission->name} ({$admission->course_name}) - DigiCoders Academy");
+            });
+        } catch (\Throwable $e) {
+            // Silently handle mailer error in local dev
+        }
 
         return redirect()->back()->with('success', 'Congratulations! Your admission form has been submitted successfully. Our admission team will contact you shortly.');
     }
@@ -108,14 +142,14 @@ class AdmissionController extends Controller
         $validated = $this->validateAdmission($request);
 
         $uploadPath = public_path('uploads/admissions');
-        if (!file_exists($uploadPath)) {
+        if (! file_exists($uploadPath)) {
             mkdir($uploadPath, 0777, true);
         }
 
         if ($request->hasFile('student_photo')) {
-            $photoName = 'photo_' . time() . '_' . uniqid() . '.' . $request->file('student_photo')->getClientOriginalExtension();
+            $photoName = 'photo_'.time().'_'.uniqid().'.'.$request->file('student_photo')->getClientOriginalExtension();
             $request->file('student_photo')->move($uploadPath, $photoName);
-            $validated['student_photo'] = 'uploads/admissions/' . $photoName;
+            $validated['student_photo'] = 'uploads/admissions/'.$photoName;
         }
 
         $validated['source'] = 'Admin Dashboard';
@@ -123,7 +157,7 @@ class AdmissionController extends Controller
 
         $admission = Admission::create($validated);
 
-        \App\Services\NotificationService::notifyAdmission($admission->name, $admission->course_name ?? 'Course');
+        NotificationService::notifyAdmission($admission->name, $admission->course_name ?? 'Course');
 
         return redirect()->route('admin.admissions.index')->with('success', 'Student admission recorded successfully.');
     }
@@ -145,7 +179,7 @@ class AdmissionController extends Controller
 
         if ($request->hasFile('student_photo')) {
             $uploadPath = public_path('uploads/admissions');
-            if (!file_exists($uploadPath)) {
+            if (! file_exists($uploadPath)) {
                 mkdir($uploadPath, 0777, true);
             }
 
@@ -153,9 +187,9 @@ class AdmissionController extends Controller
                 @unlink(public_path($admission->student_photo));
             }
 
-            $photoName = 'photo_' . time() . '_' . uniqid() . '.' . $request->file('student_photo')->getClientOriginalExtension();
+            $photoName = 'photo_'.time().'_'.uniqid().'.'.$request->file('student_photo')->getClientOriginalExtension();
             $request->file('student_photo')->move($uploadPath, $photoName);
-            $validated['student_photo'] = 'uploads/admissions/' . $photoName;
+            $validated['student_photo'] = 'uploads/admissions/'.$photoName;
         }
 
         if ($request->has('status')) {
@@ -182,7 +216,7 @@ class AdmissionController extends Controller
             return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
         }
 
-        return redirect()->back()->with('success', 'Admission status updated to ' . strtoupper($request->status) . '!');
+        return redirect()->back()->with('success', 'Admission status updated to '.strtoupper($request->status).'!');
     }
 
     /**

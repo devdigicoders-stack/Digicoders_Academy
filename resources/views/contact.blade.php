@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Contact Us & Campus Location | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Contact DigiCoders Academy Lucknow. Phone: +91 9140967607, Email: info@digicodersacademy.com. Visit our campus near Polytechnic Chauraha, Indiranagar, Lucknow.">
@@ -419,9 +420,13 @@
                             </div>
 
                             <button type="submit" id="contactSubmitBtn"
-                                class="w-full bg-[#00A651] hover:bg-[#008d44] text-white py-4 rounded-[6px] text-sm font-extrabold transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
-                                <span>Send Message</span>
-                                <i data-lucide="send" class="w-4 h-4"></i>
+                                class="w-full bg-[#00A651] hover:bg-[#008d44] text-white py-4 rounded-[6px] text-sm font-extrabold transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-80 disabled:cursor-not-allowed">
+                                <span id="contactBtnText">Send Message</span>
+                                <i id="contactBtnIcon" data-lucide="send" class="w-4 h-4"></i>
+                                <svg id="contactBtnSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
                             </button>
                         </form>
 
@@ -430,6 +435,22 @@
                                 const phoneInput = document.getElementById('contactPhone');
                                 const phoneError = document.getElementById('phoneError');
                                 const form = document.getElementById('contactForm');
+
+                                if (form) {
+                                    form.addEventListener('submit', function () {
+                                        const btn = document.getElementById('contactSubmitBtn');
+                                        const btnText = document.getElementById('contactBtnText');
+                                        const btnIcon = document.getElementById('contactBtnIcon');
+                                        const spinner = document.getElementById('contactBtnSpinner');
+
+                                        if (btn && btnText) {
+                                            btn.disabled = true;
+                                            btnText.innerText = 'Sending Message...';
+                                            if (btnIcon) btnIcon.classList.add('hidden');
+                                            if (spinner) spinner.classList.remove('hidden');
+                                        }
+                                    });
+                                }
 
                                 if (phoneInput) {
                                     // Allow only numeric digits

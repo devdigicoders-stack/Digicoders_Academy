@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
 
     <!-- Primary Meta Tags -->
     <title>About Us | DigiCoders Academy - Empowering Skills That Build Careers</title>
@@ -200,7 +201,7 @@
                         <!-- Main Building Image Container -->
                         <div
                             class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 relative group">
-                            <img src="{{ asset('images/who-we-are-campus.png') }}"
+                            <img src="{{ asset('images/who-we-are-illustration.png') }}"
                                 alt="DigiCoders Academy Practical Training Lab"
                                 class="w-full h-[340px] sm:h-[420px] lg:h-[450px] object-cover rounded-xl transform group-hover:scale-105 transition-transform duration-700">
 
@@ -216,7 +217,7 @@
                                         Excellence in<br>Education
                                     </p>
                                     <p class="text-[11px] font-semibold text-[#00A651] mt-0.5">
-                                        Since 2014
+                                        Since 2019
                                     </p>
                                 </div>
                             </div>
@@ -799,74 +800,6 @@
             </div>
         </section>
 
-
-        <!-- 🔟 MEET OUR EXPERT TRAINERS (Spacious 4-Column Grid) -->
-        <section id="expert-trainers" class="py-16 sm:py-24 bg-white relative">
-            <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <!-- Section Header -->
-                <div class="text-center max-w-xl mx-auto mb-12 sm:mb-16">
-                    <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#00A651]">OUR EXPERT TRAINERS</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-[#111111] mt-2 tracking-tight">
-                        Learn From Industry Experts
-                    </h2>
-                    <p class="text-sm text-[#666666] mt-2 leading-relaxed">
-                        Our trainers bring years of real-world experience from top technology companies to guide your learning.
-                    </p>
-                </div>
-
-                <!-- 4 Trainer Cards Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Trainer 1 -->
-                    <div
-                        class="p-6 rounded-[6px] bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 text-center flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-                            alt="Rahul Yadav" class="w-20 h-20 rounded-full object-cover mb-4 border-2 border-emerald-100 shadow-xs">
-                        <h3 class="text-base font-bold text-[#111111] font-heading">Rahul Yadav</h3>
-                        <p class="text-xs text-[#666666] font-medium mt-1">Full Stack Developer</p>
-                        <span class="inline-block text-[11px] font-bold text-[#00A651] bg-[#EAF7EE] px-3 py-1 rounded-full mt-3 border border-emerald-100">
-                            8+ Years Exp.
-                        </span>
-                    </div>
-
-                    <!-- Trainer 2 -->
-                    <div
-                        class="p-6 rounded-[6px] bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 text-center flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
-                            alt="Neha Sharma" class="w-20 h-20 rounded-full object-cover mb-4 border-2 border-orange-100 shadow-xs">
-                        <h3 class="text-base font-bold text-[#111111] font-heading">Neha Sharma</h3>
-                        <p class="text-xs text-[#666666] font-medium mt-1">UI/UX Designer</p>
-                        <span class="inline-block text-[11px] font-bold text-[#F58220] bg-[#FFF4EA] px-3 py-1 rounded-full mt-3 border border-orange-100">
-                            6+ Years Exp.
-                        </span>
-                    </div>
-
-                    <!-- Trainer 3 -->
-                    <div
-                        class="p-6 rounded-[6px] bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 text-center flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
-                            alt="Arti Verma" class="w-20 h-20 rounded-full object-cover mb-4 border-2 border-emerald-100 shadow-xs">
-                        <h3 class="text-base font-bold text-[#111111] font-heading">Arti Verma</h3>
-                        <p class="text-xs text-[#666666] font-medium mt-1">Data Analyst</p>
-                        <span class="inline-block text-[11px] font-bold text-[#00A651] bg-[#EAF7EE] px-3 py-1 rounded-full mt-3 border border-emerald-100">
-                            7+ Years Exp.
-                        </span>
-                    </div>
-
-                    <!-- Trainer 4 -->
-                    <div
-                        class="p-6 rounded-[6px] bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 text-center flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
-                            alt="Pooja Singh" class="w-20 h-20 rounded-full object-cover mb-4 border-2 border-orange-100 shadow-xs">
-                        <h3 class="text-base font-bold text-[#111111] font-heading">Pooja Singh</h3>
-                        <p class="text-xs text-[#666666] font-medium mt-1">Digital Marketing Expert</p>
-                        <span class="inline-block text-[11px] font-bold text-[#F58220] bg-[#FFF4EA] px-3 py-1 rounded-full mt-3 border border-orange-100">
-                            5+ Years Exp.
-                        </span>
-                    </div>
-                </div>
-
-       
 
         <!-- 1️⃣2️⃣ READY TO BUILD YOUR TECH CAREER CTA SECTION (6px Border Radius & Refined Font Weight) -->
         <section id="ready-to-build-cta" class="py-16 sm:py-20 bg-white">

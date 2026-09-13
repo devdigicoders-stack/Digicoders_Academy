@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>{{ $blog->meta_title ?: $blog->title . ' | DigiCoders Blog' }}</title>
     <meta name="description"
         content="{{ $blog->meta_description ?: ($blog->summary ?: Str::limit(strip_tags($blog->content), 160)) }}">
@@ -205,7 +206,7 @@
                         <div class="flex flex-wrap items-center gap-2 pt-2">
                             <span class="text-xs font-bold text-[#555555]">Tags:</span>
                             @foreach($blog->tags as $t)
-                                <a href="{{ route('blog.index', ['tag' => $t->slug]) }}"
+                                <a href="{{ route('blogs.index', ['tag' => $t->slug]) }}"
                                     class="px-3 py-1 rounded-full bg-slate-100 hover:bg-emerald-50 text-xs font-bold text-[#00A651] transition-colors">
                                     #{{ $t->name }}
                                 </a>

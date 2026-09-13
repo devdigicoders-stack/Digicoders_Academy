@@ -64,8 +64,11 @@ Route::get('/student-life', function () {
 
 Route::get('/gallery', [GalleryController::class, 'frontendIndex'])->name('gallery');
 
+// Blogs Frontend Routes (supports both /blogs and /blog for full compatibility)
 Route::get('/blogs', [BlogController::class, 'frontendIndex'])->name('blogs.index');
 Route::get('/blogs/{slug}', [BlogController::class, 'frontendShow'])->name('blogs.show');
+Route::get('/blog', [BlogController::class, 'frontendIndex'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'frontendShow'])->name('blog.show');
 
 Route::get('/contact', function () {
     $settings = Setting::pluck('value', 'key')->toArray();

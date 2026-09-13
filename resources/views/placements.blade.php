@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Placements & Success Stories | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Explore student success stories, hiring partners, offer letters & placement statistics at DigiCoders Academy Lucknow. 95% placement support with 5000+ placed students.">

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Campus Gallery & Photo Gallery | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Explore the official photo & video gallery of DigiCoders Academy Lucknow. Photos of computer labs, classrooms, workshops, hackathons, seminars & placement drives.">

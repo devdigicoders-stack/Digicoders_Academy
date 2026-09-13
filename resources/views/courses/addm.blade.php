@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     
     <!-- SEO Title & Meta -->
     <title>Advanced Diploma in Digital Marketing (ADDM) - DigiCoders Academy</title>
@@ -40,57 +41,66 @@
 
     <main class="w-full overflow-hidden">
 
-        <!-- 1️⃣ HERO BANNER (Clean, Ultra-Spacious Hero Section) -->
-        <section id="course-hero" class="relative w-full bg-white border-b border-slate-200/60 overflow-hidden py-14 lg:py-24 min-h-[420px] flex items-center">
-            
-            <!-- Background Image with Soft White Gradient Mask -->
-            <div class="absolute inset-0 z-0">
-                <img src="{{ asset('images/course-students-banner.jpg') }}"
-                    alt="DigiCoders ADDM Digital Marketing Lab" class="w-full h-full object-cover object-right opacity-90">
-                <div class="absolute inset-0 bg-gradient-to-r from-white via-white/95 sm:via-white/90 to-white/20 lg:to-transparent"></div>
-            </div>
-
-            <div class="relative z-10 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-2xl space-y-5">
+        <!-- 1️⃣ HERO BANNER (Full Image in Right Half with Left White Gradient Fade) -->
+        <section id="course-hero" class="relative w-full bg-white border-b border-slate-200/60 overflow-hidden py-10 lg:py-16">
+            <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     
-                    <!-- Breadcrumb -->
-                    <nav class="flex items-center gap-2 text-xs font-semibold text-[#666666]">
-                        <a href="{{ route('home') }}" class="hover:text-[#F58220] transition-colors">Home</a>
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                        <a href="{{ route('courses.index') }}" class="hover:text-[#F58220] transition-colors">Courses</a>
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                        <span class="text-[#666666] font-bold">ADDM</span>
-                    </nav>
+                    <!-- Left Column (6 Cols): Course Text Content -->
+                    <div class="lg:col-span-6 space-y-5">
+                        
+                        <!-- Breadcrumb -->
+                        <nav class="flex items-center gap-2 text-xs font-semibold text-[#666666]">
+                            <a href="{{ route('home') }}" class="hover:text-[#F58220] transition-colors">Home</a>
+                            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                            <a href="{{ route('courses.index') }}" class="hover:text-[#F58220] transition-colors">Courses</a>
+                            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                            <span class="text-[#666666] font-bold">ADDM</span>
+                        </nav>
 
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-[6px] bg-[#EAF7EE] border border-emerald-200/80 text-[#00A651] text-[11px] font-bold tracking-wider uppercase">
-                        <span>1 YEAR DIGITAL MARKETING DIPLOMA</span>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-[6px] bg-[#EAF7EE] border border-emerald-200/80 text-[#00A651] text-[11px] font-bold tracking-wider uppercase">
+                            <span>1 YEAR DIGITAL MARKETING DIPLOMA</span>
+                        </div>
+
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-[#111111] tracking-tight leading-[1.15]">
+                            Advanced Diploma in <br class="hidden sm:block">
+                            <span class="text-[#00A651]">Digital Marketing (ADDM)</span>
+                        </h1>
+
+                        <div class="space-y-2 max-w-xl">
+                            <h2 class="text-base sm:text-lg font-bold text-[#111111]">Master Modern Performance Marketing & AI Strategies</h2>
+                            <p class="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal">
+                                Learn SEO, Google & Meta Ads, Social Media Growth, AI Marketing (ChatGPT, Canva AI), Prompt Engineering, Email Marketing, and Analytics.
+                            </p>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <a href="{{ route('admissions') }}"
+                                class="bg-[#00A651] hover:bg-[#008d44] text-white px-7 py-3.5 rounded-[6px] text-xs font-bold transition-all shadow-md hover:shadow-emerald-500/20 cursor-pointer flex items-center gap-2">
+                                <span>Apply Now</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+
+                            <button onclick="openModal('brochureModal')"
+                                class="bg-white hover:bg-slate-50 text-[#111111] border border-slate-300/90 px-6 py-3.5 rounded-[6px] text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-sm">
+                                <i data-lucide="download" class="w-4 h-4 text-[#555555]"></i>
+                                <span>Download Syllabus</span>
+                            </button>
+                        </div>
+
                     </div>
 
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-[#111111] tracking-tight leading-[1.15]">
-                        Advanced Diploma in <br>
-                        <span class="text-[#00A651]">Digital Marketing (ADDM)</span>
-                    </h1>
-
-                    <div class="space-y-2 max-w-xl">
-                        <h2 class="text-base sm:text-lg font-bold text-[#111111]">Master Modern Performance Marketing & AI Strategies</h2>
-                        <p class="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal">
-                            Learn SEO, Google & Meta Ads, Social Media Growth, AI Marketing (ChatGPT, Canva AI), Prompt Engineering, Email Marketing, and Analytics.
-                        </p>
-                    </div>
-
-                    <!-- CTA Buttons -->
-                    <div class="flex flex-wrap items-center gap-4 pt-2">
-                        <a href="{{ route('admissions') }}"
-                            class="bg-[#00A651] hover:bg-[#008d44] text-white px-7 py-3.5 rounded-[6px] text-xs font-bold transition-all shadow-md hover:shadow-emerald-500/20 cursor-pointer flex items-center gap-2">
-                            <span>Apply Now</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-
-                        <button onclick="openModal('brochureModal')"
-                            class="bg-white hover:bg-slate-50 text-[#111111] border border-slate-300/90 px-6 py-3.5 rounded-[6px] text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shadow-sm">
-                            <i data-lucide="download" class="w-4 h-4 text-[#555555]"></i>
-                            <span>Download Syllabus</span>
-                        </button>
+                    <!-- Right Column (6 Cols): Full Image in Right Half with Left Edge White Fade -->
+                    <div class="lg:col-span-6 w-full">
+                        <div class="relative w-full overflow-hidden rounded-2xl">
+                            <img src="{{ asset('images/course-students-banner.jpg') }}"
+                                alt="DigiCoders ADDM Digital Marketing Lab" 
+                                class="w-full h-auto object-contain rounded-2xl">
+                            
+                            <!-- Left Edge Soft White Fade Overlay -->
+                            <div class="absolute inset-y-0 left-0 w-20 sm:w-28 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none"></div>
+                        </div>
                     </div>
 
                 </div>

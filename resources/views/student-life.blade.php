@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Student Life & Campus Experience | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Experience campus life at DigiCoders Academy Lucknow. Modern computer labs, smart classrooms, coding hackathons, technical workshops, student clubs & placement support.">

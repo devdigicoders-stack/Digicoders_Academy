@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>Frequently Asked Questions (FAQ) | DigiCoders Academy Lucknow</title>
     <meta name="description"
         content="Find answers to all your questions about admissions, diploma courses, fees, batch timings, placement support, and certificate verification at DigiCoders Academy.">

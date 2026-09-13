@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\BrochureEnquiry;
 use App\Services\NotificationService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class BrochureEnquiryController extends Controller
 {
@@ -27,21 +30,21 @@ class BrochureEnquiryController extends Controller
         }
 
         $validated = $request->validate([
-            'name'   => 'required|string|max:255',
-            'phone'  => ['required', 'string', 'regex:/^[6-9]\d{9}$/'],
-            'email'  => 'nullable|email|max:255',
+            'name' => 'required|string|max:255',
+            'phone' => ['required', 'string', 'regex:/^[6-9]\d{9}$/'],
+            'email' => 'nullable|email|max:255',
             'course' => 'nullable|string|max:255',
         ], [
-            'name.required'  => 'Full Name is required (Kripya naam bharein).',
+            'name.required' => 'Full Name is required (Kripya naam bharein).',
             'phone.required' => 'WhatsApp Mobile number is required.',
-            'phone.regex'    => 'Mobile number must be 10 digits and start with 6, 7, 8, or 9.',
-            'email.email'    => 'Please enter a valid email address.',
+            'phone.regex' => 'Mobile number must be 10 digits and start with 6, 7, 8, or 9.',
+            'email.email' => 'Please enter a valid email address.',
         ]);
 
         $enquiry = BrochureEnquiry::create([
-            'name'   => $validated['name'],
-            'phone'  => $validated['phone'],
-            'email'  => $validated['email'] ?? null,
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+            'email' => $validated['email'] ?? null,
             'course' => $validated['course'] ?? 'All Courses / General Prospectus',
             'status' => 'new',
         ]);
@@ -56,6 +59,26 @@ class BrochureEnquiryController extends Controller
                 'Brochure Download Request ('.$enquiry->course.')',
                 route('admin.brochure-requests.index')
             );
+        }
+
+        // Send Instant Rich HTML Email Notification to Admin
+        $recipientEmail = env('ADMIN_OTP_EMAIL') ?: (Admin::first()?->email ?: 'admin@digicoders.in');
+        $mailData = [
+            'name' => $enquiry->name,
+            'phone' => $enquiry->phone,
+            'email' => $enquiry->email,
+            'course' => $enquiry->course,
+            'requestTime' => Carbon::now()->format('M d, Y h:i A'),
+            'adminUrl' => route('admin.brochure-requests.index'),
+        ];
+
+        try {
+            Mail::send('emails.brochure-enquiry', $mailData, function ($message) use ($recipientEmail, $enquiry) {
+                $message->to($recipientEmail)
+                    ->subject("📖 Brochure Request: {$enquiry->name} ({$enquiry->course}) - DigiCoders Academy");
+            });
+        } catch (\Throwable $e) {
+            // Silently handle mailer error in local dev
         }
 
         $pdfPath = asset('pdf/DigiCoders_2026_Placement_Brochure.pdf');
@@ -101,11 +124,11 @@ class BrochureEnquiryController extends Controller
         }
 
         $stats = [
-            'total'     => BrochureEnquiry::count(),
-            'new'       => BrochureEnquiry::where('status', 'new')->count(),
+            'total' => BrochureEnquiry::count(),
+            'new' => BrochureEnquiry::where('status', 'new')->count(),
             'contacted' => BrochureEnquiry::where('status', 'contacted')->count(),
-            'resolved'  => BrochureEnquiry::where('status', 'resolved')->count(),
-            'unread'    => BrochureEnquiry::where('is_read', false)->count(),
+            'resolved' => BrochureEnquiry::where('status', 'resolved')->count(),
+            'unread' => BrochureEnquiry::where('is_read', false)->count(),
         ];
 
         $enquiries = $query->latest()->paginate(15)->withQueryString();
