@@ -205,18 +205,6 @@
                 <div class="greeting">Hello Administrator 👋</div>
                 <div class="intro">A new student lead has just submitted an enquiry on the DigiCoders Academy website. Below are the submission details:</div>
 
-                <!-- Stats Overview -->
-                <div class="grid-stats">
-                    <div class="stat-card">
-                        <div class="stat-label">Student Name</div>
-                        <div class="stat-value">{{ $name }}</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Interested Course</div>
-                        <div class="stat-value" style="color: #00A651;">{{ $course ?? 'General Enquiry' }}</div>
-                    </div>
-                </div>
-
                 <!-- Details Table -->
                 <div class="table-title">Full Lead Details</div>
                 <table class="details-table">

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-site-verification" content="VJgFd1sV7ctRhpkFdKwCQBAATOL5E4d2M7r5vDY4oKw" />
     <title>{{ $blog->meta_title ?: $blog->title . ' | DigiCoders Blog' }}</title>
     <meta name="description"
@@ -250,9 +251,89 @@
                         @endif
 
 
-                        <!-- Main Article Body -->
-                        <div class="prose max-w-none text-sm sm:text-base text-[#333333] leading-relaxed space-y-4">
-                            {!! $blog->content !!}
+                        <!-- Main Article Body with Expand/Collapse (Show More / Show Less) -->
+                        <div id="blogContentContainer" class="relative">
+                            <!-- Collapsible Wrapper for Text Content -->
+                            <div id="blogContentWrapper" class="prose max-w-none text-sm sm:text-base text-[#333333] leading-relaxed space-y-4 overflow-hidden transition-all duration-500 relative">
+                                {!! $blog->content !!}
+
+                                <!-- Gradient Fade Overlay with Inline CSS for guaranteed cross-browser text fade -->
+                                <div id="blogContentGradient"
+                                    style="position: absolute; bottom: 0; left: 0; right: 0; height: 180px; background: linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0.95) 45%, rgba(255, 255, 255, 0.6) 75%, rgba(255, 255, 255, 0) 100%); pointer-events: none; z-index: 10; transition: opacity 0.3s ease;"
+                                    class="hidden"></div>
+                            </div>
+
+                            <!-- Show More / Show Less Button Container -->
+                            <div id="blogContentToggleWrapper" class="relative z-20 text-center -mt-9 pb-2 hidden">
+                                <button id="blogContentToggleBtn" type="button" onclick="toggleBlogContent()"
+                                    class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#00A651] hover:bg-[#008d44] text-white text-xs sm:text-sm font-extrabold shadow-lg hover:shadow-xl transition-all duration-300 transform active:scale-95 cursor-pointer border border-[#00A651]">
+                                    <span id="blogContentToggleText">Show More</span>
+                                    <i id="blogContentToggleIcon" data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 📢 BOTTOM ARTICLE SOCIAL SHARE BOX -->
+                        <div id="bottom-share-box" class="mt-8 p-6 rounded-[8px] bg-[#FAFAFA] border border-slate-200/90 shadow-sm space-y-4">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                <div>
+                                    <h4 class="text-base font-extrabold font-heading text-[#111111] flex items-center gap-2">
+                                        <i class="fa-solid fa-share-nodes text-[#00A651]"></i>
+                                        <span>Share This Article</span>
+                                    </h4>
+                                    <p class="text-xs text-[#555555] font-medium mt-0.5">
+                                        Found this article helpful? Share it with your friends & colleagues!
+                                    </p>
+                                </div>
+
+                                <!-- Social Share Buttons Row -->
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <!-- WhatsApp -->
+                                    <a href="https://api.whatsapp.com/send?text={{ $shareTitle }}%20{{ $shareUrl }}"
+                                        target="_blank" rel="noopener noreferrer" title="Share on WhatsApp"
+                                        style="background-color: #25D366 !important;"
+                                        class="px-4 py-2 rounded-full text-white text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs hover:opacity-90 hover:scale-105 active:scale-95">
+                                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                                        <span>WhatsApp</span>
+                                    </a>
+
+                                    <!-- Facebook -->
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}"
+                                        target="_blank" rel="noopener noreferrer" title="Share on Facebook"
+                                        style="background-color: #1877F2 !important;"
+                                        class="px-4 py-2 rounded-full text-white text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs hover:opacity-90 hover:scale-105 active:scale-95">
+                                        <i class="fa-brands fa-facebook-f text-xs"></i>
+                                        <span>Facebook</span>
+                                    </a>
+
+                                    <!-- Twitter / X -->
+                                    <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $shareTitle }}"
+                                        target="_blank" rel="noopener noreferrer" title="Share on X (Twitter)"
+                                        style="background-color: #111111 !important;"
+                                        class="px-4 py-2 rounded-full text-white text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs hover:opacity-90 hover:scale-105 active:scale-95">
+                                        <svg class="w-3.5 h-3.5 fill-current text-white" viewBox="0 0 24 24">
+                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg>
+                                        <span>Share</span>
+                                    </a>
+
+                                    <!-- LinkedIn -->
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl }}"
+                                        target="_blank" rel="noopener noreferrer" title="Share on LinkedIn"
+                                        style="background-color: #0A66C2 !important;"
+                                        class="px-4 py-2 rounded-full text-white text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs hover:opacity-90 hover:scale-105 active:scale-95">
+                                        <!-- <i class="fa-brands fa-linkedin-in text-xs"></i> -->
+                                        <span>LinkedIn</span>
+                                    </a>
+
+                                    <!-- Copy Link -->
+                                    <button onclick="copyBlogShareLink('{{ url()->current() }}')" title="Copy Article Link"
+                                        class="px-4 py-2 rounded-full bg-slate-800 text-white text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs hover:bg-slate-900 hover:scale-105 active:scale-95 cursor-pointer">
+                                        <i class="fa-solid fa-link text-xs"></i>
+                                        <span>Copy Link</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Article FAQs Accordion Section -->
@@ -356,41 +437,81 @@
                                 </div>
                             @endif
 
-                            <!-- Quick CTA & Admissions Widget -->
+                            <!-- Quick CTA & Admissions Form Widget -->
                             <div class="p-6 rounded-[8px] bg-white border border-slate-200/90 shadow-md space-y-4">
                                 <div>
                                     <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-[#00A651] text-[10px] font-extrabold uppercase tracking-wider mb-2 border border-emerald-100">
-                                        <i class="fa-solid fa-graduation-cap text-xs"></i> Admissions Open
+                                        <i class="fa-solid fa-graduation-cap text-xs"></i> Free Counseling
                                     </div>
                                     <h4 class="text-base font-extrabold font-heading text-[#111111] leading-snug">
                                         Need Course Counseling?
                                     </h4>
                                     <p class="text-xs text-[#555555] font-medium mt-1 leading-relaxed">
-                                        Speak directly with our academic advisor for batch details, fees & syllabus.
+                                        Fill your details below to get a direct call back from our academic advisor.
                                     </p>
                                 </div>
 
-                                <div class="space-y-2.5 pt-1">
-                                    <!-- Apply Online -->
-                                    <a href="{{ route('admissions') }}"
-                                        class="w-full bg-[#00A651] hover:bg-[#008d44] text-white py-3 rounded-[6px] text-xs font-extrabold transition-all shadow-md text-center flex items-center justify-center gap-2">
-                                        <i class="fa-solid fa-file-signature text-sm"></i>
-                                        <span>Apply For Next Batch</span>
-                                    </a>
+                                <!-- AJAX Counseling Form (Only Name & Mobile Number) -->
+                                <form id="sidebarCtaForm" onsubmit="submitCtaForm(event)" class="space-y-3 pt-1">
+                                    @csrf
+                                    <input type="hidden" name="subject" value="Blog Counseling Inquiry: {{ $blog->title }}">
+                                    <input type="hidden" name="course" value="{{ $blog->category ?? 'General Counseling' }}">
 
-                                    <!-- Call Helpline Number -->
-                                    <a href="tel:+919140967607"
-                                        class="w-full bg-[#FAFAFA] hover:bg-slate-100 text-[#111111] border border-slate-200 py-2.5 rounded-[6px] text-xs font-extrabold transition-all text-center flex items-center justify-center gap-2">
+                                    <!-- Feedback Alert (Moved Above Form Fields) -->
+                                    <div id="ctaFormFeedback" class="hidden p-3 rounded-[6px] text-xs font-bold text-center"></div>
+
+                                    <!-- Name Field -->
+                                    <div>
+                                        <label for="cta_name" class="block text-xs font-bold text-[#111111] mb-1">
+                                            Full Name <span class="text-red-500">*</span>
+                                        </label>
+                                        <div class="flex items-center rounded-[6px] border border-slate-200 bg-white focus-within:border-[#00A651] focus-within:ring-2 focus-within:ring-[#00A651]/20 transition-all shadow-2xs overflow-hidden">
+                                            <span class="w-9 flex items-center justify-center text-slate-400 text-xs shrink-0 border-r border-slate-100 py-2.5 bg-slate-50/50">
+                                                <i class="fa-solid fa-user"></i>
+                                            </span>
+                                            <input type="text" id="cta_name" name="name" required placeholder="Enter your full name"
+                                                class="w-full px-3 py-2 bg-transparent text-xs text-[#111111] placeholder:text-slate-400 outline-none border-none focus:ring-0">
+                                        </div>
+                                    </div>
+
+                                    <!-- Mobile Field (10 Digits starting with 6,7,8,9) -->
+                                    <div>
+                                        <label for="cta_phone" class="block text-xs font-bold text-[#111111] mb-1">
+                                            Mobile Number <span class="text-red-500">*</span>
+                                        </label>
+                                        <div class="flex items-center rounded-[6px] border border-slate-200 bg-white focus-within:border-[#00A651] focus-within:ring-2 focus-within:ring-[#00A651]/20 transition-all shadow-2xs overflow-hidden">
+                                            <span class="px-2.5 flex items-center justify-center text-slate-500 font-bold text-xs shrink-0 border-r border-slate-100 py-2.5 bg-slate-50">
+                                                +91
+                                            </span>
+                                            <input type="tel" id="cta_phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" minlength="10"
+                                                placeholder="10-digit mobile number"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+                                                class="w-full px-3 py-2 bg-transparent text-xs text-[#111111] placeholder:text-slate-400 outline-none border-none focus:ring-0">
+                                        </div>
+                                        <p id="ctaPhoneError" class="text-[11px] text-red-500 font-semibold mt-1 hidden"></p>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" id="ctaSubmitBtn"
+                                        class="w-full bg-[#00A651] hover:bg-[#008d44] text-white py-3 rounded-[6px] text-xs font-extrabold transition-all shadow-md text-center flex items-center justify-center gap-2 cursor-pointer active:scale-98">
+                                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                                        <span id="ctaSubmitBtnText">Request Call Back</span>
+                                    </button>
+                                </form>
+
+                                <!-- Quick Call & WhatsApp Links -->
+                                <div class="space-y-2 pt-2 border-t border-slate-100">
+                                    <a href="tel:+919198483820"
+                                        class="w-full bg-[#FAFAFA] hover:bg-slate-100 text-[#111111] border border-slate-200 py-2 rounded-[6px] text-[11px] font-bold transition-all text-center flex items-center justify-center gap-2">
                                         <i class="fa-solid fa-phone-volume text-[#F58220]"></i>
-                                        <span>Call: +91 91409 67607</span>
+                                        <span>Or Call: +91 9198483820</span>
                                     </a>
 
-                                    <!-- WhatsApp Chat -->
-                                    <a href="https://wa.me/919198483820?text=Hi%20DigiCoders,%20I%20want%20information%20about%20courses%20and%20admissions"
+                                    <a href="https://wa.me/919198483820?text=Hi%20DigiCoders,%20I%20want%20information%20about%20courses%20and%20counseling"
                                         target="_blank" rel="noopener noreferrer"
                                         style="background-color: #25D366 !important; color: #ffffff !important;"
-                                        class="w-full py-2.5 rounded-[6px] text-xs font-extrabold transition-all shadow-md text-center flex items-center justify-center gap-2 hover:opacity-90">
-                                        <i class="fa-brands fa-whatsapp text-base" style="color: #ffffff !important;"></i>
+                                        class="w-full py-2 rounded-[6px] text-[11px] font-bold transition-all shadow-xs text-center flex items-center justify-center gap-2 hover:opacity-90">
+                                        <i class="fa-brands fa-whatsapp text-sm" style="color: #ffffff !important;"></i>
                                         <span style="color: #ffffff !important;">Chat on WhatsApp</span>
                                     </a>
                                 </div>
@@ -510,10 +631,116 @@
             }
         }
 
+        let isBlogContentExpanded = false;
+
+        function initBlogContentExpandCollapse() {
+            const wrapper = document.getElementById('blogContentWrapper');
+            const gradient = document.getElementById('blogContentGradient');
+            const toggleWrapper = document.getElementById('blogContentToggleWrapper');
+
+            if (!wrapper || !toggleWrapper || !gradient) return;
+
+            // Height threshold (680px) to trigger expand/collapse preview
+            if (wrapper.scrollHeight > 680) {
+                wrapper.style.maxHeight = '580px';
+                gradient.classList.remove('hidden');
+                gradient.style.display = 'block';
+                gradient.style.opacity = '1';
+                toggleWrapper.classList.remove('hidden');
+                toggleWrapper.classList.add('-mt-9');
+                toggleWrapper.classList.remove('pt-4');
+                isBlogContentExpanded = false;
+            } else {
+                wrapper.style.maxHeight = 'none';
+                gradient.classList.add('hidden');
+                gradient.style.display = 'none';
+                toggleWrapper.classList.add('hidden');
+                isBlogContentExpanded = true;
+            }
+        }
+
+        function expandBlogContent() {
+            const wrapper = document.getElementById('blogContentWrapper');
+            const gradient = document.getElementById('blogContentGradient');
+            const toggleWrapper = document.getElementById('blogContentToggleWrapper');
+            const toggleText = document.getElementById('blogContentToggleText');
+            const toggleIcon = document.getElementById('blogContentToggleIcon');
+
+            if (!wrapper) return;
+
+            wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+            if (gradient) {
+                gradient.style.opacity = '0';
+                setTimeout(() => { gradient.style.display = 'none'; }, 300);
+            }
+            if (toggleWrapper) {
+                toggleWrapper.classList.remove('-mt-9');
+                toggleWrapper.classList.add('pt-4');
+            }
+            if (toggleText) toggleText.innerText = 'Show Less';
+            if (toggleIcon) toggleIcon.style.transform = 'rotate(180deg)';
+
+            isBlogContentExpanded = true;
+
+            setTimeout(function () {
+                if (isBlogContentExpanded) {
+                    wrapper.style.maxHeight = 'none';
+                }
+            }, 500);
+        }
+
+        function collapseBlogContent() {
+            const container = document.getElementById('blogContentContainer');
+            const wrapper = document.getElementById('blogContentWrapper');
+            const gradient = document.getElementById('blogContentGradient');
+            const toggleWrapper = document.getElementById('blogContentToggleWrapper');
+            const toggleText = document.getElementById('blogContentToggleText');
+            const toggleIcon = document.getElementById('blogContentToggleIcon');
+
+            if (!wrapper) return;
+
+            wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+            // Force reflow
+            wrapper.offsetHeight;
+
+            wrapper.style.maxHeight = '580px';
+            if (gradient) {
+                gradient.style.display = 'block';
+                gradient.offsetHeight;
+                gradient.style.opacity = '1';
+                gradient.classList.remove('hidden');
+            }
+            if (toggleWrapper) {
+                toggleWrapper.classList.add('-mt-9');
+                toggleWrapper.classList.remove('pt-4');
+            }
+            if (toggleText) toggleText.innerText = 'Show More';
+            if (toggleIcon) toggleIcon.style.transform = 'rotate(0deg)';
+
+            isBlogContentExpanded = false;
+
+            if (container) {
+                const yOffset = -140;
+                const y = container.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }
+
+        function toggleBlogContent() {
+            if (isBlogContentExpanded) {
+                collapseBlogContent();
+            } else {
+                expandBlogContent();
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+
+            initBlogContentExpandCollapse();
+            window.addEventListener('load', initBlogContentExpandCollapse);
 
             // Dynamic Table of Contents (TOC) Generator with Bullet Points & Smart Fallback
             const articleBody = document.querySelector('.prose');
@@ -568,12 +795,17 @@
 
                         a.addEventListener('click', function (e) {
                             e.preventDefault();
-                            const target = document.getElementById(heading.id);
-                            if (target) {
-                                const yOffset = -130;
-                                const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                                window.scrollTo({ top: y, behavior: 'smooth' });
+                            if (!isBlogContentExpanded) {
+                                expandBlogContent();
                             }
+                            setTimeout(function () {
+                                const target = document.getElementById(heading.id);
+                                if (target) {
+                                    const yOffset = -130;
+                                    const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                                    window.scrollTo({ top: y, behavior: 'smooth' });
+                                }
+                            }, 100);
                         });
 
                         li.appendChild(bullet);
@@ -597,6 +829,83 @@
             } else {
                 content.classList.add('hidden');
                 if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Handle Sidebar CTA Counseling Form Submission via AJAX
+        async function submitCtaForm(e) {
+            e.preventDefault();
+            const form = e.target;
+            const nameInput = document.getElementById('cta_name');
+            const phoneInput = document.getElementById('cta_phone');
+            const phoneError = document.getElementById('ctaPhoneError');
+            const feedback = document.getElementById('ctaFormFeedback');
+            const submitBtn = document.getElementById('ctaSubmitBtn');
+            const submitBtnText = document.getElementById('ctaSubmitBtnText');
+
+            if (phoneError) phoneError.classList.add('hidden');
+            if (feedback) {
+                feedback.classList.add('hidden');
+                feedback.className = "hidden p-3 rounded-[6px] text-xs font-bold text-center";
+            }
+
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            if (!name) {
+                alert('Please enter your full name.');
+                nameInput.focus();
+                return;
+            }
+
+            // Validate 10 digits starting with 6, 7, 8, or 9
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                if (phoneError) {
+                    phoneError.innerText = 'Mobile number must be 10 digits and start with 6, 7, 8, or 9.';
+                    phoneError.classList.remove('hidden');
+                }
+                phoneInput.focus();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtnText.innerText = 'Submitting...';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch("{{ route('contact.submit') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || "{{ csrf_token() }}"
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    if (feedback) {
+                        feedback.className = "p-3 rounded-[6px] text-xs font-bold text-center bg-emerald-50 text-[#00A651] border border-emerald-200 block";
+                        feedback.innerText = "✓ Thank you! Your details have been submitted. Our counselor will contact you shortly.";
+                    }
+                    form.reset();
+                } else {
+                    const err = data.message || (data.errors ? Object.values(data.errors).flat().join(' ') : 'Submission failed. Please check inputs and try again.');
+                    if (feedback) {
+                        feedback.className = "p-3 rounded-[6px] text-xs font-bold text-center bg-red-50 text-red-600 border border-red-200 block";
+                        feedback.innerText = "✕ " + err;
+                    }
+                }
+            } catch (error) {
+                if (feedback) {
+                    feedback.className = "p-3 rounded-[6px] text-xs font-bold text-center bg-red-50 text-red-600 border border-red-200 block";
+                    feedback.innerText = "✕ Something went wrong. Please check your internet connection and try again.";
+                }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtnText.innerText = 'Request Call Back';
             }
         }
     </script>
