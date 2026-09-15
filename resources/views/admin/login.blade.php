@@ -2,6 +2,9 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    @include('layouts.google-tag')
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal Login | DigiCoders Academy</title>
