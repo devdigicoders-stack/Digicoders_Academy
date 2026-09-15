@@ -19,10 +19,13 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\BlogTag;
 use App\Models\Course;
 use App\Models\Faq;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 // 1. Home & Main Frontend Routes (100% Dynamic from Database)
 Route::get('/', function () {
@@ -95,61 +98,137 @@ Route::get('/refund-policy', function () {
 })->name('refund-policy');
 
 Route::get('/sitemap', function () {
-    return view('sitemap');
+    $blogs = Blog::where('status', 'published')->latest()->take(20)->get();
+    $categories = BlogCategory::where('status', true)->orWhereNull('status')->get();
+    $tags = BlogTag::all();
+    $courses = Course::where('status', true)->orWhereNull('status')->get();
+
+    return view('sitemap', compact('blogs', 'categories', 'tags', 'courses'));
 })->name('sitemap');
 
+Route::get('/robots.txt', function () {
+    $baseUrl = 'https://digicodersacademy.com';
+    $content = "User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: {$baseUrl}/sitemap.xml\n";
+
+    return response($content, 200, ['Content-Type' => 'text/plain']);
+})->name('robots');
+
 Route::get('/sitemap.xml', function () {
-    $baseUrl = config('app.url', 'https://digicodersacademy.com');
-    $routes = [
-        '/',
-        '/about',
-        '/courses',
-        '/admissions',
-        '/placements',
-        '/student-life',
-        '/gallery',
-        '/blogs',
-        '/contact',
-        '/faq',
-        '/privacy-policy',
-        '/terms',
-        '/refund-policy',
-        '/courses/dca',
-        '/courses/adca',
-        '/courses/web-designing',
-        '/courses/advanced-excel-mis',
-        '/courses/adwd',
-        '/courses/addm',
-    ];
+    $baseUrl = 'https://digicodersacademy.com';
+    $urls = [];
 
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    $addUrl = function ($path, $priority = '0.8', $changefreq = 'weekly', $lastmod = null) use (&$urls, $baseUrl) {
+        if (empty($path)) {
+            return;
+        }
+        $path = trim($path);
+        if (str_starts_with($path, 'tel:') || str_contains($path, 'tel:')) {
+            return;
+        }
+        if (! str_starts_with($path, 'http://') && ! str_starts_with($path, 'https://')) {
+            $loc = rtrim($baseUrl, '/').'/'.ltrim($path, '/');
+        } else {
+            $loc = preg_replace('/^http:/i', 'https:', $path);
+        }
 
-    foreach ($routes as $route) {
-        $xml .= '<url>';
-        $xml .= '<loc>'.rtrim($baseUrl, '/').$route.'</loc>';
-        $xml .= '<changefreq>weekly</changefreq>';
-        $xml .= '<priority>'.($route === '/' ? '1.0' : '0.8').'</priority>';
-        $xml .= '</url>';
+        if (! isset($urls[$loc])) {
+            $urls[$loc] = [
+                'loc' => $loc,
+                'priority' => $priority,
+                'changefreq' => $changefreq,
+                'lastmod' => $lastmod ?: now()->toAtomString(),
+            ];
+        }
+    };
+
+    // 1. Primary Site Pages
+    $addUrl('/', '1.0', 'daily');
+    $addUrl('/about', '0.8', 'monthly');
+    $addUrl('/courses', '0.9', 'weekly');
+    $addUrl('/admissions', '0.9', 'daily');
+    $addUrl('/placements', '0.8', 'weekly');
+    $addUrl('/student-life', '0.7', 'weekly');
+    $addUrl('/gallery', '0.7', 'weekly');
+    $addUrl('/blogs', '0.9', 'daily');
+    $addUrl('/contact', '0.8', 'monthly');
+    $addUrl('/faq', '0.7', 'monthly');
+    $addUrl('/privacy-policy', '0.5', 'yearly');
+    $addUrl('/terms', '0.5', 'yearly');
+    $addUrl('/refund-policy', '0.5', 'yearly');
+    $addUrl('/sitemap', '0.5', 'monthly');
+
+    // 2. Static Course Routes
+    $staticCourses = ['dca', 'adca', 'web-designing', 'advanced-excel-mis', 'excel-mis', 'adwd', 'addm'];
+    foreach ($staticCourses as $cSlug) {
+        $addUrl('/courses/'.$cSlug, '0.8', 'weekly');
     }
 
+    // 3. Dynamic Database Courses
     try {
-        $blogs = Blog::where('status', 'published')->get();
-        foreach ($blogs as $blog) {
-            $xml .= '<url>';
-            $xml .= '<loc>'.rtrim($baseUrl, '/').'/blogs/'.$blog->slug.'</loc>';
-            $xml .= '<changefreq>monthly</changefreq>';
-            $xml .= '<priority>0.6</priority>';
-            $xml .= '</url>';
+        $dbCourses = Course::where('status', true)->orWhereNull('status')->get();
+        foreach ($dbCourses as $course) {
+            if (! empty($course->slug)) {
+                $addUrl('/courses/'.$course->slug, '0.8', 'weekly', optional($course->updated_at)->toAtomString());
+            }
         }
     } catch (Throwable $e) {
-        // Silently skip blogs if table is not migrated yet
+        // Fallback
+    }
+
+    // 4. Dynamic Database Blogs
+    try {
+        $blogs = Blog::where('status', 'published')->latest()->get();
+        foreach ($blogs as $blog) {
+            if (! empty($blog->slug)) {
+                $addUrl('/blogs/'.$blog->slug, '0.8', 'weekly', optional($blog->updated_at)->toAtomString());
+            }
+        }
+    } catch (Throwable $e) {
+        // Fallback
+    }
+
+    // 5. Dynamic Database Blog Categories
+    try {
+        $categories = BlogCategory::where('status', true)->orWhereNull('status')->get();
+        foreach ($categories as $cat) {
+            $catKey = ! empty($cat->slug) ? $cat->slug : Str::slug($cat->name);
+            if (! empty($catKey)) {
+                $addUrl('/blogs?category='.urlencode($catKey), '0.6', 'weekly', optional($cat->updated_at)->toAtomString());
+            }
+        }
+    } catch (Throwable $e) {
+        // Fallback
+    }
+
+    // 6. Dynamic Database Blog Tags
+    try {
+        $tags = BlogTag::all();
+        foreach ($tags as $tag) {
+            $tagKey = ! empty($tag->slug) ? $tag->slug : Str::slug($tag->name);
+            if (! empty($tagKey)) {
+                $addUrl('/blogs?tag='.urlencode($tagKey), '0.6', 'weekly', optional($tag->updated_at)->toAtomString());
+            }
+        }
+    } catch (Throwable $e) {
+        // Fallback
+    }
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
+
+    foreach ($urls as $item) {
+        $xml .= '  <url>'."\n";
+        $xml .= '    <loc>'.htmlspecialchars($item['loc'], ENT_XML1, 'UTF-8').'</loc>'."\n";
+        $xml .= '    <lastmod>'.$item['lastmod'].'</lastmod>'."\n";
+        $xml .= '    <changefreq>'.$item['changefreq'].'</changefreq>'."\n";
+        $xml .= '    <priority>'.$item['priority'].'</priority>'."\n";
+        $xml .= '  </url>'."\n";
     }
 
     $xml .= '</urlset>';
 
     return response($xml, 200, ['Content-Type' => 'application/xml']);
-});
+})->name('sitemap.xml');
 
 // 1.5 Admin Panel Routes
 

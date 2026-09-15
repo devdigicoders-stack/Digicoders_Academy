@@ -3,4 +3,3 @@ Allow: /
 Disallow: /admin/
 
 Sitemap: https://digicodersacademy.com/sitemap.xml
-Sitemap: https://digiacademy.in/sitemap.xml

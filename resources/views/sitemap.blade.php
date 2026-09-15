@@ -51,7 +51,7 @@
         <section class="py-14 sm:py-20 bg-[#FAFAFA]">
             <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     
                     <!-- Main Navigation Pages -->
                     <div class="p-6 rounded-[6px] bg-white border border-slate-200/90 shadow-md space-y-4">
@@ -85,6 +85,23 @@
                             <li><a href="{{ route('courses.addm') }}" class="hover:text-[#F58220] font-medium">ADDM (Digital Marketing Diploma)</a></li>
                             <li><a href="{{ route('courses.web-designing') }}" class="hover:text-[#F58220] font-medium">Web Designing & UI/UX</a></li>
                             <li><a href="{{ route('courses.excel-mis') }}" class="hover:text-[#F58220] font-medium">Advanced Excel & MIS Reporting</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Latest Blog Articles -->
+                    <div class="p-6 rounded-[6px] bg-white border border-slate-200/90 shadow-md space-y-4">
+                        <div class="flex items-center gap-2 text-purple-600 border-b border-slate-100 pb-3">
+                            <i data-lucide="newspaper" class="w-5 h-5"></i>
+                            <h2 class="text-base font-extrabold font-heading text-[#111111]">Latest Articles</h2>
+                        </div>
+                        <ul class="space-y-2 text-xs text-[#555555]">
+                            @if(isset($blogs) && count($blogs) > 0)
+                                @foreach($blogs as $b)
+                                    <li><a href="{{ route('blogs.show', $b->slug) }}" class="hover:text-purple-600 font-medium line-clamp-1" title="{{ $b->title }}">{{ $b->title }}</a></li>
+                                @endforeach
+                            @else
+                                <li><a href="{{ route('blogs.index') }}" class="hover:text-purple-600 font-medium">Explore All Articles</a></li>
+                            @endif
                         </ul>
                     </div>
 
